@@ -16,7 +16,7 @@ services:
     container_name: vite-frontend-prod
     build:
       context: ../frontend
-      dockerfile: ../docker/prod.Dockerfile
+      dockerfile: ../frontend/docker/prod.Dockerfile
     volumes:
       - /app/node_modules
     ports:

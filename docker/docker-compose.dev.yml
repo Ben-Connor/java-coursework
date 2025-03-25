@@ -19,7 +19,7 @@ services:
     container_name: vite-frontend-dev
     build:
       context: ../frontend
-      dockerfile: ../docker/dev.Dockerfile
+      dockerfile: ../frontend/docker/dev.Dockerfile
     volumes:
       - ../frontend/src:/app/src
       - /app/node_modules
@@ -31,7 +31,6 @@ services:
       - app-network
     command: ["npm", "run", "dev"]
     restart: on-failure
-
 
 networks:
   app-network:
