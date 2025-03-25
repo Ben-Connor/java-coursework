@@ -1,11 +1,14 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import { Link, Outlet } from '@tanstack/react-router';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+      </nav>
+      <hr />
+      <Outlet /> {}
+    </div>
   );
 }
 
