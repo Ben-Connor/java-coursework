@@ -1,0 +1,24 @@
+{
+    "loggers": {
+        "uvicorn": {
+            "handlers": ["queue"],
+            "level": "INFO",
+            "propagate": false
+        },
+        "uvicorn.access": {
+            "handlers": ["queue"],
+            "level": "INFO",
+            "propagate": false
+        },
+        "uvicorn.error": {
+            "handlers": ["queue"],
+            "level": "INFO",
+            "propagate": false
+        },
+        "uvicorn.asgi": {
+            "handlers": ["queue"],
+            "level": "INFO",
+            "propagate": false
+        }
+    }
+}

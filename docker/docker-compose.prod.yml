@@ -1,0 +1,18 @@
+services:
+  fastapi-backend:
+    container_name: coursework-backend-prod
+    build:
+      context: ../backend
+      dockerfile: ./docker/prod.Dockerfile
+    env_file:
+      - ../backend/env/.env.prod
+    restart: always
+    ports:
+      - 8000:8000
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge
