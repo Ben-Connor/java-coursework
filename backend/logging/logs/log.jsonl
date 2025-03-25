@@ -1,0 +1,1 @@
+{"timestamp": "30/01/2025 01:13:52.152290", "level": "INFO", "message": "Stopping reloader process [1]", "file_path": "/usr/local/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py", "line_number": 111, "process": {"name": "MainProcess", "id": 1}, "thread": {"name": "MainThread", "id": 139869997648768}, "logger": "uvicorn.error"}
