@@ -1,4 +1,10 @@
-import { createRootRoute, createRoute, RouterProvider, createRouter } from '@tanstack/react-router';
+import { 
+  createRootRoute, 
+  createRoute, 
+  RouterProvider, 
+  createRouter, 
+  Route 
+} from '@tanstack/react-router';
 import Home from './pages/Home';
 import App from './App';
 import FoodSearch from './FoodSearch';
@@ -14,14 +20,20 @@ const homeRoute = createRoute({
 });
 
 const foodSearchRoute = createRoute({
-  getParentRoute: () => rootRoute, // It's a child of the root route
-  path: '/food-search', // The path that will render the FoodSearch component
-  component: FoodSearch, // FoodSearch component will render here
+  getParentRoute: () => rootRoute,
+  path: '/food-search',
+  component: FoodSearch,
 });
 
 const routeTree = rootRoute.addChildren([homeRoute, foodSearchRoute]);
 
 const router = createRouter({ routeTree });
+
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router;
+  }
+}
 
 export function AppRouter() {
   return <RouterProvider router={router} />;
