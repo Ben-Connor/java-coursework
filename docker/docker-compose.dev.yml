@@ -15,6 +15,22 @@ services:
     networks:
       - app-network
 
+  frontend:
+    container_name: vite-frontend-dev
+    build:
+      context: ../frontend
+      dockerfile: ../frontend/docker/dev.Dockerfile
+    volumes:
+      - ../frontend/src:/app/src
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    networks:
+      - app-network
+    command: ["npm", "run", "dev"]
+    restart: on-failure
 
 networks:
   app-network:
