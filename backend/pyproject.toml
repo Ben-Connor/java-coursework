@@ -3,7 +3,7 @@ name = "coursework-name"
 version = "0.1.0"
 description = ""
 authors = [
-    "Kieran Lock <kk935@bath.ac.uk>"
+    "Kieran Lock <kl935@bath.ac.uk>"
 ]
 readme = "README.md"
 package-mode = false
