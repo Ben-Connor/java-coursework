@@ -1,39 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+
+// Define the types for the API response and the product data
+interface Nutriments {
+  'energy-kcal_100g'?: number;
+  energy_100g?: number;
+}
+
+interface Product {
+  code: string;
+  product_name: string;
+  ingredients_text: string;
+  nutriments: Nutriments;
+  image_url: string;
+}
+
+interface FoodData {
+  products: Product[];
+}
 
 function FoodSearch() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [foodData, setFoodData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  // Use proper types for state variables
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [foodData, setFoodData] = useState<FoodData | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
-  const handleInputChange = (e) => {
+  // Type for the input change event
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleSearch = async (e) => {
+  // Type for the form submit event
+  const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     console.log('Searching for:', searchQuery);
 
     try {
-      // Updated URL to specify JSON format and include search parameters
-      const response = await fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(searchQuery)}&search_simple=1&action=process&json=1`);
+      const response = await fetch(
+        `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(searchQuery)}&search_simple=1&action=process&json=1`
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
 
-      // Parse response to JSON
-      const data = await response.json();
+      const data: FoodData = await response.json();
       console.log('Raw API Response:', data); // Log the entire response to inspect the structure
 
       if (data && data.products && data.products.length > 0) {
-        // If products exist, display them
         setFoodData(data);
         setError('');
       } else {
-        // If no products are found
         setError('No products found for your search.');
         setFoodData(null);
       }
@@ -50,17 +69,14 @@ function FoodSearch() {
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Food Search</h1>
       <form onSubmit={handleSearch} className="mb-4">
-        <input 
-          type="text" 
-          placeholder="Search for food..." 
-          value={searchQuery} 
-          onChange={handleInputChange} 
+        <input
+          type="text"
+          placeholder="Search for food..."
+          value={searchQuery}
+          onChange={handleInputChange}
           className="border p-2 mr-2 w-64"
         />
-        <button 
-          type="submit" 
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
           Search
         </button>
       </form>
@@ -80,9 +96,9 @@ function FoodSearch() {
                 Calories: {product.nutriments?.['energy-kcal_100g'] || product.nutriments?.energy_100g || 'N/A'} kcal
               </p>
               {product.image_url && (
-                <img 
-                  src={product.image_url} 
-                  alt={product.product_name} 
+                <img
+                  src={product.image_url}
+                  alt={product.product_name}
                   className="mt-2 max-w-[200px] h-auto"
                 />
               )}
@@ -95,3 +111,4 @@ function FoodSearch() {
 }
 
 export default FoodSearch;
+
