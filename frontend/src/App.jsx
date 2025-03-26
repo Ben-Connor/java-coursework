@@ -6,7 +6,7 @@ function App() {
     <div>
       <nav>
         {/* <Link to="/">Home</Link> */}
-        <a href="/">Home</a> | <a href="/food-search">Food Search</a>
+        <a href="/">Home</a> | <a href="/food-search">Food Search</a> | <a href ="/graphs">Graphs </a>
       </nav>
       <hr />
       <Outlet /> {}

@@ -2,6 +2,7 @@ import { createRootRoute, createRoute, RouterProvider, createRouter } from '@tan
 import Home from './pages/Home';
 import App from './App';
 import FoodSearch from './FoodSearch';
+import Graphs from './Graphs'; 
 
 const rootRoute = createRootRoute({
   component: App,
@@ -19,7 +20,13 @@ const foodSearchRoute = createRoute({
   component: FoodSearch, // FoodSearch component will render here
 });
 
-const routeTree = rootRoute.addChildren([homeRoute, foodSearchRoute]);
+const graphsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/graphs',
+  component: Graphs,
+});
+
+const routeTree = rootRoute.addChildren([homeRoute, foodSearchRoute, graphsRoute]);
 
 const router = createRouter({ routeTree });
 
