@@ -14,4 +14,9 @@ export default defineConfig({
   host: true,
   origin: "http://0.0.0.0:3000",
  },
+ test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.tsx',
+  }
 });
