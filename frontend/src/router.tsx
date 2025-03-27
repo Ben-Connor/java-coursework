@@ -8,6 +8,7 @@ import {
 import Home from './pages/Home';
 import App from './App';
 import FoodSearch from './FoodSearch';
+import ManualFoodEntry from './pages/ManualFoodEntry';
 
 const rootRoute = createRootRoute({
   component: App,
@@ -25,7 +26,13 @@ const foodSearchRoute = createRoute({
   component: FoodSearch,
 });
 
-const routeTree = rootRoute.addChildren([homeRoute, foodSearchRoute]);
+const manualFoodEntryRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/food-entry',
+  component: ManualFoodEntry,
+});
+
+const routeTree = rootRoute.addChildren([homeRoute, foodSearchRoute, manualFoodEntryRoute]);
 
 const router = createRouter({ routeTree });
 
