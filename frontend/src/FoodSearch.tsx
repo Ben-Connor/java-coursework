@@ -1,55 +1,62 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 
-// Define the types for the API response and the product data
-interface Nutriments {
-  'energy-kcal_100g'?: number;
-  energy_100g?: number;
+// Define the types for the USDA API response and the product data
+interface Nutrient {
+  nutrientName: string;
+  value: number;
+  unitName: string;
 }
 
 interface Product {
-  code: string;
-  product_name: string;
-  ingredients_text: string;
-  nutriments: Nutriments;
-  image_url: string;
+  fdcId: number;
+  description: string;
+  brandOwner: string;
+  foodCategory: string;
+  nutrients: Nutrient[];
+  foodNutrients: Nutrient[];
+  imageUrl: string;
 }
 
-interface FoodData {
-  products: Product[];
+interface USDAResponse {
+  foods: Product[];
 }
 
 function FoodSearch() {
-  // Use proper types for state variables
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [foodData, setFoodData] = useState<FoodData | null>(null);
+  const [foodData, setFoodData] = useState<USDAResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
-  // Type for the input change event
+  // Handle input change
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
-  // Type for the form submit event
+  // Handle form submission
   const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
+    if (!searchQuery.trim()) {
+      setError('Please enter a search term.');
+      return;
+    }
+
     setLoading(true);
     setError('');
-    console.log('Searching for:', searchQuery);
 
     try {
+      const apiKey = 'DEMO_KEY'; // Replace with your USDA API key
       const response = await fetch(
-        `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(searchQuery)}&search_simple=1&action=process&json=1`
+        `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(searchQuery)}&api_key=${apiKey}`
       );
 
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
 
-      const data: FoodData = await response.json();
-      console.log('Raw API Response:', data); // Log the entire response to inspect the structure
+      const data: USDAResponse = await response.json();
+      console.log('Raw USDA API Response:', data); // Log the entire response to inspect the structure
 
-      if (data && data.products && data.products.length > 0) {
+      if (data && data.foods && data.foods.length > 0) {
         setFoodData(data);
         setError('');
       } else {
@@ -85,20 +92,27 @@ function FoodSearch() {
 
       {error && <p className="text-red-500">{error}</p>}
 
-      {foodData && foodData.products && (
+      {foodData && foodData.foods && (
         <div>
           <h2 className="text-xl font-semibold mb-3">Results</h2>
-          {foodData.products.map((product, index) => (
-            <div key={product.code || index} className="mb-4 p-3 border rounded">
-              <h3 className="font-bold">{product.product_name || 'Unnamed Product'}</h3>
-              <p className="text-gray-700">{product.ingredients_text || 'Ingredients not available'}</p>
-              <p className="text-gray-600">
-                Calories: {product.nutriments?.['energy-kcal_100g'] || product.nutriments?.energy_100g || 'N/A'} kcal
-              </p>
-              {product.image_url && (
+          {foodData.foods.map((product) => (
+            <div key={product.fdcId} className="mb-4 p-3 border rounded">
+              <h3 className="font-bold">{product.description || 'Unnamed Product'}</h3>
+              <p className="text-gray-700">{product.brandOwner || 'Brand not available'}</p>
+              <p className="text-gray-700">{product.foodCategory || 'Category not available'}</p>
+
+              {/* Nutritional information */}
+              {product.foodNutrients.map((nutrient, index) => (
+                <p key={index} className="text-gray-600">
+                  {nutrient.nutrientName}: {nutrient.value} {nutrient.unitName}
+                </p>
+              ))}
+
+              {/* Display image if available */}
+              {product.imageUrl && (
                 <img
-                  src={product.image_url}
-                  alt={product.product_name}
+                  src={product.imageUrl}
+                  alt={product.description}
                   className="mt-2 max-w-[200px] h-auto"
                 />
               )}
@@ -111,4 +125,3 @@ function FoodSearch() {
 }
 
 export default FoodSearch;
-
