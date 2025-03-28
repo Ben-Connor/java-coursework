@@ -4,12 +4,16 @@ from fastapi import FastAPI
 from typing import AsyncIterator
 from fastapi.middleware.cors import CORSMiddleware
 
+from ..database.tables import drop_tables, create_tables
+from ..database import get_engine
 from .routers import meta_router
 from .lib.consts import API_ORIGINS, API_PREFIX, RouterTag, ALL
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+    drop_tables(get_engine())
+    create_tables(get_engine())  # TODO: Alembic for production
     try:
         yield
     finally:
@@ -22,6 +26,6 @@ app.add_middleware(
     allow_origins=API_ORIGINS,
     allow_credentials=True,
     allow_methods=[ALL],
-    allow_headers=[ALL]
+    allow_headers=[ALL],
 )
 app.include_router(meta_router, prefix=API_PREFIX, tags=[RouterTag.META])
