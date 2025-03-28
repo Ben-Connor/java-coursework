@@ -5,3 +5,6 @@
 __pycache__/
 *.pyc
 *.pyo
+
+# Ignore generated test data
+database/tests/test_data/*.json

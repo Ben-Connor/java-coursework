@@ -2,7 +2,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from schema import Base
+from database.schema import Base
 
 # Default to SQLite but prepare for PostgreSQL later
 DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///nutrition_tracker.db")
