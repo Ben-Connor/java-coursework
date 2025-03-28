@@ -1,0 +1,841 @@
+{
+  "user_id": 1,
+  "username": "test_user_1",
+  "period": {
+    "start_date": "2025-03-21",
+    "end_date": "2025-03-28",
+    "days": 8
+  },
+  "targets": {
+    "calories": 2200,
+    "protein": 140,
+    "carbs": 250,
+    "fat": 70
+  },
+  "daily_data": [
+    {
+      "date": "2025-03-21",
+      "macros": {
+        "calories": {
+          "amount": 478,
+          "target": 2200
+        },
+        "protein": {
+          "amount": 41,
+          "target": 140,
+          "unit": "g"
+        },
+        "carbs": {
+          "amount": 65,
+          "target": 250,
+          "unit": "g"
+        },
+        "fat": {
+          "amount": 7,
+          "target": 70,
+          "unit": "g"
+        }
+      },
+      "micros": {
+        "Vitamin C": {
+          "amount": 15.1,
+          "unit": "mg",
+          "target": 90
+        },
+        "Calcium": {
+          "amount": 168.1,
+          "unit": "mg",
+          "target": 1000
+        },
+        "Iron": {
+          "amount": 3.0,
+          "unit": "mg",
+          "target": 18
+        }
+      },
+      "meals": {
+        "lunch": {
+          "calories": 423,
+          "protein": 37,
+          "carbs": 54,
+          "fat": 6,
+          "foods": [
+            {
+              "name": "Chicken Breast",
+              "calories": 165.0,
+              "protein": 31.0,
+              "carbs": 0.0,
+              "fat": 3.6,
+              "portion": "1 serving",
+              "quantity": 1.0
+            },
+            {
+              "name": "Brown Rice",
+              "calories": 215.0,
+              "protein": 5.0,
+              "carbs": 45.0,
+              "fat": 2.0,
+              "portion": "1 serving",
+              "quantity": 1.2
+            }
+          ]
+        },
+        "dinner": {
+          "calories": 55,
+          "protein": 4,
+          "carbs": 11,
+          "fat": 1,
+          "foods": [
+            {
+              "name": "Broccoli",
+              "calories": 55.0,
+              "protein": 3.7,
+              "carbs": 11.0,
+              "fat": 0.6,
+              "portion": "1 serving",
+              "quantity": 1.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "date": "2025-03-22",
+      "macros": {
+        "calories": {
+          "amount": 1112,
+          "target": 2200
+        },
+        "protein": {
+          "amount": 119,
+          "target": 140,
+          "unit": "g"
+        },
+        "carbs": {
+          "amount": 98,
+          "target": 250,
+          "unit": "g"
+        },
+        "fat": {
+          "amount": 27,
+          "target": 70,
+          "unit": "g"
+        }
+      },
+      "micros": {
+        "Vitamin C": {
+          "amount": 45.7,
+          "unit": "mg",
+          "target": 90
+        },
+        "Calcium": {
+          "amount": 507.7,
+          "unit": "mg",
+          "target": 1000
+        },
+        "Iron": {
+          "amount": 9.1,
+          "unit": "mg",
+          "target": 18
+        }
+      },
+      "meals": {
+        "breakfast": {
+          "calories": 320,
+          "protein": 18,
+          "carbs": 33,
+          "fat": 14,
+          "foods": [
+            {
+              "name": "Oatmeal",
+              "calories": 150.0,
+              "protein": 5.0,
+              "carbs": 27.0,
+              "fat": 3.0,
+              "portion": "1 serving",
+              "quantity": 1.2
+            },
+            {
+              "name": "Egg",
+              "calories": 70.0,
+              "protein": 6.0,
+              "carbs": 0.5,
+              "fat": 5.0,
+              "portion": "1 serving",
+              "quantity": 2.0
+            }
+          ]
+        },
+        "lunch": {
+          "calories": 484,
+          "protein": 52,
+          "carbs": 50,
+          "fat": 8,
+          "foods": [
+            {
+              "name": "Chicken Breast",
+              "calories": 165.0,
+              "protein": 31.0,
+              "carbs": 0.0,
+              "fat": 3.6,
+              "portion": "1 serving",
+              "quantity": 1.5
+            },
+            {
+              "name": "Brown Rice",
+              "calories": 215.0,
+              "protein": 5.0,
+              "carbs": 45.0,
+              "fat": 2.0,
+              "portion": "1 serving",
+              "quantity": 1.1
+            }
+          ]
+        },
+        "dinner": {
+          "calories": 308,
+          "protein": 49,
+          "carbs": 15,
+          "fat": 6,
+          "foods": [
+            {
+              "name": "Chicken Breast",
+              "calories": 165.0,
+              "protein": 31.0,
+              "carbs": 0.0,
+              "fat": 3.6,
+              "portion": "1 serving",
+              "quantity": 1.4
+            },
+            {
+              "name": "Broccoli",
+              "calories": 55.0,
+              "protein": 3.7,
+              "carbs": 11.0,
+              "fat": 0.6,
+              "portion": "1 serving",
+              "quantity": 1.4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "date": "2025-03-23",
+      "macros": {
+        "calories": {
+          "amount": 779,
+          "target": 2200
+        },
+        "protein": {
+          "amount": 63,
+          "target": 140,
+          "unit": "g"
+        },
+        "carbs": {
+          "amount": 108,
+          "target": 250,
+          "unit": "g"
+        },
+        "fat": {
+          "amount": 12,
+          "target": 70,
+          "unit": "g"
+        }
+      },
+      "micros": {
+        "Vitamin C": {
+          "amount": 28.1,
+          "unit": "mg",
+          "target": 90
+        },
+        "Calcium": {
+          "amount": 312.8,
+          "unit": "mg",
+          "target": 1000
+        },
+        "Iron": {
+          "amount": 5.6,
+          "unit": "mg",
+          "target": 18
+        }
+      },
+      "meals": {
+        "breakfast": {
+          "calories": 180,
+          "protein": 6,
+          "carbs": 32,
+          "fat": 4,
+          "foods": [
+            {
+              "name": "Oatmeal",
+              "calories": 150.0,
+              "protein": 5.0,
+              "carbs": 27.0,
+              "fat": 3.0,
+              "portion": "1 serving",
+              "quantity": 1.2
+            }
+          ]
+        },
+        "lunch": {
+          "calories": 489,
+          "protein": 49,
+          "carbs": 54,
+          "fat": 7,
+          "foods": [
+            {
+              "name": "Chicken Breast",
+              "calories": 165.0,
+              "protein": 31.0,
+              "carbs": 0.0,
+              "fat": 3.6,
+              "portion": "1 serving",
+              "quantity": 1.4
+            },
+            {
+              "name": "Brown Rice",
+              "calories": 215.0,
+              "protein": 5.0,
+              "carbs": 45.0,
+              "fat": 2.0,
+              "portion": "1 serving",
+              "quantity": 1.2
+            }
+          ]
+        },
+        "dinner": {
+          "calories": 110,
+          "protein": 7,
+          "carbs": 22,
+          "fat": 1,
+          "foods": [
+            {
+              "name": "Broccoli",
+              "calories": 55.0,
+              "protein": 3.7,
+              "carbs": 11.0,
+              "fat": 0.6,
+              "portion": "1 serving",
+              "quantity": 2.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "date": "2025-03-24",
+      "macros": {
+        "calories": {
+          "amount": 682,
+          "target": 2200
+        },
+        "protein": {
+          "amount": 53,
+          "target": 140,
+          "unit": "g"
+        },
+        "carbs": {
+          "amount": 96,
+          "target": 250,
+          "unit": "g"
+        },
+        "fat": {
+          "amount": 11,
+          "target": 70,
+          "unit": "g"
+        }
+      },
+      "micros": {
+        "Vitamin C": {
+          "amount": 23.6,
+          "unit": "mg",
+          "target": 90
+        },
+        "Calcium": {
+          "amount": 262.6,
+          "unit": "mg",
+          "target": 1000
+        },
+        "Iron": {
+          "amount": 4.7,
+          "unit": "mg",
+          "target": 18
+        }
+      },
+      "meals": {
+        "breakfast": {
+          "calories": 165,
+          "protein": 6,
+          "carbs": 30,
+          "fat": 3,
+          "foods": [
+            {
+              "name": "Oatmeal",
+              "calories": 150.0,
+              "protein": 5.0,
+              "carbs": 27.0,
+              "fat": 3.0,
+              "portion": "1 serving",
+              "quantity": 1.1
+            }
+          ]
+        },
+        "lunch": {
+          "calories": 456,
+          "protein": 43,
+          "carbs": 54,
+          "fat": 7,
+          "foods": [
+            {
+              "name": "Chicken Breast",
+              "calories": 165.0,
+              "protein": 31.0,
+              "carbs": 0.0,
+              "fat": 3.6,
+              "portion": "1 serving",
+              "quantity": 1.2
+            },
+            {
+              "name": "Brown Rice",
+              "calories": 215.0,
+              "protein": 5.0,
+              "carbs": 45.0,
+              "fat": 2.0,
+              "portion": "1 serving",
+              "quantity": 1.2
+            }
+          ]
+        },
+        "dinner": {
+          "calories": 61,
+          "protein": 4,
+          "carbs": 12,
+          "fat": 1,
+          "foods": [
+            {
+              "name": "Broccoli",
+              "calories": 55.0,
+              "protein": 3.7,
+              "carbs": 11.0,
+              "fat": 0.6,
+              "portion": "1 serving",
+              "quantity": 1.1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "date": "2025-03-25",
+      "macros": {
+        "calories": {
+          "amount": 1032,
+          "target": 2200
+        },
+        "protein": {
+          "amount": 106,
+          "target": 140,
+          "unit": "g"
+        },
+        "carbs": {
+          "amount": 99,
+          "target": 250,
+          "unit": "g"
+        },
+        "fat": {
+          "amount": 25,
+          "target": 70,
+          "unit": "g"
+        }
+      },
+      "micros": {
+        "Vitamin C": {
+          "amount": 41.2,
+          "unit": "mg",
+          "target": 90
+        },
+        "Calcium": {
+          "amount": 457.5,
+          "unit": "mg",
+          "target": 1000
+        },
+        "Iron": {
+          "amount": 8.2,
+          "unit": "mg",
+          "target": 18
+        }
+      },
+      "meals": {
+        "breakfast": {
+          "calories": 305,
+          "protein": 18,
+          "carbs": 31,
+          "fat": 13,
+          "foods": [
+            {
+              "name": "Oatmeal",
+              "calories": 150.0,
+              "protein": 5.0,
+              "carbs": 27.0,
+              "fat": 3.0,
+              "portion": "1 serving",
+              "quantity": 1.1
+            },
+            {
+              "name": "Egg",
+              "calories": 70.0,
+              "protein": 6.0,
+              "carbs": 0.5,
+              "fat": 5.0,
+              "portion": "1 serving",
+              "quantity": 2.0
+            }
+          ]
+        },
+        "lunch": {
+          "calories": 358,
+          "protein": 36,
+          "carbs": 40,
+          "fat": 5,
+          "foods": [
+            {
+              "name": "Chicken Breast",
+              "calories": 165.0,
+              "protein": 31.0,
+              "carbs": 0.0,
+              "fat": 3.6,
+              "portion": "1 serving",
+              "quantity": 1.0
+            },
+            {
+              "name": "Brown Rice",
+              "calories": 215.0,
+              "protein": 5.0,
+              "carbs": 45.0,
+              "fat": 2.0,
+              "portion": "1 serving",
+              "quantity": 0.9
+            }
+          ]
+        },
+        "dinner": {
+          "calories": 368,
+          "protein": 53,
+          "carbs": 28,
+          "fat": 7,
+          "foods": [
+            {
+              "name": "Chicken Breast",
+              "calories": 165.0,
+              "protein": 31.0,
+              "carbs": 0.0,
+              "fat": 3.6,
+              "portion": "1 serving",
+              "quantity": 1.4
+            },
+            {
+              "name": "Broccoli",
+              "calories": 55.0,
+              "protein": 3.7,
+              "carbs": 11.0,
+              "fat": 0.6,
+              "portion": "1 serving",
+              "quantity": 2.5
+            }
+          ]
+        }
+      }
+    },
+    {
+      "date": "2025-03-26",
+      "macros": {
+        "calories": {
+          "amount": 766,
+          "target": 2200
+        },
+        "protein": {
+          "amount": 51,
+          "target": 140,
+          "unit": "g"
+        },
+        "carbs": {
+          "amount": 120,
+          "target": 250,
+          "unit": "g"
+        },
+        "fat": {
+          "amount": 12,
+          "target": 70,
+          "unit": "g"
+        }
+      },
+      "micros": {
+        "Vitamin C": {
+          "amount": 27.5,
+          "unit": "mg",
+          "target": 90
+        },
+        "Calcium": {
+          "amount": 305.6,
+          "unit": "mg",
+          "target": 1000
+        },
+        "Iron": {
+          "amount": 5.5,
+          "unit": "mg",
+          "target": 18
+        }
+      },
+      "meals": {
+        "breakfast": {
+          "calories": 270,
+          "protein": 9,
+          "carbs": 49,
+          "fat": 5,
+          "foods": [
+            {
+              "name": "Oatmeal",
+              "calories": 150.0,
+              "protein": 5.0,
+              "carbs": 27.0,
+              "fat": 3.0,
+              "portion": "1 serving",
+              "quantity": 1.8
+            }
+          ]
+        },
+        "lunch": {
+          "calories": 364,
+          "protein": 33,
+          "carbs": 45,
+          "fat": 5,
+          "foods": [
+            {
+              "name": "Chicken Breast",
+              "calories": 165.0,
+              "protein": 31.0,
+              "carbs": 0.0,
+              "fat": 3.6,
+              "portion": "1 serving",
+              "quantity": 0.9
+            },
+            {
+              "name": "Brown Rice",
+              "calories": 215.0,
+              "protein": 5.0,
+              "carbs": 45.0,
+              "fat": 2.0,
+              "portion": "1 serving",
+              "quantity": 1.0
+            }
+          ]
+        },
+        "dinner": {
+          "calories": 132,
+          "protein": 9,
+          "carbs": 26,
+          "fat": 1,
+          "foods": [
+            {
+              "name": "Broccoli",
+              "calories": 55.0,
+              "protein": 3.7,
+              "carbs": 11.0,
+              "fat": 0.6,
+              "portion": "1 serving",
+              "quantity": 2.4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "date": "2025-03-27",
+      "macros": {
+        "calories": {
+          "amount": 777,
+          "target": 2200
+        },
+        "protein": {
+          "amount": 81,
+          "target": 140,
+          "unit": "g"
+        },
+        "carbs": {
+          "amount": 84,
+          "target": 250,
+          "unit": "g"
+        },
+        "fat": {
+          "amount": 13,
+          "target": 70,
+          "unit": "g"
+        }
+      },
+      "micros": {
+        "Vitamin C": {
+          "amount": 28.1,
+          "unit": "mg",
+          "target": 90
+        },
+        "Calcium": {
+          "amount": 311.7,
+          "unit": "mg",
+          "target": 1000
+        },
+        "Iron": {
+          "amount": 5.6,
+          "unit": "mg",
+          "target": 18
+        }
+      },
+      "meals": {
+        "breakfast": {
+          "calories": 165,
+          "protein": 6,
+          "carbs": 30,
+          "fat": 3,
+          "foods": [
+            {
+              "name": "Oatmeal",
+              "calories": 150.0,
+              "protein": 5.0,
+              "carbs": 27.0,
+              "fat": 3.0,
+              "portion": "1 serving",
+              "quantity": 1.1
+            }
+          ]
+        },
+        "lunch": {
+          "calories": 304,
+          "protein": 29,
+          "carbs": 36,
+          "fat": 4,
+          "foods": [
+            {
+              "name": "Chicken Breast",
+              "calories": 165.0,
+              "protein": 31.0,
+              "carbs": 0.0,
+              "fat": 3.6,
+              "portion": "1 serving",
+              "quantity": 0.8
+            },
+            {
+              "name": "Brown Rice",
+              "calories": 215.0,
+              "protein": 5.0,
+              "carbs": 45.0,
+              "fat": 2.0,
+              "portion": "1 serving",
+              "quantity": 0.8
+            }
+          ]
+        },
+        "dinner": {
+          "calories": 308,
+          "protein": 47,
+          "carbs": 19,
+          "fat": 6,
+          "foods": [
+            {
+              "name": "Chicken Breast",
+              "calories": 165.0,
+              "protein": 31.0,
+              "carbs": 0.0,
+              "fat": 3.6,
+              "portion": "1 serving",
+              "quantity": 1.3
+            },
+            {
+              "name": "Broccoli",
+              "calories": 55.0,
+              "protein": 3.7,
+              "carbs": 11.0,
+              "fat": 0.6,
+              "portion": "1 serving",
+              "quantity": 1.7
+            }
+          ]
+        }
+      }
+    },
+    {
+      "date": "2025-03-28",
+      "macros": {
+        "calories": {
+          "amount": 235,
+          "target": 2200
+        },
+        "protein": {
+          "amount": 12,
+          "target": 140,
+          "unit": "g"
+        },
+        "carbs": {
+          "amount": 30,
+          "target": 250,
+          "unit": "g"
+        },
+        "fat": {
+          "amount": 8,
+          "target": 70,
+          "unit": "g"
+        }
+      },
+      "micros": {
+        "Vitamin C": {
+          "amount": 6.6,
+          "unit": "mg",
+          "target": 90
+        },
+        "Calcium": {
+          "amount": 73.2,
+          "unit": "mg",
+          "target": 1000
+        },
+        "Iron": {
+          "amount": 1.3,
+          "unit": "mg",
+          "target": 18
+        }
+      },
+      "meals": {
+        "breakfast": {
+          "calories": 235,
+          "protein": 12,
+          "carbs": 30,
+          "fat": 8,
+          "foods": [
+            {
+              "name": "Oatmeal",
+              "calories": 150.0,
+              "protein": 5.0,
+              "carbs": 27.0,
+              "fat": 3.0,
+              "portion": "1 serving",
+              "quantity": 1.1
+            },
+            {
+              "name": "Egg",
+              "calories": 70.0,
+              "protein": 6.0,
+              "carbs": 0.5,
+              "fat": 5.0,
+              "portion": "1 serving",
+              "quantity": 1.0
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "averages": {
+      "calories": 733,
+      "protein": 66
+    }
+  }
+}
