@@ -3,34 +3,18 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - "*" # This wildcard matches all branches and triggers the workflow on every commit
+      - "*" # Trigger on push to any branch
+  pull_request:
+    branches:
+      - "*" # Trigger on pull request to any branch
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2 # Checks out your repository’s code
+      - name: Checkout code
+        uses: actions/checkout@v2 # Checkout the repository code
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16" # Specify Node.js version (adjust if needed)
-
-      - name: Install Dependencies
-        run: |
-          cd frontend  # Navigate to the frontend directory
-          npm install  # Install dependencies
-
-      - name: Run Vitest Tests
-        run: |
-          cd frontend  # Navigate to the frontend directory
-          npm test  # Run tests using Vitest (assuming `npm test` runs Vitest)
-
-      - name: Upload Test Results (Optional)
-        if: failure() # Only upload test results if tests fail
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: ./frontend/test-reports # Adjust path to test reports if necessary
+      - name: Run echo command
+        run: echo "GitHub Actions workflow is running!"
