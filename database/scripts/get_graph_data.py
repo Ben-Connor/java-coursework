@@ -1,13 +1,10 @@
 # database/scripts/get_graph_data.py
 import json
+from pathlib import Path
 from datetime import datetime, timedelta, timezone
-import sys 
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# These imports will work with Poetry since your files are in the correct structure
-from database.db import SessionLocal
-from database.schema import User
+from tests.test_data.test_db import TestSessionLocal
+from schema import User
 from nutrition_query import get_user_nutrition_data
 
 def get_data_for_graphing(user_id=1, days=30, output_file=None):
@@ -15,7 +12,7 @@ def get_data_for_graphing(user_id=1, days=30, output_file=None):
     Get nutrition data for graphing and optionally save to a JSON file.
     """
     # Get a database session
-    db = SessionLocal()
+    db = TestSessionLocal()
     
     try:
         # Get date range
@@ -43,9 +40,14 @@ def get_data_for_graphing(user_id=1, days=30, output_file=None):
         
         # Save to file if requested
         if output_file:
-            with open(output_file, "w") as f:
+            # Convert to Path object if it's a string
+            output_path = Path(output_file)
+            # Create directory if it doesn't exist
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+                
+            with output_path.open('w') as f:
                 json.dump(nutrition_data, f, indent=2)
-                print(f"Data saved to {output_file}")
+                print(f"Data saved to {output_path}")
         
         return nutrition_data
     
@@ -57,7 +59,7 @@ def get_data_for_graphing(user_id=1, days=30, output_file=None):
 
 def list_available_users():
     """List all users in the database."""
-    db = SessionLocal()
+    db = TestSessionLocal()
     try:
         users = db.query(User).all()
         if not users:
@@ -84,7 +86,13 @@ def main():
     if args.list_users:
         list_available_users()
     elif args.user:
-        output_file = args.output or f"user_{args.user}_nutrition_data.json"
+        if args.output:
+            output_file = args.output
+        else:
+            data_dir = Path("tests/test_data")
+            data_dir.mkdir(parents=True, exist_ok=True)
+            output_file = data_dir / f"user_{args.user}_nutrition_data.json"
+            
         get_data_for_graphing(user_id=args.user, days=args.days, output_file=output_file)
     else:
         parser.print_help()

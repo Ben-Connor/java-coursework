@@ -1,15 +1,15 @@
-# database/tests/conftest.py
-import os
+from pathlib import Path
 import pytest
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
-from database.schema import Base
+from schema import Base
 from datetime import datetime, timedelta, timezone
-from database.tests.test_data.generator import generate_test_data
-from database.nutrition_query import get_user_nutrition_data
+from tests.test_data.generator import generate_test_data
+from nutrition_query import get_user_nutrition_data
 
-# File-based SQLite database for testing
-TEST_DATABASE_URL = "sqlite:///test_nutrition_tracker.db"
+# Define the database file path using pathlib
+TEST_DB_FILE = Path("test_nutrition_tracker.db")
+TEST_DATABASE_URL = f"sqlite:///{TEST_DB_FILE}"
 
 @pytest.fixture(scope="session")
 def test_engine():
@@ -27,8 +27,9 @@ def test_engine():
     # Cleanup after all tests have run
     Base.metadata.drop_all(bind=engine)
     
-    if os.path.exists("test_nutrition_tracker.db"):
-        os.remove("test_nutrition_tracker.db")
+    # Remove the database file if it exists
+    if TEST_DB_FILE.exists():
+        TEST_DB_FILE.unlink()  # unlink() is the pathlib way to remove a file
 
 @pytest.fixture
 def db(test_engine):

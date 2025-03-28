@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta, timezone
 import random
 
-from database.queries import (
+from queries import (
     add_user, add_food, add_micronutrient, add_food_micronutrient, 
     log_user_food, log_user_micronutrient_consumption, add_food_source
 )

@@ -3,8 +3,8 @@ from typing import Dict, List, Optional, Any
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
-from database.schema import User, Food, UserMacroLog, Micronutrient, FoodMicronutrient, UserMicroLog
-from database.queries import get_user_by_username, get_user_food_logs, get_food_micronutrients
+from schema import User, Food, UserMacroLog, Micronutrient, FoodMicronutrient, UserMicroLog
+from queries import get_user_by_username, get_user_food_logs, get_food_micronutrients
 
 def get_user_nutrition_data(
     db: Session, 

@@ -4,7 +4,7 @@ from typing import Optional, List
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 
-from database.schema import User, Food, UserMacroLog, UserMicroLog, FoodMicronutrient, Micronutrient, FoodSource
+from schema import User, Food, UserMacroLog, UserMicroLog, FoodMicronutrient, Micronutrient, FoodSource
 
 def add_user(db: Session, username: str, email: str, password_hash: str) -> Optional[User]:
     """

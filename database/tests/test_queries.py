@@ -1,7 +1,7 @@
 from sqlalchemy.exc import SQLAlchemyError
 
-from database import queries
-from database.schema import User, Food, UserMacroLog, UserMicroLog, FoodMicronutrient, Micronutrient, FoodSource
+import queries
+from schema import User, Food, UserMacroLog, UserMicroLog, FoodMicronutrient, Micronutrient, FoodSource
 
 # User Tests
 def test_add_user(db):

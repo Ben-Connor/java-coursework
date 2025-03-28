@@ -1,18 +1,15 @@
 # database/scripts/populate_test_db.py
-from database.db import engine, SessionLocal
-from database.schema import Base
-from database.tests.test_data.generator import generate_test_data
-import sys 
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from tests.test_data.test_db import test_engine, TestSessionLocal, create_test_tables, TEST_DB_PATH
+from tests.test_data.generator import generate_test_data
 
 def populate_database(days=30, user_count=3):
-    """Populate the database with test data."""
-    print(f"Creating tables in database...")
-    Base.metadata.create_all(bind=engine)
+    """Populate the test database with test data."""
+    print(f"Creating tables in test database at: {TEST_DB_PATH}")
+    create_test_tables()
     
     # Get a database session
-    db = SessionLocal()
+    db = TestSessionLocal()
     
     try:
         print(f"Generating {days} days of test data for {user_count} users...")
@@ -35,14 +32,14 @@ def populate_database(days=30, user_count=3):
 def main():
     import argparse
     
-    parser = argparse.ArgumentParser(description="Populate database with test data")
+    parser = argparse.ArgumentParser(description="Populate test database with test data")
     parser.add_argument("--days", type=int, default=30, help="Number of days of data to generate")
     parser.add_argument("--users", type=int, default=3, help="Number of users to create")
     
     args = parser.parse_args()
     
     populate_database(days=args.days, user_count=args.users)
-    print("Database population completed!")
+    print(f"Test database population completed! Database saved at: {os.path.abspath(TEST_DB_PATH)}")
 
 if __name__ == "__main__":
     main()

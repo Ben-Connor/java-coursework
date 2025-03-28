@@ -2,8 +2,8 @@
 import pytest
 from datetime import datetime, timedelta, timezone
 
-from database.tests.test_data.generator import generate_test_data
-from database.nutrition_query import get_user_nutrition_data, get_nutrition_data_by_username
+from tests.test_data.generator import generate_test_data
+from nutrition_query import get_user_nutrition_data, get_nutrition_data_by_username
 
 def test_nutrition_data_query(db):
     """Test that nutrition data can be properly queried from the database."""
