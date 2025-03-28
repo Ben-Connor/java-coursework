@@ -48,7 +48,7 @@ const ManualFoodEntry: React.FC = () => {
             <h2>Manual Food Entry</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="foodName">Food Name:</label>
+                    <label htmlFor="foodName">Fod Name:</label>
                     <input
                         id="foodName"
                         type="text"
