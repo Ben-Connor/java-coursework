@@ -3,37 +3,34 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - "*"
-  pull_request:
-    branches:
-      - "*"
+      - "*" # This wildcard matches all branches and triggers the workflow on every commit
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 # Checks out your repository’s code
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "16" # Specify Node.js version (adjust if needed)
 
       - name: Install Dependencies
         run: |
-          cd frontend
-          npm install
+          cd frontend  # Navigate to the frontend directory
+          npm install  # Install dependencies
 
       - name: Run Vitest Tests
         run: |
-          cd frontend
-          npm test
+          cd frontend  # Navigate to the frontend directory
+          npm test  # Run tests using Vitest (assuming `npm test` runs Vitest)
 
-      - name: Upload Test Results
-        if: failure()
+      - name: Upload Test Results (Optional)
+        if: failure() # Only upload test results if tests fail
         uses: actions/upload-artifact@v2
         with:
           name: test-results
-          path: ./test-reports
+          path: ./frontend/test-reports # Adjust path to test reports if necessary
