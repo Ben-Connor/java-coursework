@@ -28,6 +28,8 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
     "jsdom": "^26.0.0",
+    "pretty-quick": "^4.1.1",
+    "simple-git-hooks": "^2.12.1",
     "typescript": "^5.8.2",
     "vite": "^6.2.0",
     "vitest": "^3.0.9"
