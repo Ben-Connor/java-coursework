@@ -1,0 +1,38 @@
+name: Run MyPy Type Checking
+
+on:
+  pull_request:
+    branches:
+      - scrum-76/mypy
+
+jobs:
+  mypy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.13
+
+      # Install Poetry
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+
+      # Install dependencies for backend
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          poetry install  # Install dependencies in the backend directory
+
+      # Run MyPy for backend
+      - name: Run MyPy for backend
+        run: |
+          cd backend
+          poetry run mypy . # Replace with your backend module
