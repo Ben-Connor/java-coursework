@@ -1,34 +1,38 @@
-from typing import TYPE_CHECKING
+from typing import Optional
 
 from sqlmodel import Relationship
 
 from .lib import DatabaseTable
 from ...lib.models import (
     UserModel,
-    UserMacroLogModel,
-    UserMicroLogModel,
+    FoodEntryModel,
+    NutrientEntryModel,
 )
-
-if TYPE_CHECKING:
-    from .food import Food, Micronutrient
 
 
 class User(UserModel, DatabaseTable, table=True):
     __tablename__ = "users"
 
-    macro_logs: list["UserMacroLog"] = Relationship(back_populates="user")
-    micro_logs: list["UserMicroLog"] = Relationship(back_populates="user")
+    food_entries: list["FoodEntry"] = Relationship(back_populates="user")
 
 
-class UserMacroLog(UserMacroLogModel, DatabaseTable, table=True):
-    __tablename__ = "user_macro_logs"
+class FoodEntry(FoodEntryModel, DatabaseTable, table=True):
+    __tablename__ = "food_entries"
 
-    user: "User" = Relationship(back_populates="macro_logs")
-    food: "Food" = Relationship(back_populates="macro_logs")
+    user: "User" = Relationship(back_populates="food_entries")
+
+    calories: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.calories_id"})
+    protein: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.protein_id"})
+    carbohydrates: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.carbohydrates_id"})
+    fat: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.fat_id"})
+    sugar: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.sugar_id"})
+
+    vitamin_c: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.vitamin_c_id"})
+    vitamin_d: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.vitamin_d_id"})
+    fibre: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.fibre_id"})
 
 
-class UserMicroLog(UserMicroLogModel, DatabaseTable, table=True):
-    __tablename__ = "user_micro_logs"
+class NutrientEntry(NutrientEntryModel, DatabaseTable, table=True):
+    __tablename__ = "nutrient_entries"
 
-    user: "User" = Relationship(back_populates="micro_logs")
-    micronutrient: "Micronutrient" = Relationship(back_populates="micro_logs")
+    food_entry: Optional["FoodEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "NutrientEntry.food_entry_id"})

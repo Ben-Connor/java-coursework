@@ -6,8 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from ..database.tables import drop_tables, create_tables
 from ..database import get_engine
-from .routers import meta_router
-from .lib.consts import API_ORIGINS, API_PREFIX, RouterTag, ALL
+from .routers import meta_router, user_router
+from .lib.consts import API_ORIGINS, API_PREFIX, ALL
 
 
 @asynccontextmanager
@@ -28,4 +28,5 @@ app.add_middleware(
     allow_methods=[ALL],
     allow_headers=[ALL],
 )
-app.include_router(meta_router, prefix=API_PREFIX, tags=[RouterTag.META])
+app.include_router(meta_router, prefix=API_PREFIX)
+app.include_router(user_router, prefix=API_PREFIX)
