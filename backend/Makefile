@@ -1,2 +1,2 @@
 test:
-	ENVIRONMENT=dev pytest ./src/tests -svv
+	ENVIRONMENT=test poetry run pytest ./src/tests -svv

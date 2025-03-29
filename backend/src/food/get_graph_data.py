@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
 
-from tests.test_data.test_db import TestSessionLocal
+from tests._legacy_test_data.test_db import TestSessionLocal
 from schema import User
 from nutrition_query import get_user_nutrition_data
 

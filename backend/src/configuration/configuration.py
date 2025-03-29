@@ -10,6 +10,10 @@ class Configuration(BaseSettings):
     BACKEND_BASE_URL: str
     FRONTEND_BASE_URL: str
     DATABASE_URL: str
+    IS_SQLITE: bool
+
+    def is_test(self) -> bool:
+        return self.ENVIRONMENT == Environment.TEST
 
     def is_development(self) -> bool:
         return self.ENVIRONMENT == Environment.DEVELOPMENT

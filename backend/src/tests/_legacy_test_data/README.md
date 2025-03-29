@@ -1,4 +1,4 @@
-# Nutrition Tracking API Data Structure
+<!-- # Nutrition Tracking API Data Structure
 
 This directory contains sample data files that simulate the structure of the nutrition tracking API responses.
 
@@ -98,4 +98,4 @@ This directory contains sample data files that simulate the structure of the nut
       "protein": 142
     }
   }
-}
+} -->
