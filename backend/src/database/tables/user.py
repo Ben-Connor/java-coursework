@@ -21,15 +21,15 @@ class FoodEntry(FoodEntryModel, DatabaseTable, table=True):
 
     user: "User" = Relationship(back_populates="food_entries")
 
-    calories: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.calories_id"})
-    protein: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.protein_id"})
-    carbohydrates: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.carbohydrates_id"})
-    fat: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.fat_id"})
-    sugar: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.sugar_id"})
+    calories: Optional["NutrientEntry"] = Relationship(back_populates="food_entry", sa_relationship_kwargs={"foreign_keys": "FoodEntry.calories_id"})
+    protein: Optional["NutrientEntry"] = Relationship(back_populates="food_entry", sa_relationship_kwargs={"foreign_keys": "FoodEntry.protein_id"})
+    carbohydrates: Optional["NutrientEntry"] = Relationship(back_populates="food_entry", sa_relationship_kwargs={"foreign_keys": "FoodEntry.carbohydrates_id"})
+    fat: Optional["NutrientEntry"] = Relationship(back_populates="food_entry", sa_relationship_kwargs={"foreign_keys": "FoodEntry.fat_id"})
+    sugar: Optional["NutrientEntry"] = Relationship(back_populates="food_entry", sa_relationship_kwargs={"foreign_keys": "FoodEntry.sugar_id"})
 
-    vitamin_c: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.vitamin_c_id"})
-    vitamin_d: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.vitamin_d_id"})
-    fibre: Optional["NutrientEntry"] = Relationship(sa_relationship_kwargs={"foreign_keys": "FoodEntry.fibre_id"})
+    vitamin_c: Optional["NutrientEntry"] = Relationship(back_populates="food_entry", sa_relationship_kwargs={"foreign_keys": "FoodEntry.vitamin_c_id"})
+    vitamin_d: Optional["NutrientEntry"] = Relationship(back_populates="food_entry", sa_relationship_kwargs={"foreign_keys": "FoodEntry.vitamin_d_id"})
+    fibre: Optional["NutrientEntry"] = Relationship(back_populates="food_entry", sa_relationship_kwargs={"foreign_keys": "FoodEntry.fibre_id"})
 
 
 class NutrientEntry(NutrientEntryModel, DatabaseTable, table=True):

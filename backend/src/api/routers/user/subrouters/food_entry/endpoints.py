@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 from sqlmodel import insert, select, and_
+from sqlalchemy.orm import joinedload, load_only
 
 from .schemas import PostFoodEntryResponse, PostFoodEntryRequest, GetFoodEntryResponse, GetFoodEntriesResponse
 from .....lib.dependencies import SessionDep
@@ -51,6 +52,17 @@ def post_food_entry(food_entry_data: PostFoodEntryRequest, user_id: int, session
 def get_food_entry_by_name(name: str, user_id: int, session: SessionDep):
     food_entries = session.scalars(
         select(FoodEntryTable)
+        .options(
+            load_only(FoodEntryTable.id, FoodEntryTable.created_at, FoodEntryTable.updated_at, FoodEntryTable.name, FoodEntryTable.timestamp, FoodEntryTable.user_id),
+            joinedload(FoodEntryTable.calories),
+            joinedload(FoodEntryTable.protein),
+            joinedload(FoodEntryTable.carbohydrates),
+            joinedload(FoodEntryTable.fat),
+            joinedload(FoodEntryTable.sugar),
+            joinedload(FoodEntryTable.vitamin_c),
+            joinedload(FoodEntryTable.vitamin_d),
+            joinedload(FoodEntryTable.fibre),
+        )
         .where(
             and_(
                 FoodEntryTable.name == name,
@@ -65,6 +77,17 @@ def get_food_entry_by_name(name: str, user_id: int, session: SessionDep):
 def get_all_food_entries(user_id: int, session: SessionDep):
     food_entries = session.scalars(
         select(FoodEntryTable)
+        .options(
+            load_only(FoodEntryTable.id, FoodEntryTable.created_at, FoodEntryTable.updated_at, FoodEntryTable.name, FoodEntryTable.timestamp, FoodEntryTable.user_id),
+            joinedload(FoodEntryTable.calories),
+            joinedload(FoodEntryTable.protein),
+            joinedload(FoodEntryTable.carbohydrates),
+            joinedload(FoodEntryTable.fat),
+            joinedload(FoodEntryTable.sugar),
+            joinedload(FoodEntryTable.vitamin_c),
+            joinedload(FoodEntryTable.vitamin_d),
+            joinedload(FoodEntryTable.fibre),
+        )
         .where(FoodEntryTable.user_id == user_id)
     )
     return GetFoodEntriesResponse(food_entries=list(food_entries))
@@ -74,6 +97,17 @@ def get_all_food_entries(user_id: int, session: SessionDep):
 def get_food_entry(user_id: int, food_entry_id: str, session: SessionDep):
     food_entry = session.scalar(
         select(FoodEntryTable)
+        .options(
+            load_only(FoodEntryTable.id, FoodEntryTable.created_at, FoodEntryTable.updated_at, FoodEntryTable.name, FoodEntryTable.timestamp, FoodEntryTable.user_id),
+            joinedload(FoodEntryTable.calories),
+            joinedload(FoodEntryTable.protein),
+            joinedload(FoodEntryTable.carbohydrates),
+            joinedload(FoodEntryTable.fat),
+            joinedload(FoodEntryTable.sugar),
+            joinedload(FoodEntryTable.vitamin_c),
+            joinedload(FoodEntryTable.vitamin_d),
+            joinedload(FoodEntryTable.fibre),
+        )
         .where(
             and_(
                 FoodEntryTable.id == food_entry_id,

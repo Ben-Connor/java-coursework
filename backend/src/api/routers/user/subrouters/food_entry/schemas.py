@@ -10,6 +10,27 @@ class Nutrient(APISchema):
     unit: NutrientUnit
 
 
+class NutrientEntry(Nutrient):
+    id: int
+    created_at: datetime
+    updated_at: datetime
+
+
+class FoodEntry(APISchema):
+    id: int
+    name: str
+    timestamp: datetime
+    user_id: int
+    calories: NutrientEntry
+    protein: NutrientEntry
+    carbohydrates: NutrientEntry
+    fat: NutrientEntry
+    sugar: NutrientEntry
+    vitamin_c: NutrientEntry
+    vitamin_d: NutrientEntry
+    fibre: NutrientEntry
+
+
 class PostFoodEntryRequest(APISchema):
     name: str
     timestamp: datetime
@@ -28,8 +49,8 @@ class PostFoodEntryResponse(APISchema):
 
 
 class GetFoodEntryResponse(APISchema):
-    food_entry: FoodEntryTable
+    food_entry: FoodEntry
 
 
 class GetFoodEntriesResponse(APISchema):
-    food_entries: list[FoodEntryTable]
+    food_entries: list[FoodEntry]
