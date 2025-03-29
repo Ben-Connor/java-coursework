@@ -2,46 +2,23 @@ from datetime import datetime
 
 from .....lib.schemas import APISchema
 from ......database.tables import FoodEntryTable
-from ......lib.models.lib.consts import NutrientUnit
+from ......lib.models.lib.consts import NutrientUnit, Nutrient
+from ......lib.models import FoodEntryModel
 
-
-class Nutrient(APISchema):
+class NutrientEntry(APISchema):
+    name: Nutrient
     quantity: float
     unit: NutrientUnit
 
 
-class NutrientEntry(Nutrient):
-    id: int
-    created_at: datetime
-    updated_at: datetime
-
-
-class FoodEntry(APISchema):
-    id: int
-    name: str
-    timestamp: datetime
-    user_id: int
-    calories: NutrientEntry
-    protein: NutrientEntry
-    carbohydrates: NutrientEntry
-    fat: NutrientEntry
-    sugar: NutrientEntry
-    vitamin_c: NutrientEntry
-    vitamin_d: NutrientEntry
-    fibre: NutrientEntry
+class FoodEntry(FoodEntryModel, APISchema):
+    nutrients: list[NutrientEntry]
 
 
 class PostFoodEntryRequest(APISchema):
     name: str
     timestamp: datetime
-    calories: Nutrient
-    protein: Nutrient
-    carbohydrates: Nutrient
-    fat: Nutrient
-    sugar: Nutrient
-    vitamin_c: Nutrient
-    vitamin_d: Nutrient
-    fibre: Nutrient
+    nutrients: list[NutrientEntry]
 
 
 class PostFoodEntryResponse(APISchema):

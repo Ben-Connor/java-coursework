@@ -1,11 +1,11 @@
 from fastapi import APIRouter, HTTPException, status
 from sqlmodel import insert, select, and_
-from sqlalchemy.orm import joinedload, load_only
+from sqlalchemy.orm import joinedload
+from sqlalchemy.exc import IntegrityError
 
 from .schemas import PostFoodEntryResponse, PostFoodEntryRequest, GetFoodEntryResponse, GetFoodEntriesResponse
 from .....lib.dependencies import SessionDep
-from ......database.tables import FoodEntryTable
-from .utils import insert_nutrient_entry
+from ......database.tables import FoodEntryTable, NutrientEntryTable
 from .....lib.consts import RouterTag
 
 
@@ -15,31 +15,38 @@ _router = APIRouter()
 
 @_router.post("/", response_model=PostFoodEntryResponse)
 def post_food_entry(food_entry_data: PostFoodEntryRequest, user_id: int, session: SessionDep):
-    calories = insert_nutrient_entry(session, food_entry_data.calories)
-    protein = insert_nutrient_entry(session, food_entry_data.protein)
-    carbohydrates = insert_nutrient_entry(session, food_entry_data.carbohydrates)
-    fat = insert_nutrient_entry(session, food_entry_data.fat)
-    sugar = insert_nutrient_entry(session, food_entry_data.sugar)
-    vitamin_c = insert_nutrient_entry(session, food_entry_data.vitamin_c)
-    vitamin_d = insert_nutrient_entry(session, food_entry_data.vitamin_d)
-    fibre = insert_nutrient_entry(session, food_entry_data.fibre)
-    food_entry = session.scalar(
+    stmt = (
         insert(FoodEntryTable)
         .values(
             name=food_entry_data.name,
             timestamp=food_entry_data.timestamp,
             user_id=user_id,
-            calories_id=calories.id,
-            protein_id=protein.id,
-            carbohydrates_id=carbohydrates.id,
-            fat_id=fat.id,
-            sugar_id=sugar.id,
-            vitamin_c_id=vitamin_c.id,
-            vitamin_d_id=vitamin_d.id,
-            fibre_id=fibre.id,
         )
         .returning(FoodEntryTable)
     )
+    try:
+        food_entry = session.scalar(stmt)
+    except IntegrityError:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            detail="Cannot create food entry for non-existent user."
+        )
+    for nutrient in food_entry_data.nutrients:
+        nutrient_entry = session.scalar(
+            insert(NutrientEntryTable)
+            .values(
+                name=nutrient.name,
+                quantity=nutrient.quantity,
+                unit=nutrient.unit,
+                food_entry_id=food_entry.id,
+            )
+            .returning(NutrientEntryTable)
+        )
+        if nutrient_entry is None:
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST,
+                detail=f"Failed to create nutrient entry: {nutrient}"
+            )
     if food_entry is None:
         raise HTTPException(
             status.HTTP_400_BAD_REQUEST,
@@ -52,24 +59,14 @@ def post_food_entry(food_entry_data: PostFoodEntryRequest, user_id: int, session
 def get_food_entry_by_name(name: str, user_id: int, session: SessionDep):
     food_entries = session.scalars(
         select(FoodEntryTable)
-        .options(
-            load_only(FoodEntryTable.id, FoodEntryTable.created_at, FoodEntryTable.updated_at, FoodEntryTable.name, FoodEntryTable.timestamp, FoodEntryTable.user_id),
-            joinedload(FoodEntryTable.calories),
-            joinedload(FoodEntryTable.protein),
-            joinedload(FoodEntryTable.carbohydrates),
-            joinedload(FoodEntryTable.fat),
-            joinedload(FoodEntryTable.sugar),
-            joinedload(FoodEntryTable.vitamin_c),
-            joinedload(FoodEntryTable.vitamin_d),
-            joinedload(FoodEntryTable.fibre),
-        )
+        .options(joinedload(FoodEntryTable.nutrients))
         .where(
             and_(
                 FoodEntryTable.name == name,
                 FoodEntryTable.user_id == user_id,
             )
         )
-    )
+    ).unique()
     return GetFoodEntriesResponse(food_entries=list(food_entries))
 
 
@@ -77,19 +74,9 @@ def get_food_entry_by_name(name: str, user_id: int, session: SessionDep):
 def get_all_food_entries(user_id: int, session: SessionDep):
     food_entries = session.scalars(
         select(FoodEntryTable)
-        .options(
-            load_only(FoodEntryTable.id, FoodEntryTable.created_at, FoodEntryTable.updated_at, FoodEntryTable.name, FoodEntryTable.timestamp, FoodEntryTable.user_id),
-            joinedload(FoodEntryTable.calories),
-            joinedload(FoodEntryTable.protein),
-            joinedload(FoodEntryTable.carbohydrates),
-            joinedload(FoodEntryTable.fat),
-            joinedload(FoodEntryTable.sugar),
-            joinedload(FoodEntryTable.vitamin_c),
-            joinedload(FoodEntryTable.vitamin_d),
-            joinedload(FoodEntryTable.fibre),
-        )
+        .options(joinedload(FoodEntryTable.nutrients))
         .where(FoodEntryTable.user_id == user_id)
-    )
+    ).unique()
     return GetFoodEntriesResponse(food_entries=list(food_entries))
 
 
@@ -97,17 +84,7 @@ def get_all_food_entries(user_id: int, session: SessionDep):
 def get_food_entry(user_id: int, food_entry_id: str, session: SessionDep):
     food_entry = session.scalar(
         select(FoodEntryTable)
-        .options(
-            load_only(FoodEntryTable.id, FoodEntryTable.created_at, FoodEntryTable.updated_at, FoodEntryTable.name, FoodEntryTable.timestamp, FoodEntryTable.user_id),
-            joinedload(FoodEntryTable.calories),
-            joinedload(FoodEntryTable.protein),
-            joinedload(FoodEntryTable.carbohydrates),
-            joinedload(FoodEntryTable.fat),
-            joinedload(FoodEntryTable.sugar),
-            joinedload(FoodEntryTable.vitamin_c),
-            joinedload(FoodEntryTable.vitamin_d),
-            joinedload(FoodEntryTable.fibre),
-        )
+        .options(joinedload(FoodEntryTable.nutrients))
         .where(
             and_(
                 FoodEntryTable.id == food_entry_id,

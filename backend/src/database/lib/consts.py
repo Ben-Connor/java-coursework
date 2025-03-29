@@ -15,3 +15,4 @@ _POOL_TYPE_TO_POOL_CLASS: dict[PoolType, Pool] = {
     PoolType.QUEUE_POOL: QueuePool,
     PoolType.NULL_POOL: NullPool,
 }
+CONNECT_EVENT = "connect"

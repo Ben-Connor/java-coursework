@@ -1,17 +1,25 @@
 from typing import overload, Literal
 
-from sqlalchemy import Engine, create_engine
+from sqlite3 import Connection
+
+from sqlalchemy import Engine, create_engine, event
+from sqlalchemy.pool.base import _ConnectionRecord
 from sqlmodel import Session
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine
 
 from .begun_session import BegunSession, AsyncBegunSession
 from .lib.schemas import EngineSettings
-from .lib.consts import PoolType
+from .lib.consts import PoolType, CONNECT_EVENT
 from ..configuration import CONFIGURATION
+from ..configuration.lib.consts import Environment
 
 
 _ENGINES: dict[EngineSettings, Engine | AsyncEngine] = {}
+
+
+def _foreign_keys_on(connection: Connection, connection_record: _ConnectionRecord) -> None:
+    connection.execute("PRAGMA foreign_keys=ON")
 
 
 @overload
@@ -35,6 +43,8 @@ def get_engine(*, is_async: bool = False, pool_type: PoolType = PoolType.QUEUE_P
         echo=CONFIGURATION.is_development(),
         poolclass=pool_type.to_pool_class()
     )
+    if CONFIGURATION.ENVIRONMENT == Environment.DEVELOPMENT:  # SQLite
+        event.listen(engine, CONNECT_EVENT, _foreign_keys_on)
     _ENGINES[engine_settings] = engine
     return engine
 
