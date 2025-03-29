@@ -1,2 +1,10 @@
 # Ignore SQLite database file
 /database/nutrition_tracker.db
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore generated test data
+database/tests/test_data/*.json

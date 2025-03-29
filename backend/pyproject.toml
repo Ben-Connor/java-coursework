@@ -3,7 +3,8 @@ name = "coursework-name"
 version = "0.1.0"
 description = ""
 authors = [
-    "Kieran Lock <kk935@bath.ac.uk>"
+    "Kieran Lock <kk935@bath.ac.uk>",
+    "Noah Hayes <nh869@bath.ac.uk>",
 ]
 readme = "README.md"
 package-mode = false
@@ -17,9 +18,12 @@ uvicorn = "^0.31.1"
 orjson = "^3.10.7"
 httpx = "^0.28.0"
 itsdangerous = "^2.2.0"
+sqlalchemy = { version = "^2.0.39", extras = ["asyncio"] }
+sqlmodel = "^0.0.24"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3.3"
+pytest = "^8.3.5"
+pytest-sqlalchemy = "^0.2.1"
 
 [build-system]
 requires = ["poetry-core"]

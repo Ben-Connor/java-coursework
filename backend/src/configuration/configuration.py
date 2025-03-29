@@ -9,6 +9,7 @@ class Configuration(BaseSettings):
     ENVIRONMENT: Environment
     BACKEND_BASE_URL: str
     FRONTEND_BASE_URL: str
+    DATABASE_URL: str
 
     def is_development(self) -> bool:
         return self.ENVIRONMENT == Environment.DEVELOPMENT

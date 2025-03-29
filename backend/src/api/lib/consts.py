@@ -3,6 +3,8 @@ from enum import StrEnum
 
 class RouterTag(StrEnum):
     META = "meta"
+    USER = "user"
+    FOOD_ENTRY = "food_entry"
 
 
 API_APP_ENTRYPOINT = "src.api:app"

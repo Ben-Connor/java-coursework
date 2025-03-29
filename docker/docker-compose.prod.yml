@@ -12,21 +12,21 @@ services:
     networks:
       - app-network
 
-  frontend:
-    container_name: vite-frontend-prod
-    build:
-      context: ../frontend
-      dockerfile: ../frontend/docker/prod.Dockerfile
-    volumes:
-      - /app/node_modules
-    ports:
-      - "80:80"
-    environment:
-      - REACT_APP_API_URL=https://api.yourproductiondomain.com  # API URL for production
-    networks:
-      - app-network
-    command: ["npm", "run", "start"]
-    restart: always
+  # frontend:
+  #   container_name: vite-frontend-prod
+  #   build:
+  #     context: ../frontend
+  #     dockerfile: ../frontend/docker/prod.Dockerfile
+  #   volumes:
+  #     - /app/node_modules
+  #   ports:
+  #     - "80:80"
+  #   environment:
+  #     - REACT_APP_API_URL=https://api.yourproductiondomain.com  # API URL for production
+  #   networks:
+  #     - app-network
+  #   command: ["npm", "run", "start"]
+  #   restart: always
 
 
 networks:
