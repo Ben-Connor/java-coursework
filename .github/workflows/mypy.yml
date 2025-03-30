@@ -35,4 +35,4 @@ jobs:
       - name: Run MyPy
         run: |
           cd backend
-          poetry run mypy
+          poetry run mypy .
