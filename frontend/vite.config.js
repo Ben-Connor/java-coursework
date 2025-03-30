@@ -5,14 +5,14 @@ export default defineConfig({
     base: "/",
     plugins: [react()],
     preview: {
-    port: 3000,
-    strictPort: true,
+        port: 3000,
+        strictPort: true,
     },
     server: {
-    port: 3000,
-    strictPort: true,
-    host: true,
-    origin: "http://0.0.0.0:3000",
+        port: 3000,
+        strictPort: true,
+        host: true,
+        origin: "http://0.0.0.0:3000",
     },
     test: {
         globals: true,
