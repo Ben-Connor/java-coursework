@@ -2,6 +2,11 @@ name: MyPy Static Type Checking
 
 on:
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+  push:
     branches:
       - dev
       - prod
