@@ -15,11 +15,7 @@ In contrast, NoSQL databases sacrifice this consistency and integrity for other 
 
 # How the Database Works at a High Level
 
-When a user tries to input a food item, the application first checks if that food exists in an **external database** (e.g., USDA FoodData Central, Open Food Facts).
-
-- **If the food exists**, it is retrieved from the external database. The system then adds the food to the `foods` table (if it doesn't already exist) via the `food_sources` table, creating a link to the external source.
-- **If the food doesn’t exist** in the external database, it will be treated as a new entry in the `foods` table and added with user-specific data.
-- Once the food is added, it is logged in **user-specific tables** (`user_macro_log`, `user_micro_log`), where individual servings are recorded.
+Rewrite this...
 
 # SQLAlchemy
 

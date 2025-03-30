@@ -1,14 +1,14 @@
-FROM node:18-alpine
+FROM oven/bun:1.2-alpine
+
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm install
+COPY package.json bun.lock ./
+
+RUN bun install --production --frozen-lockfile
 
 COPY . .
 
 EXPOSE 3000
 
-ENV WDS_SOCKET_PORT=0
-
-CMD ["npm", "run", "dev"]
+CMD ["bun", "run", "dev"]
