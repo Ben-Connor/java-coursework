@@ -1,0 +1,27 @@
+name: Vitest Unit Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Run unit tests
+        run: |
+          cd frontend
+          npm test
