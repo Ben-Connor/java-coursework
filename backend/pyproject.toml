@@ -17,16 +17,16 @@ uvicorn = "^0.31.1"
 orjson = "^3.10.7"
 httpx = "^0.28.0"
 itsdangerous = "^2.2.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
 mypy = "^1.15.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
 python_version = "^3.13"
 strict = true
 disallow_untyped_defs = true
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.3.3"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
