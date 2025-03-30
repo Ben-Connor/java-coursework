@@ -1,24 +1,25 @@
 from datetime import datetime
 
 from .....lib.schemas import APISchema
-from ......database.tables import FoodEntryTable
+from ......database.tables import FoodEntryTable, NutrientEntryTable
 from ......lib.models.lib.consts import NutrientUnit, Nutrient
 from ......lib.models import FoodEntryModel
+from ......database.tables.lib import DatabaseTable
 
-class NutrientEntry(APISchema):
+class NutrientEntryInputSchema(APISchema):
     name: Nutrient
     quantity: float
     unit: NutrientUnit
 
 
-class FoodEntry(FoodEntryModel, APISchema):
-    nutrients: list[NutrientEntry]
+class FoodEntrySchema(FoodEntryModel, DatabaseTable, APISchema):
+    nutrients: list[NutrientEntryTable]
 
 
 class PostFoodEntryRequest(APISchema):
     name: str
     timestamp: datetime
-    nutrients: list[NutrientEntry]
+    nutrients: list[NutrientEntryInputSchema]
 
 
 class PostFoodEntryResponse(APISchema):
@@ -26,8 +27,8 @@ class PostFoodEntryResponse(APISchema):
 
 
 class GetFoodEntryResponse(APISchema):
-    food_entry: FoodEntry
+    food_entry: FoodEntrySchema
 
 
 class GetFoodEntriesResponse(APISchema):
-    food_entries: list[FoodEntry]
+    food_entries: list[FoodEntrySchema]

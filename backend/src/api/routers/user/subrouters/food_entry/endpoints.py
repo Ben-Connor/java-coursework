@@ -28,7 +28,7 @@ def post_food_entry(food_entry_data: PostFoodEntryRequest, user_id: int, session
         food_entry = session.scalar(stmt)
     except IntegrityError:
         raise HTTPException(
-            status.HTTP_400_BAD_REQUEST,
+            status.HTTP_404_NOT_FOUND,
             detail="Cannot create food entry for non-existent user."
         )
     for nutrient in food_entry_data.nutrients:
@@ -45,12 +45,12 @@ def post_food_entry(food_entry_data: PostFoodEntryRequest, user_id: int, session
         if nutrient_entry is None:
             raise HTTPException(
                 status.HTTP_400_BAD_REQUEST,
-                detail=f"Failed to create nutrient entry: {nutrient}"
+                detail=f"Failed to create nutrient entry: {nutrient.name!r}."
             )
     if food_entry is None:
         raise HTTPException(
             status.HTTP_400_BAD_REQUEST,
-            detail=f"Failed to create food {food_entry_data.name!r}."
+            detail=f"Failed to create food entry {food_entry_data.name!r}."
         )
     return PostFoodEntryResponse(food_entry=food_entry)
 
@@ -95,7 +95,7 @@ def get_food_entry(user_id: int, food_entry_id: str, session: SessionDep):
     if food_entry is None:
         raise HTTPException(
             status.HTTP_404_NOT_FOUND,
-            detail="No such food found."
+            detail="No such food entry found."
         )
     return GetFoodEntryResponse(food_entry=food_entry)
 

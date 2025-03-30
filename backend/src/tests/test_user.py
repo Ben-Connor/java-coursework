@@ -1,29 +1,10 @@
 from fastapi.testclient import TestClient
-from sqlmodel import select, insert, func, col
+from sqlmodel import select
 
 from ..database.tables import UserTable
 from ..database import BegunSession
-from ..lib.models import UserModel
-
-
-USER_001 = UserModel(
-    id=1,
-    username="test_username",
-    email="test_username@email.com",
-    password_hash="hashed_password",
-)
-
-
-def insert_user(user: UserModel, session: BegunSession) -> UserTable | None:
-    return session.scalar(
-        insert(UserTable)
-        .values(
-            username=user.username,
-            email=user.email,
-            password_hash=user.password_hash,
-        )
-        .returning(UserTable)
-    )
+from .lib.consts import USER_001
+from .lib.queries import insert_user, count_records
 
 
 def test_create_user(client: TestClient, session: BegunSession) -> None:
@@ -44,7 +25,7 @@ def test_create_duplicate_user(client: TestClient, session: BegunSession) -> Non
     assert response.status_code == 400
     assert response.json()["detail"] == "Cannot create duplicate user."
 
-    assert session.scalar(select(func.count(col(UserTable.id)))) == 1
+    assert count_records(UserTable, session) == 1
     
 
 def test_get_user_by_email(client: TestClient, session: BegunSession) -> None:
@@ -62,7 +43,7 @@ def test_get_nonexistent_user_by_email(client: TestClient, session: BegunSession
     assert response.status_code == 404
     assert response.json()["detail"] == "No such user found."
 
-    assert not session.scalar(select(func.count(col(UserTable.id))))
+    assert not count_records(UserTable, session)
 
 
 def test_get_user_by_id(client: TestClient, session: BegunSession):
@@ -80,7 +61,7 @@ def test_get_nonexistent_user_by_id(client: TestClient, session: BegunSession):
     assert response.status_code == 404
     assert response.json()["detail"] == "No such user found."
 
-    assert not session.scalar(select(func.count(col(UserTable.id))))
+    assert not count_records(UserTable, session)
 
 
 def test_get_all_users(client: TestClient, session: BegunSession):
