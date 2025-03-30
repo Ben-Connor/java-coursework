@@ -4,3 +4,4 @@ env/*
 .venv/
 .python-version
 .pytest_cache/
+.mypy_cache/
