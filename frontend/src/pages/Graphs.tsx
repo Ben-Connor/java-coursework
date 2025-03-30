@@ -12,7 +12,7 @@ import {
   Legend
 } from 'chart.js';
 
-import userData from './data/user_1_nutrition_data.json';
+import userData from '../data/user_1_nutrition_data.json';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const Graphs: React.FC = () => {

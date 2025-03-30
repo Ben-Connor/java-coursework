@@ -1,6 +1,6 @@
 import { Link, Outlet } from '@tanstack/react-router';
 import React from 'react';
-import FoodSearch from './FoodSearch';
+import FoodSearch from './pages/FoodSearch';
 
 const App: React.FC = () => {
   return (

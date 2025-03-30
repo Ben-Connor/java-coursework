@@ -7,8 +7,8 @@ import {
 } from '@tanstack/react-router';
 import Home from './pages/Home';
 import App from './App';
-import FoodSearch from './FoodSearch';
-import Graphs from './Graphs'; 
+import FoodSearch from './pages/FoodSearch';
+import Graphs from './pages/Graphs'; 
 
 const rootRoute = createRootRoute({
   component: App,
