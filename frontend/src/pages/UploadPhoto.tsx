@@ -38,7 +38,7 @@ function UploadPhoto() {
 
     return (
         <div>
-            <input type="file" multiple accept="image/*" onChange={handleFileChange} />
+            <input type="file" accept="image/*" onChange={handleFileChange} />
             { im_file && (
                 <div>
                     <p>Image Name : {im_file.name}</p>
