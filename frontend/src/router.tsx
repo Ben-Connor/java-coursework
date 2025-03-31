@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import App from './App';
 import FoodSearch from './pages/FoodSearch';
 import Graphs from './pages/Graphs'; 
+import UploadPhoto from './pages/UploadPhoto';
 
 const rootRoute = createRootRoute({
   component: App,
@@ -32,7 +33,15 @@ const graphsRoute = createRoute({
   component: Graphs,
 });
 
-const routeTree = rootRoute.addChildren([homeRoute, foodSearchRoute, graphsRoute]);
+const uploadPhotoRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/upload-photo',
+  component: UploadPhoto,
+});
+
+
+
+const routeTree = rootRoute.addChildren([homeRoute, foodSearchRoute, graphsRoute, uploadPhotoRoute]);
 
 const router = createRouter({ routeTree });
 
