@@ -20,6 +20,7 @@ httpx = "^0.28.0"
 itsdangerous = "^2.2.0"
 sqlalchemy = { version = "^2.0.39", extras = ["asyncio"] }
 sqlmodel = "^0.0.24"
+loggle = "^0.1.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"

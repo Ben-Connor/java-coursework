@@ -2,7 +2,7 @@
     "loggers": {
         "coursework-name": {
             "handlers": ["queue"],
-            "level": "WARNING",
+            "level": "DEBUG",
             "propagate": false
         },
         "uvicorn": {
@@ -27,7 +27,7 @@
         },
         "sqlalchemy.engine": {
             "handlers": ["queue"],
-            "level": "NOTSET",
+            "level": "INFO",
             "propagate": false
         },
         "sqlalchemy.pool": {

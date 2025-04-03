@@ -39,7 +39,6 @@ def get_engine(*, is_async: bool = False, pool_type: PoolType = PoolType.QUEUE_P
     engine_creator = create_async_engine if is_async else create_engine
     engine = engine_creator(
         CONFIGURATION.DATABASE_URL,
-        echo=CONFIGURATION.is_development(),
         poolclass=pool_type.to_pool_class(),
         connect_args=connection_kwargs,
     )
