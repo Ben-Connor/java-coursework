@@ -27,4 +27,4 @@ class Configuration(BaseSettings):
     model_config = SettingsConfigDict(env_file=ENVIRONMENT_FILE_LOOKUP[get_environment()], extra="ignore")
 
 
-CONFIGURATION = Configuration()
+CONFIGURATION = Configuration()  # type: ignore[call-arg]

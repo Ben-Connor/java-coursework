@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from loggle import LoggingConfiguration, Logger, LoggersSchema, LoggerName, FormatterName, AtomicHandlerName, CompositeHandlerName, StreamHandlerSchema, FileHandlerSchema, QueueHandlerSchema, FilterName, LoggingLevel, LoggingStream
+from loggle import LoggingConfiguration, Logger, LoggersSchema, LoggerName, FormatterName, AtomicHandlerName, CompositeHandlerName, StreamHandlerSchema, FileHandlerSchema, QueueHandlerSchema, FilterName, LoggingLevel, LoggingStream, HandlersDict, AtomicHandlerSchema, CompositeHandlerSchema
 from loggle.collections import Filters, Formatters, HandlerClasses, UvicornLoggerName, SQLAlchemyLoggerName
 
 from ..configuration import CONFIGURATION
@@ -37,6 +37,8 @@ class AppLoggerName(LoggerName):
     SQLALCHEMY_ORM = SQLAlchemyLoggerName.ORM
 
 
+APP_ATOMIC_HANDLER_NAMES: list[AppAtomicHandlerName] = list(AppAtomicHandlerName)
+
 FILTERS = {
     AppFilterName.ERROR: Filters.ERROR,
 }
@@ -46,7 +48,7 @@ FORMATTERS = {
     AppFormatterName.JSON: Formatters.JSON,
 }
 
-HANDLERS = {
+HANDLERS: HandlersDict[AppAtomicHandlerName | AppCompositeHandlerName, AtomicHandlerSchema[AppFilterName, AppFormatterName], CompositeHandlerSchema[AppAtomicHandlerName, AppFilterName]] = HandlersDict({
     AppAtomicHandlerName.STANDARD: StreamHandlerSchema(
         handler_class=HandlerClasses.STREAM,
         filters=[AppFilterName.ERROR],
@@ -67,9 +69,9 @@ HANDLERS = {
     ),
     AppCompositeHandlerName.QUEUE: QueueHandlerSchema(
         handler_class=HandlerClasses.QUEUE,
-        handlers=list(AppAtomicHandlerName),
+        handlers=APP_ATOMIC_HANDLER_NAMES,
     ),
-}
+})
 
 LOGGERS = (
     LoggersSchema[AppLoggerName, AppAtomicHandlerName | AppCompositeHandlerName]

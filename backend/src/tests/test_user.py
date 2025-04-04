@@ -8,7 +8,7 @@ from .lib.queries import insert_user, count_records
 
 
 def test_create_user(client: TestClient, session: BegunSession) -> None:
-    user_data = USER_001.model_dump(mode="json", exclude="id")
+    user_data = USER_001.model_dump(mode="json", exclude={"id"})
 
     response = client.post("/api/v1/user", json=user_data)
     assert response.status_code == 200
@@ -19,7 +19,7 @@ def test_create_user(client: TestClient, session: BegunSession) -> None:
 
 def test_create_duplicate_user(client: TestClient, session: BegunSession) -> None:
     insert_user(USER_001, session)
-    user_data = USER_001.model_dump(mode="json", exclude="id")
+    user_data = USER_001.model_dump(mode="json", exclude={"id"})
 
     response = client.post("/api/v1/user", json=user_data)
     assert response.status_code == 400
@@ -38,7 +38,7 @@ def test_get_user_by_email(client: TestClient, session: BegunSession) -> None:
     assert session.scalar(select(UserTable).where(UserTable.id == USER_001.id)) == user
 
 
-def test_get_nonexistent_user_by_email(client: TestClient, session: BegunSession):
+def test_get_nonexistent_user_by_email(client: TestClient, session: BegunSession) -> None:
     response = client.get(f"/api/v1/user?email={USER_001.email}")
     assert response.status_code == 404
     assert response.json()["detail"] == "No such user found."
@@ -46,7 +46,7 @@ def test_get_nonexistent_user_by_email(client: TestClient, session: BegunSession
     assert not count_records(UserTable, session)
 
 
-def test_get_user_by_id(client: TestClient, session: BegunSession):
+def test_get_user_by_id(client: TestClient, session: BegunSession) -> None:
     insert_user(USER_001, session)
 
     response = client.get(f"/api/v1/user/{USER_001.id}")
@@ -56,7 +56,7 @@ def test_get_user_by_id(client: TestClient, session: BegunSession):
     assert session.scalar(select(UserTable).where(UserTable.id == USER_001.id)) == user
 
 
-def test_get_nonexistent_user_by_id(client: TestClient, session: BegunSession):
+def test_get_nonexistent_user_by_id(client: TestClient, session: BegunSession) -> None:
     response = client.get(f"/api/v1/user/{USER_001.id}")
     assert response.status_code == 404
     assert response.json()["detail"] == "No such user found."
@@ -64,7 +64,7 @@ def test_get_nonexistent_user_by_id(client: TestClient, session: BegunSession):
     assert not count_records(UserTable, session)
 
 
-def test_get_all_users(client: TestClient, session: BegunSession):
+def test_get_all_users(client: TestClient, session: BegunSession) -> None:
     response_001 = client.get("/api/v1/user/all")
     assert response_001.status_code == 200
     assert response_001.json()["users"] == []
