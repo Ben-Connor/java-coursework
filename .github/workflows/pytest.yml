@@ -1,4 +1,4 @@
-name: mypy Unit Tests
+name: pytest Unit Tests
 
 on:
     pull_request:
@@ -32,7 +32,7 @@ jobs:
                   cd backend
                   poetry install
 
-            - name: Run mypy
+            - name: Run pytest
               run: |
                   cd backend
-                  make mypy
+                  make test
