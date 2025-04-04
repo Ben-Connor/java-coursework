@@ -1,4 +1,4 @@
-name: mypy Unit Tests
+name: Mypy Static Type Analysis
 
 on:
     pull_request:

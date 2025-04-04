@@ -1,4 +1,4 @@
-name: pytest Unit Tests
+name: Pytest Unit Tests
 
 env:
   ENVIRONMENT: test
