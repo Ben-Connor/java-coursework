@@ -8,11 +8,11 @@ class PoolType(StrEnum):
     NULL_POOL = "NULL_POOL"
     STATIC_POOL = "STATIC_POOL"
 
-    def to_pool_class(self) -> Pool:
+    def to_pool_class(self) -> type[Pool]:
         return _POOL_TYPE_TO_POOL_CLASS[self]
 
 
-_POOL_TYPE_TO_POOL_CLASS: dict[PoolType, Pool] = {
+_POOL_TYPE_TO_POOL_CLASS: dict[PoolType, type[Pool]] = {
     PoolType.QUEUE_POOL: QueuePool,
     PoolType.NULL_POOL: NullPool,
     PoolType.STATIC_POOL: StaticPool,

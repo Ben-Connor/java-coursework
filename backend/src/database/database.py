@@ -31,6 +31,11 @@ def get_engine(*, is_async: Literal[True] = ..., pool_type: PoolType = ..., **co
     ...
 
 
+@overload
+def get_engine(*, is_async: bool = ..., pool_type: PoolType = ..., **connection_kwargs: Any) -> Engine | AsyncEngine:
+    ...
+
+
 def get_engine(*, is_async: bool = False, pool_type: PoolType = PoolType.QUEUE_POOL, **connection_kwargs: Any) -> Engine | AsyncEngine:
     engine_settings = EngineSettings(is_async, pool_type, tuple(connection_kwargs.items()))
     cached_engine = _ENGINES.get(engine_settings)
@@ -72,14 +77,24 @@ def get_session(*, begun: Literal[False] = ..., is_async: Literal[True] = ..., p
     ...
 
 
+@overload
+def get_session(*, begun: bool = ..., is_async: Literal[True] = ..., pool_type: PoolType = ..., **connection_kwargs: Any) -> AsyncBegunSession | AsyncSession:
+    ...
+
+
+@overload
+def get_session(*, begun: bool = ..., is_async: bool = ..., pool_type: PoolType = ..., **connection_kwargs: Any) -> BegunSession | AsyncBegunSession | Session | AsyncSession:
+    ...
+
+
 def get_session(*, begun: bool = True, is_async: bool = False, pool_type: PoolType = PoolType.QUEUE_POOL, **connection_kwargs: Any) -> BegunSession | AsyncBegunSession | Session | AsyncSession:
     engine = get_engine(is_async=is_async, pool_type=pool_type, **connection_kwargs)
     if begun:
         session_creator = AsyncBegunSession if is_async else BegunSession
     else:
-        session_creator = AsyncSession if is_async else Session
+        session_creator = AsyncSession if is_async else Session  # type: ignore[assignment]
     return session_creator(
-        bind=engine,
+        bind=engine,  # type: ignore[arg-type]
         expire_on_commit=False,
     )
 

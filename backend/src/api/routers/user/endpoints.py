@@ -14,7 +14,7 @@ _router = APIRouter()
 
 
 @_router.post("/", response_model=PostUserResponse)
-def post_user(user_data: PostUserRequest, session: SessionDep):
+def post_user(user_data: PostUserRequest, session: SessionDep) -> PostUserResponse:
     stmt = (
         insert(UserTable)
         .values(
@@ -40,7 +40,7 @@ def post_user(user_data: PostUserRequest, session: SessionDep):
 
 
 @_router.get("/", response_model=GetUserResponse)
-def get_user_by_email(email: str, session: SessionDep):
+def get_user_by_email(email: str, session: SessionDep) -> GetUserResponse:
     user = session.scalar(
         select(UserTable)
         .where(UserTable.email == email)
@@ -54,7 +54,7 @@ def get_user_by_email(email: str, session: SessionDep):
 
 
 @_router.get("/all", response_model=GetUsersResponse)
-def get_all_users(session: SessionDep):
+def get_all_users(session: SessionDep) -> GetUsersResponse:
     users = session.scalars(
         select(UserTable)
     )
@@ -62,7 +62,7 @@ def get_all_users(session: SessionDep):
 
 
 @_router.get("/{user_id}", response_model=GetUserResponse)
-def get_user(user_id: int, session: SessionDep):
+def get_user(user_id: int, session: SessionDep) -> GetUserResponse:
     user = session.scalar(
         select(UserTable)
         .where(UserTable.id == user_id)
