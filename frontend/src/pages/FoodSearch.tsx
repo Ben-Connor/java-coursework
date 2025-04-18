@@ -95,6 +95,23 @@ function FoodSearch() {
     setExpandedFood((prevExpandedFood) => (prevExpandedFood === fdcId ? null : fdcId));
   };
 
+  // Function to reorder and prioritize nutrients (calories, protein, carbs, fat)
+  const reorderNutrients = (foodNutrients: Nutrient[]) => {
+    const priorityOrder = ['Energy', 'Protein', 'Carbohydrate', 'Fat']; // USDA names for nutrients
+    const orderedNutrients = foodNutrients.sort((a, b) => {
+      const aIndex = priorityOrder.indexOf(a.nutrientName);
+      const bIndex = priorityOrder.indexOf(b.nutrientName);
+
+      // Move priority nutrients to the beginning
+      if (aIndex !== -1 && bIndex === -1) return -1; // a is in the priority list, b is not
+      if (bIndex !== -1 && aIndex === -1) return 1;  // b is in the priority list, a is not
+
+      return aIndex - bIndex; // Both are in the priority list or not, sort based on their index
+    });
+
+    return orderedNutrients;
+  };
+
   return (
     <div className="relative flex flex-col h-full">
       {/* Fixed Selected Foods Panel at the top right */}
@@ -168,7 +185,7 @@ function FoodSearch() {
 
                   {expandedFood === product.fdcId && (
                     <div className="mt-3">
-                      {product.foodNutrients.map((nutrient, index) => (
+                      {reorderNutrients(product.foodNutrients).map((nutrient, index) => (
                         <p key={index} className="text-gray-600">
                           {nutrient.nutrientName}: {nutrient.value} {nutrient.unitName}
                         </p>
