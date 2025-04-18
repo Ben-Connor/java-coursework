@@ -14,7 +14,7 @@ _router = APIRouter()
 
 
 @_router.post("/", response_model=PostFoodEntryResponse)
-def post_food_entry(food_entry_data: PostFoodEntryRequest, user_id: int, session: SessionDep):
+def post_food_entry(food_entry_data: PostFoodEntryRequest, user_id: int, session: SessionDep) -> PostFoodEntryResponse:
     stmt = (
         insert(FoodEntryTable)
         .values(
@@ -30,6 +30,11 @@ def post_food_entry(food_entry_data: PostFoodEntryRequest, user_id: int, session
         raise HTTPException(
             status.HTTP_404_NOT_FOUND,
             detail="Cannot create food entry for non-existent user."
+        )
+    if food_entry is None:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            detail=f"Failed to create food entry {food_entry_data.name!r}."
         )
     for nutrient in food_entry_data.nutrients:
         nutrient_entry = session.scalar(
@@ -47,19 +52,14 @@ def post_food_entry(food_entry_data: PostFoodEntryRequest, user_id: int, session
                 status.HTTP_400_BAD_REQUEST,
                 detail=f"Failed to create nutrient entry: {nutrient.name!r}."
             )
-    if food_entry is None:
-        raise HTTPException(
-            status.HTTP_400_BAD_REQUEST,
-            detail=f"Failed to create food entry {food_entry_data.name!r}."
-        )
     return PostFoodEntryResponse(food_entry=food_entry)
 
 
 @_router.get("/", response_model=GetFoodEntriesResponse)
-def get_food_entry_by_name(name: str, user_id: int, session: SessionDep):
+def get_food_entry_by_name(name: str, user_id: int, session: SessionDep) -> GetFoodEntriesResponse:
     food_entries = session.scalars(
         select(FoodEntryTable)
-        .options(joinedload(FoodEntryTable.nutrients))
+        .options(joinedload(FoodEntryTable.nutrients))  # type: ignore[arg-type]
         .where(
             and_(
                 FoodEntryTable.name == name,
@@ -71,20 +71,20 @@ def get_food_entry_by_name(name: str, user_id: int, session: SessionDep):
 
 
 @_router.get("/all", response_model=GetFoodEntriesResponse)
-def get_all_food_entries(user_id: int, session: SessionDep):
+def get_all_food_entries(user_id: int, session: SessionDep) -> GetFoodEntriesResponse:
     food_entries = session.scalars(
         select(FoodEntryTable)
-        .options(joinedload(FoodEntryTable.nutrients))
+        .options(joinedload(FoodEntryTable.nutrients))  # type: ignore[arg-type]
         .where(FoodEntryTable.user_id == user_id)
     ).unique()
     return GetFoodEntriesResponse(food_entries=list(food_entries))
 
 
 @_router.get("/{food_entry_id}", response_model=GetFoodEntryResponse)
-def get_food_entry(user_id: int, food_entry_id: str, session: SessionDep):
+def get_food_entry(user_id: int, food_entry_id: int, session: SessionDep) -> GetFoodEntryResponse:
     food_entry = session.scalar(
         select(FoodEntryTable)
-        .options(joinedload(FoodEntryTable.nutrients))
+        .options(joinedload(FoodEntryTable.nutrients))  # type: ignore[arg-type]
         .where(
             and_(
                 FoodEntryTable.id == food_entry_id,

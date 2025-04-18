@@ -1,13 +1,18 @@
 {
     "loggers": {
-        "uvicorn": {
+        "coursework-name": {
             "handlers": ["queue"],
             "level": "INFO",
             "propagate": false
         },
+        "uvicorn": {
+            "handlers": ["queue"],
+            "level": "NOTSET",
+            "propagate": false
+        },
         "uvicorn.access": {
             "handlers": ["queue"],
-            "level": "INFO",
+            "level": "NOTSET",
             "propagate": false
         },
         "uvicorn.error": {
@@ -17,7 +22,27 @@
         },
         "uvicorn.asgi": {
             "handlers": ["queue"],
+            "level": "NOTSET",
+            "propagate": false
+        },
+        "sqlalchemy.engine": {
+            "handlers": ["queue"],
             "level": "INFO",
+            "propagate": false
+        },
+        "sqlalchemy.pool": {
+            "handlers": ["queue"],
+            "level": "NOTSET",
+            "propagate": false
+        },
+        "sqlalchemy.dialects": {
+            "handlers": ["queue"],
+            "level": "NOTSET",
+            "propagate": false
+        },
+        "sqlalchemy.orm": {
+            "handlers": ["queue"],
+            "level": "NOTSET",
             "propagate": false
         }
     }
