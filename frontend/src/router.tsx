@@ -10,6 +10,7 @@ import App from './App';
 import FoodSearch from './pages/FoodSearch';
 import Graphs from './pages/Graphs'; 
 import UploadPhoto from './pages/UploadPhoto';
+import Webcam from './pages/Webcam';
 
 const rootRoute = createRootRoute({
   component: App,
@@ -36,12 +37,19 @@ const graphsRoute = createRoute({
 const uploadPhotoRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/upload-photo',
-  component: UploadPhoto,
+  component: UploadPhoto
+  
+});
+
+const webcamRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/webcam',
+  component: Webcam,
+  
 });
 
 
-
-const routeTree = rootRoute.addChildren([homeRoute, foodSearchRoute, graphsRoute, uploadPhotoRoute]);
+const routeTree = rootRoute.addChildren([homeRoute, foodSearchRoute, graphsRoute, uploadPhotoRoute, webcamRoute]);
 
 const router = createRouter({ routeTree });
 
