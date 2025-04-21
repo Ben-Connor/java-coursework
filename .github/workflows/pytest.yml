@@ -1,4 +1,15 @@
-name: Mypy Static Type Analysis
+name: Pytest Unit Tests
+
+env:
+  ENVIRONMENT: test
+
+  BACKEND_BASE_URL: localhost:8000/
+  FRONTEND_BASE_URL: localhost:3000/
+
+  PYTHONUNBUFFERED: 1
+
+  DATABASE_URL: sqlite://
+  IS_SQLITE: True
 
 on:
     pull_request:
@@ -12,7 +23,7 @@ on:
             - prod
 
 jobs:
-    mypy:
+    pytest:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -32,7 +43,7 @@ jobs:
                   cd backend
                   poetry install
 
-            - name: Run mypy
+            - name: Run pytest
               run: |
                   cd backend
-                  make mypy
+                  make test

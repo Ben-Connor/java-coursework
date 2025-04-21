@@ -3,3 +3,10 @@ from .user import (
     FoodEntry as FoodEntryModel,
     NutrientEntry as NutrientEntryModel,
 )
+
+
+__all__ = [
+    "UserModel",
+    "FoodEntryModel",
+    "NutrientEntryModel",
+]

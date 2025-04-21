@@ -9,7 +9,7 @@ _router = APIRouter()
 
 
 @_router.get("/health", response_model=GetIsHealthyResponse)
-def get_is_healthy():
+def get_is_healthy() -> GetIsHealthyResponse:
     return GetIsHealthyResponse(is_healthy=True)
 
 
