@@ -7,7 +7,7 @@ const App: React.FC = () => {
     <div>
       <nav>
         {/* <Link to="/">Home</Link> */}
-        <a href="/">Home</a> | <a href="/food-search">Food Search</a> | <a href ="/graphs">Graphs </a>
+        <a href="/">Home</a> | <a href="/food-search">Food Search</a> | <a href ="/graphs">Graphs </a> | <a href="/upload-photo">Upload Photo</a> | <a href= "/webcam">Take Photo</a>
       </nav>
       <hr />
       <Outlet />
