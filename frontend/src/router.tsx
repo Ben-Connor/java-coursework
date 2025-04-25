@@ -41,15 +41,9 @@ const uploadPhotoRoute = createRoute({
   
 });
 
-const webcamRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/webcam',
-  component: Webcam,
-  
-});
 
 
-const routeTree = rootRoute.addChildren([homeRoute, foodSearchRoute, graphsRoute, uploadPhotoRoute, webcamRoute]);
+const routeTree = rootRoute.addChildren([homeRoute, foodSearchRoute, graphsRoute, uploadPhotoRoute]);
 
 const router = createRouter({ routeTree });
 

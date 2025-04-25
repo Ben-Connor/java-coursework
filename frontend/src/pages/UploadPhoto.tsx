@@ -1,17 +1,9 @@
-import React, { ChangeEvent, useState } from "react";
-import ReactWebcam from "react-webcam";
+import React, { ChangeEvent, useState, useRef, useCallback } from "react"
+import Webcam from "react-webcam"
+import WebcamCapture from "./Webcam";
 
-type UploadStatus = "idle" | "uploading" | "succesful" | "error";
-const aspectRatios = {
-    landscape: {
-        width: 1920,
-        height: 1080,
-    },
-    portrait: {
-        width: 1080,
-        height: 1920,
-    },
-}
+
+type UploadStatus = "idle" | "uploading" | "succesful" | "error"
 
 function UploadPhoto() {
     const [im_file, setFile] = useState<File | null>(null);
@@ -39,6 +31,7 @@ function UploadPhoto() {
                 headers: {
                     "Content-Type" : "multipart/form-data",
                 },
+                //body: json string of formData i think?
             });
 
             setStatus("succesful");
@@ -69,8 +62,12 @@ function UploadPhoto() {
             {status === "error" && (
                 <p>Image Upload Failed. TRY AGAIN!!</p>
             )}
+            <div>
+                <WebcamCapture/>
+            </div>
         </div>
     );
 }
 
 export default UploadPhoto;
+
