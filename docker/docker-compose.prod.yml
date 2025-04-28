@@ -1,6 +1,6 @@
 services:
   fastapi-backend:
-    container_name: coursework-backend-prod
+    container_name: macromotions-backend-prod
     build:
       context: ../backend
       dockerfile: ./docker/prod.Dockerfile
@@ -13,7 +13,7 @@ services:
       - app-network
 
   react-frontend:
-    container_name: coursework-frontend-prod
+    container_name: macromotions-frontend-prod
     build:
       context: ../frontend
       dockerfile: ../frontend/docker/prod.Dockerfile

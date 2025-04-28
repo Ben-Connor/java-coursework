@@ -26,7 +26,7 @@ class AppCompositeHandlerName(CompositeHandlerName):
 
 
 class AppLoggerName(LoggerName):
-    COURSEWORK = "coursework-name"
+    MACROMOTIONS = "macromotions"
     UVICORN = UvicornLoggerName.ROOT
     UVICORN_ACCESS = UvicornLoggerName.ACCESS
     UVICORN_ERROR = UvicornLoggerName.ERROR
@@ -88,4 +88,4 @@ LOGGING_CONFIGURATION = (
     )
 )
 
-LOGGER = Logger(name=AppLoggerName.COURSEWORK)
+LOGGER = Logger(name=AppLoggerName.MACROMOTIONS)
