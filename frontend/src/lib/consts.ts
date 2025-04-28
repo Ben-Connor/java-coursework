@@ -74,7 +74,283 @@ export const FOOD_ENTRIES: FoodEntry[] = repeat(4, [
             },
         ],
     },
-])
+    {
+        name: "Salmon Fillet",
+        timestamp: new Date(new Date().setDate(new Date().getDate() - 1)),
+        nutrients: [
+            {
+                name: Nutrient.CALORIES,
+                quantity: 400,
+                unit: NutrientUnit.CALORIES,
+            },
+            {
+                name: Nutrient.PROTEIN,
+                quantity: 50,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.CARBOHYDRATES,
+                quantity: 0,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.FAT,
+                quantity: 20,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.SUGAR,
+                quantity: 0,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_C,
+                quantity: 0,
+                unit: NutrientUnit.MILLI_GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_D,
+                quantity: 15,
+                unit: NutrientUnit.MICRO_GRAMS,
+            },
+            {
+                name: Nutrient.FIBRE,
+                quantity: 0,
+                unit: NutrientUnit.GRAMS,
+            },
+        ],
+    },
+    {
+        name: "Brown Rice",
+        timestamp: new Date(new Date().setDate(new Date().getDate() - 2)),
+        nutrients: [
+            {
+                name: Nutrient.CALORIES,
+                quantity: 215,
+                unit: NutrientUnit.CALORIES,
+            },
+            {
+                name: Nutrient.PROTEIN,
+                quantity: 5,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.CARBOHYDRATES,
+                quantity: 45,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.FAT,
+                quantity: 1.5,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.SUGAR,
+                quantity: 0,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_C,
+                quantity: 0,
+                unit: NutrientUnit.MILLI_GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_D,
+                quantity: 0,
+                unit: NutrientUnit.MICRO_GRAMS,
+            },
+            {
+                name: Nutrient.FIBRE,
+                quantity: 3.5,
+                unit: NutrientUnit.GRAMS,
+            },
+        ],
+    },
+    {
+        name: "Broccoli",
+        timestamp: new Date(new Date().setDate(new Date().getDate() - 3)),
+        nutrients: [
+            {
+                name: Nutrient.CALORIES,
+                quantity: 55,
+                unit: NutrientUnit.CALORIES,
+            },
+            {
+                name: Nutrient.PROTEIN,
+                quantity: 4.5,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.CARBOHYDRATES,
+                quantity: 11,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.FAT,
+                quantity: 0.5,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.SUGAR,
+                quantity: 2,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_C,
+                quantity: 89,
+                unit: NutrientUnit.MILLI_GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_D,
+                quantity: 0,
+                unit: NutrientUnit.MICRO_GRAMS,
+            },
+            {
+                name: Nutrient.FIBRE,
+                quantity: 3.8,
+                unit: NutrientUnit.GRAMS,
+            },
+        ],
+    },
+    {
+        name: "Almonds",
+        timestamp: new Date(new Date().setDate(new Date().getDate() - 4)),
+        nutrients: [
+            {
+                name: Nutrient.CALORIES,
+                quantity: 575,
+                unit: NutrientUnit.CALORIES,
+            },
+            {
+                name: Nutrient.PROTEIN,
+                quantity: 21,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.CARBOHYDRATES,
+                quantity: 22,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.FAT,
+                quantity: 49,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.SUGAR,
+                quantity: 4.4,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_C,
+                quantity: 0,
+                unit: NutrientUnit.MILLI_GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_D,
+                quantity: 0,
+                unit: NutrientUnit.MICRO_GRAMS,
+            },
+            {
+                name: Nutrient.FIBRE,
+                quantity: 12.5,
+                unit: NutrientUnit.GRAMS,
+            },
+        ],
+    },
+    {
+        name: "Greek Yogurt",
+        timestamp: new Date(new Date().setDate(new Date().getDate() - 5)),
+        nutrients: [
+            {
+                name: Nutrient.CALORIES,
+                quantity: 100,
+                unit: NutrientUnit.CALORIES,
+            },
+            {
+                name: Nutrient.PROTEIN,
+                quantity: 10,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.CARBOHYDRATES,
+                quantity: 4,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.FAT,
+                quantity: 5,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.SUGAR,
+                quantity: 3,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_C,
+                quantity: 0,
+                unit: NutrientUnit.MILLI_GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_D,
+                quantity: 1,
+                unit: NutrientUnit.MICRO_GRAMS,
+            },
+            {
+                name: Nutrient.FIBRE,
+                quantity: 0,
+                unit: NutrientUnit.GRAMS,
+            },
+        ],
+    },
+    {
+        name: "Apple",
+        timestamp: new Date(new Date().setDate(new Date().getDate() - 6)),
+        nutrients: [
+            {
+                name: Nutrient.CALORIES,
+                quantity: 95,
+                unit: NutrientUnit.CALORIES,
+            },
+            {
+                name: Nutrient.PROTEIN,
+                quantity: 0.5,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.CARBOHYDRATES,
+                quantity: 25,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.FAT,
+                quantity: 0.3,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.SUGAR,
+                quantity: 19,
+                unit: NutrientUnit.GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_C,
+                quantity: 8.4,
+                unit: NutrientUnit.MILLI_GRAMS,
+            },
+            {
+                name: Nutrient.VITAMIN_D,
+                quantity: 0,
+                unit: NutrientUnit.MICRO_GRAMS,
+            },
+            {
+                name: Nutrient.FIBRE,
+                quantity: 4.4,
+                unit: NutrientUnit.GRAMS,
+            },
+        ],
+    },
+]);
 
 export const TARGETS: NutrientTarget[] = [
     {
