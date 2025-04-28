@@ -28,11 +28,12 @@ const getTotalNutrients = (entries: FoodEntry[]) => {
         totals[nutrientName as Nutrient] = sum(quantities)
     }
   
-    return totals;
+    return totals
 }
 
 function Index() {
-    const nutrientTotals = getTotalNutrients(FOOD_ENTRIES)
+    const midnight = new Date(new Date().setHours(0, 0, 0, 0))
+    const nutrientTotals = getTotalNutrients(FOOD_ENTRIES.filter(entry => entry.timestamp >= midnight))
 
     return (
         <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">

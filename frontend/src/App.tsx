@@ -4,7 +4,7 @@ import { ReactNode } from "react"
 import { ThemeProvider } from "./components/theme-provider"
 
 interface AppProps {
-    children: ReactNode
+    children?: ReactNode
 }
 
 const App = ({ children } : AppProps ) => {
