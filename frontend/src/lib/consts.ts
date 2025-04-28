@@ -4,6 +4,7 @@ import {
     IconTarget,
   } from "@tabler/icons-react"
 import { Nutrient, NutrientUnit, Sidebar, NutrientTarget, User, FoodEntry } from "./types"
+import { repeat } from "./utils"
 
 export const SIDEBAR = {
     main: [
@@ -26,7 +27,7 @@ export const USER = {
     email: "username@example.com",
 } satisfies User
 
-export const FOOD_ENTRIES: FoodEntry[] = [
+export const FOOD_ENTRIES: FoodEntry[] = repeat(4, [
     {
         name: "Chicken Breast",
         timestamp: new Date(),
@@ -73,7 +74,7 @@ export const FOOD_ENTRIES: FoodEntry[] = [
             },
         ],
     },
-]
+])
 
 export const TARGETS: NutrientTarget[] = [
     {
