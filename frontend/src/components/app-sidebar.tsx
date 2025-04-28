@@ -11,7 +11,8 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { ComponentProps } from "react"
-import { SIDEBAR, USER } from "@/lib/consts"
+import { RouteUrl, SIDEBAR, USER } from "@/lib/consts"
+import { Link } from "@tanstack/react-router"
 
 export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
     return (
@@ -20,10 +21,10 @@ export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
-                            <a href="#">
+                            <Link to={RouteUrl.DASHBOARD.toString()}>
                                 <IconMacro className="!size-5" />
                                 <span className="text-base font-semibold">Macromotions</span>
-                            </a>
+                            </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>

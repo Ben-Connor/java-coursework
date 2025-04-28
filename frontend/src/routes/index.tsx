@@ -1,12 +1,12 @@
 import { DashboardCard } from "@/components/dashboard-card"
 import { DashboardGraph } from "@/components/dashboard-graph"
-import { TARGET_COMPARATORS_LOOKUP, TARGETS, FOOD_ENTRIES } from "@/lib/consts"
+import { TARGET_COMPARATORS_LOOKUP, TARGETS, FOOD_ENTRIES, RouteUrl } from "@/lib/consts"
 import { FoodEntry, Nutrient, NutrientTarget, NutrientUnit } from "@/lib/types"
 import { sum } from "@/lib/utils"
 import { createFileRoute } from "@tanstack/react-router"
 
-export const Route = createFileRoute("/")({
-    component: Index,
+export const Route = createFileRoute(RouteUrl.DASHBOARD)({
+    component: DashboardPage,
 })
 
 type NutrientQuantity = {
@@ -31,7 +31,7 @@ const getTotalNutrients = (entries: FoodEntry[]) => {
     return totals
 }
 
-function Index() {
+function DashboardPage() {
     const midnight = new Date(new Date().setHours(0, 0, 0, 0))
     const nutrientTotals = getTotalNutrients(FOOD_ENTRIES.filter(entry => entry.timestamp >= midnight))
 

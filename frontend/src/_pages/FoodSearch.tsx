@@ -21,7 +21,7 @@ interface USDAResponse {
   foods: Product[];
 }
 
-const FoodSearch = () => {
+const _FoodSearch = () => {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [foodData, setFoodData] = useState<USDAResponse | null>(null)
   const [loading, setLoading] = useState<boolean>(false)

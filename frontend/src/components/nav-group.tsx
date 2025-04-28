@@ -8,10 +8,11 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Link } from "@tanstack/react-router"
+import { RouteUrl } from "@/lib/consts"
 
 interface Item {
     title: string
-    url: string
+    url: RouteUrl
     icon?: Icon
 }
 
@@ -27,7 +28,7 @@ export const NavGroup = ({ items }: NavGroupProps) => {
             {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton tooltip={item.title} asChild>
-                    <Link to={item.url}>
+                    <Link to={item.url.toString()}>
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>
                     </Link>

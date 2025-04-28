@@ -1,21 +1,22 @@
-import {
-    IconChartBar,
-    IconListDetails,
-    IconTarget,
-  } from "@tabler/icons-react"
+import { IconChartBar, IconListDetails } from "@tabler/icons-react"
 import { Nutrient, NutrientUnit, Sidebar, NutrientTarget, User, FoodEntry } from "./types"
 import { repeat } from "./utils"
+
+export enum RouteUrl {
+    DASHBOARD = "/",
+    ENTRIES = "/entries",
+}
 
 export const SIDEBAR = {
     main: [
         {
             title: "Dashboard",
-            url: "/",
+            url: RouteUrl.DASHBOARD,
             icon: IconChartBar,
         },
         {
             title: "Entries",
-            url: "/entries",
+            url: RouteUrl.ENTRIES,
             icon: IconListDetails,
         }
     ],
