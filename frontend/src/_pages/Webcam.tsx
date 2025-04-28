@@ -1,5 +1,5 @@
-import { useRef, useState, useCallback } from "react";
-import Webcam from "react-webcam";
+import { useRef, useState, useCallback } from "react"
+import Webcam from "react-webcam"
 
 const videoConstraints = {
   width: 720,
@@ -8,15 +8,15 @@ const videoConstraints = {
 };
 
 const WebcamCapture = () => {
-  const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
-  const webcamRef = useRef<Webcam>(null);
-  const [url, setUrl] = useState<string | null>(null);
+  const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false)
+  const webcamRef = useRef<Webcam>(null)
+  const [url, setUrl] = useState<string | null>(null)
   const capture = useCallback(() => {
-    const imageSrc = webcamRef.current?.getScreenshot();
+    const imageSrc = webcamRef.current?.getScreenshot()
     if (imageSrc) {
-      setUrl(imageSrc);
+      setUrl(imageSrc)
     }
-  }, [webcamRef]);
+  }, [webcamRef])
 
   return (
     <>
@@ -46,7 +46,7 @@ const WebcamCapture = () => {
           <div>
             <button
               onClick={() => {
-                setUrl(null);
+                setUrl(null)
               }}
             >
               delete
@@ -58,7 +58,7 @@ const WebcamCapture = () => {
         </>
       )}
     </>
-  );
+  )
 };
 
 export default WebcamCapture;

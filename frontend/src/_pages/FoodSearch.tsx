@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from "react"
 
 // Define the types for the USDA API response and the product data
 interface Nutrient {
@@ -21,54 +21,54 @@ interface USDAResponse {
   foods: Product[];
 }
 
-function FoodSearch() {
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [foodData, setFoodData] = useState<USDAResponse | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
+const FoodSearch = () => {
+  const [searchQuery, setSearchQuery] = useState<string>("")
+  const [foodData, setFoodData] = useState<USDAResponse | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>("")
 
   // Handle input change
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+    setSearchQuery(e.target.value)
   };
 
   // Handle form submission
   const handleSearch = async (e: FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!searchQuery.trim()) {
-      setError('Please enter a search term.');
+      setError("Please enter a search term.")
       return;
     }
 
-    setLoading(true);
-    setError('');
+    setLoading(true)
+    setError("")
 
     try {
-      const apiKey = 'DEMO_KEY'; // Replace with your USDA API key
+      const apiKey = "DEMO_KEY" // Replace with your USDA API key
       const response = await fetch(
         `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(searchQuery)}&api_key=${apiKey}`
-      );
+      )
 
       if (!response.ok) {
-        throw new Error('Failed to fetch data');
+        throw new Error("Failed to fetch data")
       }
 
-      const data: USDAResponse = await response.json();
-      console.log('Raw USDA API Response:', data); // Log the entire response to inspect the structure
+      const data: USDAResponse = await response.json()
+      console.log("Raw USDA API Response:", data) // Log the entire response to inspect the structure
 
       if (data && data.foods && data.foods.length > 0) {
-        setFoodData(data);
-        setError('');
+        setFoodData(data)
+        setError("")
       } else {
-        setError('No products found for your search.');
-        setFoodData(null);
+        setError("No products found for your search.")
+        setFoodData(null)
       }
     } catch (error) {
-      console.error('Error fetching food data:', error);
-      setError('An error occurred while fetching data.');
-      setFoodData(null);
+      console.error("Error fetching food data:", error)
+      setError("An error occurred while fetching data.")
+      setFoodData(null)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   };
 
@@ -97,9 +97,9 @@ function FoodSearch() {
           <h2 className="text-xl font-semibold mb-3">Results</h2>
           {foodData.foods.map((product) => (
             <div key={product.fdcId} className="mb-4 p-3 border rounded">
-              <h3 className="font-bold">{product.description || 'Unnamed Product'}</h3>
-              <p className="text-gray-700">{product.brandOwner || 'Brand not available'}</p>
-              <p className="text-gray-700">{product.foodCategory || 'Category not available'}</p>
+              <h3 className="font-bold">{product.description || "Unnamed Product"}</h3>
+              <p className="text-gray-700">{product.brandOwner || "Brand not available"}</p>
+              <p className="text-gray-700">{product.foodCategory || "Category not available"}</p>
 
               {/* Nutritional information */}
               {product.foodNutrients.map((nutrient, index) => (
@@ -121,7 +121,7 @@ function FoodSearch() {
         </div>
       )}
     </div>
-  );
+  )
 }
 
 export default FoodSearch;

@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState } from "react"
 
 const ManualFoodEntry: React.FC = () => {
-    const [foodName, setFoodName] = useState('');
-    const [calories, setCalories] = useState('');
-    const [protein, setProtein] = useState('');
-    const [carbs, setCarbs] = useState('');
-    const [fat, setFat] = useState('');
+    const [foodName, setFoodName] = useState("")
+    const [calories, setCalories] = useState("")
+    const [protein, setProtein] = useState("")
+    const [carbs, setCarbs] = useState("")
+    const [fat, setFat] = useState("")
     const [vitamins, setVitamins] = useState<
         { name: string; amount: string; unit: string }[]
-    >([]);
-    const [submitted, setSubmitted] = useState(false);
+    >([])
+    const [submitted, setSubmitted] = useState(false)
 
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+        e.preventDefault()
         const foodData = {
             name: foodName,
             calories: parseFloat(calories),
@@ -24,12 +24,12 @@ const ManualFoodEntry: React.FC = () => {
                 amount: parseFloat(vit.amount),
             })),
         };
-        console.log('Food Data Submitted:', foodData);
-        setSubmitted(true);
+        console.log("Food Data Submitted:", foodData)
+        setSubmitted(true)
     };
 
     const handleAddVitamin = () => {
-        setVitamins([...vitamins, { name: '', amount: '', unit: 'mg' }]);
+        setVitamins([...vitamins, { name: "", amount: "", unit: "mg" }])
     };
 
     const handleVitaminChange = (
@@ -39,8 +39,8 @@ const ManualFoodEntry: React.FC = () => {
     ) => {
         const updatedVitamins = vitamins.map((vit, i) =>
             i === index ? { ...vit, [field]: value } : vit,
-        );
-        setVitamins(updatedVitamins);
+        )
+        setVitamins(updatedVitamins)
     };
 
     return (
@@ -107,7 +107,7 @@ const ManualFoodEntry: React.FC = () => {
                             onChange={(e) =>
                                 handleVitaminChange(
                                     index,
-                                    'name',
+                                    "name",
                                     e.target.value,
                                 )
                             }
@@ -120,7 +120,7 @@ const ManualFoodEntry: React.FC = () => {
                             onChange={(e) =>
                                 handleVitaminChange(
                                     index,
-                                    'amount',
+                                    "amount",
                                     e.target.value,
                                 )
                             }
@@ -131,7 +131,7 @@ const ManualFoodEntry: React.FC = () => {
                             onChange={(e) =>
                                 handleVitaminChange(
                                     index,
-                                    'unit',
+                                    "unit",
                                     e.target.value,
                                 )
                             }
@@ -149,7 +149,7 @@ const ManualFoodEntry: React.FC = () => {
             </form>
             {submitted && <p>Food entry submitted successfully!</p>}
         </div>
-    );
+    )
 };
 
 export default ManualFoodEntry;

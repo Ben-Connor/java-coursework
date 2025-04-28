@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from "react";
-import ReactWebcam from "react-webcam";
+import React, { ChangeEvent, useState } from "react"
+import ReactWebcam from "react-webcam"
 
-type UploadStatus = "idle" | "uploading" | "succesful" | "error";
+type UploadStatus = "idle" | "uploading" | "succesful" | "error"
 const aspectRatios = {
     landscape: {
         width: 1920,
@@ -14,23 +14,23 @@ const aspectRatios = {
 }
 
 function UploadPhoto() {
-    const [im_file, setFile] = useState<File | null>(null);
+    const [im_file, setFile] = useState<File | null>(null)
     const [status, setStatus] = useState<UploadStatus>("idle")
     
     //Hardcoded for single file upload
     function handleFileChange(e: ChangeEvent<HTMLInputElement>){
         if (e.target.files){
-            setFile(e.target.files[0]);
+            setFile(e.target.files[0])
         }
     } 
 
     async function handleFileUpload(){
         if (!im_file) return;
 
-        setStatus("uploading");
+        setStatus("uploading")
 
-        const formData = new FormData();
-        formData.append("image", im_file);
+        const formData = new FormData()
+        formData.append("image", im_file)
 
         //Not sure how this will be sent to backend but assuming something similar
         try {
@@ -39,11 +39,11 @@ function UploadPhoto() {
                 headers: {
                     "Content-Type" : "multipart/form-data",
                 },
-            });
+            })
 
-            setStatus("succesful");
+            setStatus("succesful")
         } catch {
-            setStatus("error");
+            setStatus("error")
         }
     }
 
@@ -70,7 +70,7 @@ function UploadPhoto() {
                 <p>Image Upload Failed. TRY AGAIN!!</p>
             )}
         </div>
-    );
+    )
 }
 
 export default UploadPhoto;
