@@ -28,3 +28,17 @@ class NutrientEntry(DataModel):
     unit: NutrientUnit = Field()
 
     food_entry_id: int = Field(foreign_key="food_entries.id", index=True)
+
+
+class Target(DataModel):
+    timestamp: datetime = Field(default_factory=now)
+
+    user_id: int = Field(foreign_key="users.id", index=True)
+
+
+class NutrientTarget(DataModel):
+    name: Nutrient = Field()
+    quantity: float = Field()
+    unit: NutrientUnit = Field()
+
+    target_id: int = Field(foreign_key="targets.id", index=True)
