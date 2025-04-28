@@ -9,12 +9,10 @@ import Home from './pages/Home';
 import App from './App';
 import FoodSearch from './pages/FoodSearch';
 import Graphs from './pages/Graphs'; 
-<<<<<<< HEAD
 import BarcodeSearch from './pages/BarcodeSearch';
-=======
 import UploadPhoto from './pages/UploadPhoto';
 import Webcam from './pages/Webcam';
->>>>>>> 5805b66d0072fe859f13590b2117c5023a9686a0
+
 
 const rootRoute = createRootRoute({
   component: App,

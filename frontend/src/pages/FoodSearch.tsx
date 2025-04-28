@@ -46,7 +46,7 @@ function FoodSearch() {
     setError('');
 
     try {
-      const apiKey = 'DEMO_KEY'; // Replace with your USDA API key
+      const apiKey = 'DEMO_KEY';
       const response = await fetch(
         `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(searchQuery)}&api_key=${apiKey}`
       );
