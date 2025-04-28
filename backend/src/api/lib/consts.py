@@ -5,6 +5,7 @@ class RouterTag(StrEnum):
     META = "meta"
     USER = "user"
     FOOD_ENTRY = "food_entry"
+    TARGET = "target"
 
 
 API_APP_ENTRYPOINT = "src.api:app"

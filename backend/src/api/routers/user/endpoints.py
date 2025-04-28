@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 from .schemas import PostUserResponse, PostUserRequest, GetUserResponse, GetUsersResponse
 from ...lib.dependencies import SessionDep
 from ....database.tables import UserTable
-from .subrouters import food_entry_router
+from .subrouters import food_entry_router, target_router
 from ...lib.consts import RouterTag
 
 
@@ -77,3 +77,4 @@ def get_user(user_id: int, session: SessionDep) -> GetUserResponse:
 
 router.include_router(_router, tags=[RouterTag.USER])
 router.include_router(food_entry_router)
+router.include_router(target_router)

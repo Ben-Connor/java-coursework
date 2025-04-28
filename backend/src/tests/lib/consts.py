@@ -1,4 +1,4 @@
-from ...lib.models import UserModel, FoodEntryModel, NutrientEntryModel
+from ...lib.models import UserModel, FoodEntryModel, NutrientEntryModel, TargetModel, NutrientTargetModel
 from ...lib.models.lib.consts import Nutrient, NutrientUnit
 
 
@@ -69,5 +69,25 @@ CHICKEN_NUTRIENT_ENTRIES = [
         quantity=0,
         unit=NutrientUnit.GRAMS,
         food_entry_id=CHICKEN_ENTRY.id,
+    ),
+]
+BULKING_TARGET = TargetModel(
+    id=1,
+    user_id=USER_001.id,
+)
+BULKING_NUTRIENT_TARGETS = [
+    NutrientTargetModel(
+        id=1,
+        name=Nutrient.CALORIES,
+        quantity=3_000,
+        unit=NutrientUnit.CALORIES,
+        target_id=BULKING_TARGET.id,
+    ),
+    NutrientTargetModel(
+        id=2,
+        name=Nutrient.PROTEIN,
+        quantity=200,
+        unit=NutrientUnit.GRAMS,
+        target_id=BULKING_TARGET.id,
     ),
 ]

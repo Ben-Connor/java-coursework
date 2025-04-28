@@ -6,6 +6,7 @@ from ......lib.models.lib.consts import NutrientUnit, Nutrient
 from ......lib.models import FoodEntryModel
 from ......database.tables.lib import DatabaseTable
 
+
 class NutrientEntryInputSchema(APISchema):
     name: Nutrient
     quantity: float

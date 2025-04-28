@@ -1,8 +1,8 @@
 from sqlmodel import select, func, col, insert
 
-from ...database.tables import UserTable, FoodEntryTable, NutrientEntryTable
+from ...database.tables import UserTable, FoodEntryTable, NutrientEntryTable, TargetTable, NutrientTargetTable
 from ...database import BegunSession
-from ...lib.models import UserModel, FoodEntryModel, NutrientEntryModel
+from ...lib.models import UserModel, FoodEntryModel, NutrientEntryModel, TargetModel, NutrientTargetModel
 from ...database.tables.lib import DatabaseTable
 
 
@@ -30,6 +30,17 @@ def insert_food_entry(food_entry: FoodEntryModel, session: BegunSession) -> Food
     )
 
 
+def insert_target(food_entry: TargetModel, session: BegunSession) -> TargetTable | None:
+    return session.scalar(
+        insert(TargetTable)
+        .values(
+            timestamp=food_entry.timestamp,
+            user_id=food_entry.user_id,
+        )
+        .returning(TargetTable)
+    )
+
+
 def insert_nutrient_entry(nutrient_entry: NutrientEntryModel, session: BegunSession) -> NutrientEntryTable | None:
     return session.scalar(
         insert(NutrientEntryTable)
@@ -40,6 +51,19 @@ def insert_nutrient_entry(nutrient_entry: NutrientEntryModel, session: BegunSess
             food_entry_id=nutrient_entry.food_entry_id,
         )
         .returning(NutrientEntryTable)
+    )
+
+
+def insert_nutrient_target(nutrient_target: NutrientTargetModel, session: BegunSession) -> NutrientTargetTable | None:
+    return session.scalar(
+        insert(NutrientTargetTable)
+        .values(
+            name=nutrient_target.name,
+            quantity=nutrient_target.quantity,
+            unit=nutrient_target.unit,
+            target_id=nutrient_target.target_id,
+        )
+        .returning(NutrientTargetTable)
     )
 
 
