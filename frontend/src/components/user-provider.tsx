@@ -3,10 +3,10 @@ import { UserResponseSchema } from "@/lib/schemas/user"
 import { useUserStore } from "@/lib/stores/user"
 import { DatabaseUser, UserRequest } from "@/lib/types"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { ReactNode, useEffect } from "react"
+import { ReactNode, useCallback, useEffect } from "react"
 
 const postUser = async (user: UserRequest): Promise<DatabaseUser> => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -20,7 +20,7 @@ const postUser = async (user: UserRequest): Promise<DatabaseUser> => {
   
     const json = await response.json()
     const parseResult = UserResponseSchema.safeParse(json)
-  
+
     if (!parseResult.success) {
         console.error(parseResult.error.message)
         throw new Error("Invalid Macromotions API response structure.")
@@ -43,10 +43,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             queryClient.invalidateQueries({ queryKey: [QueryKey.USER] })
         },
     })
-    
-    useEffect(() => {
-        mutation.mutate(user)
-    }, [])
+
+    useEffect(() => mutation.mutate(user), [])
 
     return (
         <>
