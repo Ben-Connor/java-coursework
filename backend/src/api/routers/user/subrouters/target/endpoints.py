@@ -1,11 +1,10 @@
 from fastapi import APIRouter, HTTPException, status
 from sqlmodel import insert, select, and_
-from sqlalchemy.orm import joinedload
 from sqlalchemy.exc import IntegrityError
 
-from .schemas import PostTargetResponse, PostTargetRequest, GetTargetResponse, GetFoodTargetsResponse
+from .schemas import PostTargetResponse, PostTargetRequest, GetTargetResponse, GetTargetsResponse
 from .....lib.dependencies import SessionDep
-from ......database.tables import TargetTable, NutrientTargetTable
+from ......database.tables import NutrientTargetTable
 from .....lib.consts import RouterTag
 
 
@@ -16,12 +15,15 @@ _router = APIRouter()
 @_router.post("/", response_model=PostTargetResponse)
 def post_target(target_data: PostTargetRequest, user_id: int, session: SessionDep) -> PostTargetResponse:
     stmt = (
-        insert(TargetTable)
+        insert(NutrientTargetTable)
         .values(
-            timestamp=target_data.timestamp,
+            name=target_data.name,
+            quantity=target_data.quantity,
+            unit=target_data.unit,
+            is_lower_bound=target_data.is_lower_bound,
             user_id=user_id,
         )
-        .returning(TargetTable)
+        .returning(NutrientTargetTable)
     )
     try:
         target = session.scalar(stmt)
@@ -35,44 +37,25 @@ def post_target(target_data: PostTargetRequest, user_id: int, session: SessionDe
             status.HTTP_400_BAD_REQUEST,
             detail="Failed to create target."
         )
-    for nutrient in target_data.nutrients:
-        nutrient_target = session.scalar(
-            insert(NutrientTargetTable)
-            .values(
-                name=nutrient.name,
-                quantity=nutrient.quantity,
-                unit=nutrient.unit,
-                target_id=target.id,
-            )
-            .returning(NutrientTargetTable)
-        )
-        if nutrient_target is None:
-            raise HTTPException(
-                status.HTTP_400_BAD_REQUEST,
-                detail=f"Failed to create nutrient target: {nutrient.name!r}."
-            )
     return PostTargetResponse(target=target)
 
 
-@_router.get("/all", response_model=GetFoodTargetsResponse)
-def get_all_targets(user_id: int, session: SessionDep) -> GetFoodTargetsResponse:
+@_router.get("/all", response_model=GetTargetsResponse)
+def get_all_targets(user_id: int, session: SessionDep) -> GetTargetsResponse:
     targets = session.scalars(
-        select(TargetTable)
-        .options(joinedload(TargetTable.nutrients))  # type: ignore[arg-type]
-        .where(TargetTable.user_id == user_id)
-    ).unique()
-    return GetFoodTargetsResponse(targets=list(targets))
+        select(NutrientTargetTable)
+    )
+    return GetTargetsResponse(targets=list(targets))
 
 
 @_router.get("/{target_id}", response_model=GetTargetResponse)
 def get_target(user_id: int, target_id: int, session: SessionDep) -> GetTargetResponse:
     target = session.scalar(
-        select(TargetTable)
-        .options(joinedload(TargetTable.nutrients))  # type: ignore[arg-type]
+        select(NutrientTargetTable)
         .where(
             and_(
-                TargetTable.id == target_id,
-                TargetTable.user_id == user_id,
+                NutrientTargetTable.id == target_id,
+                NutrientTargetTable.user_id == user_id,
             )
         )
     )

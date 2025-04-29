@@ -1,12 +1,12 @@
-from ...lib.models import UserModel, FoodEntryModel, NutrientEntryModel, TargetModel, NutrientTargetModel
+from ...lib.models import UserModel, FoodEntryModel, NutrientEntryModel, NutrientTargetModel
 from ...lib.models.lib.consts import Nutrient, NutrientUnit
 
 
 USER_001 = UserModel(
     id=1,
-    username="Test Username",
-    email="test_username@email.com",
-    password_hash="hashed_password",
+    username="Username",
+    email="username@email.com",
+    password_hash="$hashed_password$",
 )
 CHICKEN_ENTRY = FoodEntryModel(
     id=1,
@@ -71,23 +71,70 @@ CHICKEN_NUTRIENT_ENTRIES = [
         food_entry_id=CHICKEN_ENTRY.id,
     ),
 ]
-BULKING_TARGET = TargetModel(
-    id=1,
-    user_id=USER_001.id,
-)
 BULKING_NUTRIENT_TARGETS = [
     NutrientTargetModel(
         id=1,
         name=Nutrient.CALORIES,
-        quantity=3_000,
+        quantity=3_200,
         unit=NutrientUnit.CALORIES,
-        target_id=BULKING_TARGET.id,
+        is_lower_bound=True,
+        user_id=USER_001.id,
     ),
     NutrientTargetModel(
         id=2,
         name=Nutrient.PROTEIN,
-        quantity=200,
+        quantity=220,
         unit=NutrientUnit.GRAMS,
-        target_id=BULKING_TARGET.id,
+        is_lower_bound=True,
+        user_id=USER_001.id,
+    ),
+    NutrientTargetModel(
+        id=3,
+        name=Nutrient.CARBOHYDRATES,
+        quantity=350,
+        unit=NutrientUnit.GRAMS,
+        is_lower_bound=True,
+        user_id=USER_001.id,
+    ),
+    NutrientTargetModel(
+        id=4,
+        name=Nutrient.FAT,
+        quantity=90,
+        unit=NutrientUnit.GRAMS,
+        is_lower_bound=True,
+        user_id=USER_001.id,
+    ),
+    NutrientTargetModel(
+        id=5,
+        name=Nutrient.SUGAR,
+        quantity=70,
+        unit=NutrientUnit.GRAMS,
+        is_lower_bound=False,
+        user_id=USER_001.id,
+    ),
+    NutrientTargetModel(
+        id=6,
+        name=Nutrient.FIBRE,
+        quantity=30,
+        unit=NutrientUnit.GRAMS,
+        is_lower_bound=True,
+        user_id=USER_001.id,
+    ),
+    NutrientTargetModel(
+        id=7,
+        name=Nutrient.VITAMIN_C,
+        quantity=90,
+        unit=NutrientUnit.MILLI_GRAMS,
+        is_lower_bound=True,
+        user_id=USER_001.id,
+    ),
+    NutrientTargetModel(
+        id=8,
+        name=Nutrient.VITAMIN_D,
+        quantity=10,
+        unit=NutrientUnit.MICRO_GRAMS,
+        is_lower_bound=True,
+        user_id=USER_001.id,
     ),
 ]
+BULKING_NUTRIENT_TARGET_001 = BULKING_NUTRIENT_TARGETS[0]
