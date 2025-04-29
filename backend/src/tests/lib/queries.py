@@ -3,7 +3,7 @@ from sqlmodel import select, func, col, insert
 from ...database.tables import UserTable, FoodEntryTable, NutrientEntryTable, NutrientTargetTable
 from ...database import BegunSession
 from ...lib.models import UserModel, FoodEntryModel, NutrientEntryModel, NutrientTargetModel
-from ...database.tables.lib import DatabaseModel
+from ...lib.models.lib import DatabaseModel
 
 
 def insert_user(user: UserModel, session: BegunSession) -> UserTable | None:

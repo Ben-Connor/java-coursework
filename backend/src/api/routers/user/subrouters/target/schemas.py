@@ -4,7 +4,7 @@ from ......lib.models.lib import DatabaseModel
 from ......lib.models.lib.consts import NutrientUnit, Nutrient
 
 
-class UserOutputSchema(NutrientTargetModel, DatabaseModel, APISchema):
+class TargetOutputSchema(NutrientTargetModel, DatabaseModel, APISchema):
     pass
 
 
@@ -16,12 +16,12 @@ class PostTargetRequestSchema(APISchema):
 
 
 class PostTargetResponseSchema(APISchema):
-    target: UserOutputSchema
+    target: TargetOutputSchema
 
 
 class GetTargetResponseSchema(APISchema):
-    target: UserOutputSchema
+    target: TargetOutputSchema
 
 
 class GetTargetsResponseSchema(APISchema):
-    targets: list[UserOutputSchema]
+    targets: list[TargetOutputSchema]
