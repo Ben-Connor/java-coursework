@@ -1,6 +1,6 @@
 import { IconHome, IconInnerShadowTop, IconMacro } from "@tabler/icons-react"
-import { NavGroup } from "@/components/nav-group"
-import { NavUser } from "@/components/nav-user"
+import { NavGroup } from "@/components/nav/nav-group"
+import { NavUser } from "@/components/nav/nav-user"
 import {
     Sidebar,
     SidebarContent,
@@ -13,7 +13,7 @@ import {
 import { ComponentProps } from "react"
 import { RouteUrl, SIDEBAR } from "@/lib/consts"
 import { Link } from "@tanstack/react-router"
-import { Separator } from "./ui/separator"
+import { Separator } from "../ui/separator"
 
 export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
     return (

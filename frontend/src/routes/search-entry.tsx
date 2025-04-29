@@ -1,5 +1,5 @@
-import { USDAFoodCard } from "@/components/usda-food-card"
-import { FoodSearch } from "@/components/food-search"
+import { USDAFoodCard } from "@/components/search-entry/usda-food-card"
+import { FoodSearch } from "@/components/search-entry/food-search"
 import { RouteUrl } from "@/lib/consts"
 import { FoodUSDA } from "@/lib/types"
 import { createFileRoute } from "@tanstack/react-router"

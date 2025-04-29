@@ -2,8 +2,8 @@ import { RouteUrl } from "@/lib/consts"
 import { Food } from "@/lib/types"
 import { createFileRoute } from "@tanstack/react-router"
 import { useSelectedFoodsStore } from "@/lib/stores/selected-foods"
-import { FoodCard } from "@/components/food-card"
-import { SubmitSelectedFoodsButton } from "@/components/submit-selected-foods-button"
+import { FoodCard } from "@/components/entries/food-card"
+import { SubmitSelectedFoodsButton } from "@/components/entries/submit-selected-foods-button"
 import { useFoodSelectionToggle } from "@/lib/hooks/use-food-selection-toggle"
 
 export const Route = createFileRoute(RouteUrl.ENTRIES)({

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/utils"
 import { Button } from "@/components/ui/button"
 import { Loader2 } from "lucide-react";
 import { ComponentProps, ForwardRefExoticComponent, RefAttributes } from "react";

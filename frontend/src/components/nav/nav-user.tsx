@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/sidebar"
 import { useUserStore } from "@/lib/stores/user"
 import { useShallow } from 'zustand/react/shallow'
-import { initials } from "@/lib/utils"
+import { initials } from "@/lib/utils/utils"
 
 export function NavUser() {
     const { isMobile } = useSidebar()

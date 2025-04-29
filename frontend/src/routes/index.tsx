@@ -1,8 +1,8 @@
-import { DashboardCard } from "@/components/dashboard-card"
+import { DashboardCard } from "@/components/dashboard/dashboard-card"
 import { TARGET_COMPARATORS_LOOKUP, TARGETS, FOOD_ENTRIES, RouteUrl, QueryKey } from "@/lib/consts"
 import { createFileRoute } from "@tanstack/react-router"
-import { getTotalNutrients, aggregateByDay } from "@/lib/dashboard"
-import { DashboardGraphs } from "@/components/dashboard-graphs"
+import { getTotalNutrients, aggregateByDay } from "@/lib/utils/dashboard"
+import { DashboardGraphs } from "@/components/dashboard/dashboard-graphs"
 
 export const Route = createFileRoute(RouteUrl.DASHBOARD)({
     component: DashboardPage,

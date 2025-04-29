@@ -1,4 +1,4 @@
-import { title } from "@/lib/utils"
+import { title } from "@/lib/utils/utils"
 import { useSelectedFoodsStore } from "@/lib/stores/selected-foods"
 import { Food } from "@/lib/types"
 import { toast } from "sonner"

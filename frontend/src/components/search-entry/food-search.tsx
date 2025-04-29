@@ -5,36 +5,14 @@ import { USDAFoodsSchema } from "@/lib/schemas/usda"
 import { FoodUSDA, USDAFoods } from "@/lib/types"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
-import { WorkerButton } from "./worker-button"
+import { WorkerButton } from "../ui/worker-button"
 import { IconSearch } from "@tabler/icons-react"
-import { convertUSDAProductToFood } from "@/lib/usda-parsing"
+import { convertUSDAProductToFood } from "@/lib/utils/usda-parsing"
 import { QueryKey } from "@/lib/consts"
+import { getUSDAFoods } from "@/lib/queries/usda"
 
 interface FoodSearchProps {
     onResults?: (foods: FoodUSDA[]) => void
-}
-
-const BASE_URL = "https://api.nal.usda.gov/fdc/v1"
-const API_KEY = "DEMO_KEY"
-
-const getUSDAFoods = async (query: string): Promise<USDAFoods> => {
-    const response = await fetch(
-      `${BASE_URL}/foods/search?query=${encodeURIComponent(query)}&api_key=${API_KEY}`
-    )
-
-    if (!response.ok) {
-        throw new Error(`USDA API error: ${response.statusText}`)
-    }
-  
-    const json = await response.json()
-    const parseResult = USDAFoodsSchema.safeParse(json)
-  
-    if (!parseResult.success) {
-        console.error(parseResult.error.message)
-        throw new Error("Invalid USDA API response structure.")
-    }
-
-    return parseResult.data
 }
 
 export const FoodSearch = ({ onResults }: FoodSearchProps) => {

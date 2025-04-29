@@ -1,5 +1,5 @@
-import { DATE_FORMAT } from "./consts"
-import { AggregateFoodEntryWithDay, BackendFoodEntry, Nutrient, NutrientQuantity, AggregateFoodEntry } from "./types"
+import { DATE_FORMAT } from "../consts"
+import { AggregateFoodEntryWithDay, BackendFoodEntry, Nutrient, NutrientQuantity, AggregateFoodEntry } from "../types"
 import { sum } from "./utils"
 import { format, subDays } from "date-fns"
 

@@ -1,9 +1,9 @@
-import { AppSidebar } from "@/components/app-sidebar"
+import { AppSidebar } from "@/components/nav/app-sidebar"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { ReactNode, useEffect } from "react"
-import { ThemeProvider } from "./components/theme-provider"
+import { ThemeProvider } from "./components/providers/theme-provider"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { UserProvider } from "./components/user-provider"
+import { UserProvider } from "./components/providers/user-provider"
 import { Toaster } from "./components/ui/sonner"
 
 interface AppProps {
