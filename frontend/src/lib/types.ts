@@ -13,12 +13,6 @@ export interface Sidebar {
     main: SidebarGroupEntry[]
 }
 
-export interface User {
-    username: string
-    initials: string
-    email: string
-}
-
 export enum Nutrient {
     CALORIES = "calories",
     PROTEIN = "protein",

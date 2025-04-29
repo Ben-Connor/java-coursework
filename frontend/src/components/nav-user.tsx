@@ -21,14 +21,12 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from "@/components/ui/sidebar"
-import { User } from "@/lib/types"
+import { useUserStore } from "@/lib/stores/user"
+import { useShallow } from 'zustand/react/shallow'
 
-interface NavUserProps {
-    user: User
-}
-
-export function NavUser({ user } : NavUserProps) {
+export function NavUser() {
     const { isMobile } = useSidebar()
+    const user = useUserStore(useShallow((state) => ({username: state.username, initials: state.initials, email: state.email})))
 
     return (
         <SidebarMenu>

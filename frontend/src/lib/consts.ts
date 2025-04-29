@@ -1,9 +1,10 @@
-import { IconChartBar, IconListDetails } from "@tabler/icons-react"
-import { Nutrient, NutrientUnit, Sidebar, NutrientTarget, User, FoodEntry } from "./types"
+import { IconChartBar, IconListDetails, IconSearch } from "@tabler/icons-react"
+import { Nutrient, NutrientUnit, Sidebar, NutrientTarget, FoodEntry } from "./types"
 import { repeat } from "./utils"
 
 export enum RouteUrl {
     DASHBOARD = "/",
+    SEARCH_ENTRY = "/search-entry",
     ENTRIES = "/entries",
 }
 
@@ -15,6 +16,11 @@ export const SIDEBAR = {
             icon: IconChartBar,
         },
         {
+            title: "Search Entry",
+            url: RouteUrl.SEARCH_ENTRY,
+            icon: IconSearch,
+        },
+        {
             title: "Entries",
             url: RouteUrl.ENTRIES,
             icon: IconListDetails,
@@ -22,11 +28,7 @@ export const SIDEBAR = {
     ],
 } satisfies Sidebar
 
-export const USER = {
-    username: "Username",
-    initials: "UN",
-    email: "username@example.com",
-} satisfies User
+
 
 export const FOOD_ENTRIES: FoodEntry[] = repeat(4, [
     {
@@ -351,7 +353,7 @@ export const FOOD_ENTRIES: FoodEntry[] = repeat(4, [
             },
         ],
     },
-]);
+])
 
 export const TARGETS: NutrientTarget[] = [
     {

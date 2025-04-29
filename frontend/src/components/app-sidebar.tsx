@@ -11,7 +11,7 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { ComponentProps } from "react"
-import { RouteUrl, SIDEBAR, USER } from "@/lib/consts"
+import { RouteUrl, SIDEBAR } from "@/lib/consts"
 import { Link } from "@tanstack/react-router"
 
 export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
@@ -33,7 +33,7 @@ export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
                 <NavGroup items={SIDEBAR.main} />
             </SidebarContent>
             <SidebarFooter>
-                <NavUser user={USER} />
+                <NavUser />
             </SidebarFooter>
         </Sidebar>
     )

@@ -11,10 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SearchEntryImport } from './routes/search-entry'
 import { Route as EntriesImport } from './routes/entries'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const SearchEntryRoute = SearchEntryImport.update({
+  id: '/search-entry',
+  path: '/search-entry',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const EntriesRoute = EntriesImport.update({
   id: '/entries',
@@ -46,6 +53,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EntriesImport
       parentRoute: typeof rootRoute
     }
+    '/search-entry': {
+      id: '/search-entry'
+      path: '/search-entry'
+      fullPath: '/search-entry'
+      preLoaderRoute: typeof SearchEntryImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +68,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/entries': typeof EntriesRoute
+  '/search-entry': typeof SearchEntryRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/entries': typeof EntriesRoute
+  '/search-entry': typeof SearchEntryRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/entries': typeof EntriesRoute
+  '/search-entry': typeof SearchEntryRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/entries'
+  fullPaths: '/' | '/entries' | '/search-entry'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/entries'
-  id: '__root__' | '/' | '/entries'
+  to: '/' | '/entries' | '/search-entry'
+  id: '__root__' | '/' | '/entries' | '/search-entry'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EntriesRoute: typeof EntriesRoute
+  SearchEntryRoute: typeof SearchEntryRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EntriesRoute: EntriesRoute,
+  SearchEntryRoute: SearchEntryRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +116,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/entries"
+        "/entries",
+        "/search-entry"
       ]
     },
     "/": {
@@ -105,6 +125,9 @@ export const routeTree = rootRoute
     },
     "/entries": {
       "filePath": "entries.tsx"
+    },
+    "/search-entry": {
+      "filePath": "search-entry.tsx"
     }
   }
 }
