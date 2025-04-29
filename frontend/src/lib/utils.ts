@@ -46,3 +46,12 @@ export const title = (input: string): string => {
         })
         .join(" ")
 }
+
+export const initials = (name: string): string => {
+    return name
+        .split(/\s+/)
+        .filter(word => word.length > 0)
+        .map(word => word[0])
+        .join("")
+        .toUpperCase()
+}

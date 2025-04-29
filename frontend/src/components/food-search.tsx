@@ -8,6 +8,7 @@ import { useState } from "react"
 import { WorkerButton } from "./worker-button"
 import { IconSearch } from "@tabler/icons-react"
 import { convertUSDAProductToFood } from "@/lib/usda-parsing"
+import { QueryKey } from "@/lib/consts"
 
 interface FoodSearchProps {
     onResults?: (foods: FoodUSDA[]) => void
@@ -39,7 +40,7 @@ const getUSDAFoods = async (query: string): Promise<USDAFoods> => {
 export const FoodSearch = ({ onResults }: FoodSearchProps) => {
     const [isLoading, setLoading] = useState(false)
     const [query, setQuery] = useState("")
-    const getUSDAFoodsQuery = useQuery({ queryKey: ["usda-foods"], queryFn: () => getUSDAFoods(query), enabled: false })
+    const getUSDAFoodsQuery = useQuery({ queryKey: [QueryKey.USDA_FOOD], queryFn: () => getUSDAFoods(query), enabled: false })
 
     const handleSearch = async () => {
         setLoading(true)

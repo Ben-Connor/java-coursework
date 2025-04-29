@@ -1,15 +1,13 @@
 import { create } from 'zustand'
+import { DatabaseUser } from '../types'
+import { USER_ID } from '../consts'
 
-export interface UserState {
-    id: number
-    username: string
-    initials: string
-    email: string
-}
-
-export const useUserStore = create<UserState>()((set) => ({
-    id: 1,
+export const useUserStore = create<DatabaseUser>()((set) => ({
+    id: USER_ID,
     username: "Username",
     initials: "U",
     email: "username@example.com",
+    created_at: new Date(),
+    updated_at: new Date(),
+    password_hash: "$password_hash$"
 }))

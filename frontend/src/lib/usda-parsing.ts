@@ -1,5 +1,5 @@
-import { USDAProduct, USDANutrient, FoodUSDA } from "@/lib/types"
-import { Nutrient, NutrientEntry, NutrientUnit } from "@/lib/types"
+import { USDAProduct, USDANutrient, FoodUSDA, NutrientEntry } from "@/lib/types"
+import { Nutrient, DatabaseNutrientEntry, NutrientUnit } from "@/lib/types"
 
 const mapNutrientName = (name: string): Nutrient | null => {
     switch (name.toLowerCase()) {
@@ -57,9 +57,9 @@ export const convertUSDAProductToFood = (product: USDAProduct): FoodUSDA => {
     const nutrients: NutrientEntry[] = product.foodNutrients.map(convertNutrient).filter((n): n is NutrientEntry => n !== null)
 
     return {
+        id: product.fdcId,
         name: product.description,
         nutrients,
         brandOwner: product.brandOwner,
-        fdcId: product.fdcId,
     }
 }

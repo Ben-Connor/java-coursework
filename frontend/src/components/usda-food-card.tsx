@@ -16,7 +16,7 @@ export const USDAFoodCard = ({ food, onClick }: FoodCardProps) => {
             <div className="flex flex-col gap-4">
                 <CardHeader>
                     <CardTitle>{title(food.name)}</CardTitle>
-                    {food.brandOwner && <CardDescription>{food.brandOwner}</CardDescription>}
+                    <CardDescription>{!!food.brandOwner ? food.brandOwner : "Unknown Brand"}</CardDescription>
                 </CardHeader>
                 <CardContent>
                     {food.nutrients.map(nutrient => (
@@ -28,7 +28,7 @@ export const USDAFoodCard = ({ food, onClick }: FoodCardProps) => {
                 </CardContent>
             </div>
             <CardFooter className="justify-end -mr-4 -mb-4">
-                <span className="text-sm font-light">FDC ID {food.fdcId}</span>
+                <span className="text-sm font-light">FDC ID {food.id}</span>
             </CardFooter>
         </Card>
     )

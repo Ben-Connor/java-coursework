@@ -14,6 +14,11 @@ services:
       - 8000:8000
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   react-frontend:
     container_name: macromotions-frontend-dev
@@ -30,6 +35,9 @@ services:
       - 3000:3000
     networks:
       - app-network
+    depends_on:
+      fastapi-backend:
+        condition: service_healthy
 
 networks:
   app-network:

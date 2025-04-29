@@ -1,9 +1,10 @@
 import { DashboardCard } from "@/components/dashboard-card"
-import { DashboardGraph } from "@/components/dashboard-graph"
+import { DashboardCaloriesGraph } from "@/components/dashboard-calories-graph"
 import { TARGET_COMPARATORS_LOOKUP, TARGETS, FOOD_ENTRIES, RouteUrl } from "@/lib/consts"
-import { FoodEntry, Nutrient, NutrientTarget, NutrientUnit } from "@/lib/types"
+import { DatabaseFoodEntry, Nutrient, NutrientTarget, NutrientUnit } from "@/lib/types"
 import { sum } from "@/lib/utils"
 import { createFileRoute } from "@tanstack/react-router"
+import { DashboardMacrosGraph } from "@/components/dashboard-macros-graph"
 
 export const Route = createFileRoute(RouteUrl.DASHBOARD)({
     component: DashboardPage,
@@ -13,7 +14,7 @@ type NutrientQuantity = {
     [key in Nutrient]?: number
 }
 
-const getTotalNutrients = (entries: FoodEntry[]) => {
+const getTotalNutrients = (entries: DatabaseFoodEntry[]) => {
     const nutrientMap: { [key in Nutrient]?: number[] } = {}
   
     for (const entry of entries) {
@@ -31,9 +32,33 @@ const getTotalNutrients = (entries: FoodEntry[]) => {
     return totals
 }
 
+const aggregateByDay = (foodEntries: DatabaseFoodEntry[]) => {
+    const dataMap: Record<string, Record<string, number>> = {}
+
+    FOOD_ENTRIES.forEach((entry) => {
+        const day = entry.timestamp.toISOString().split("T")[0]
+        if (!dataMap[day]) {
+            dataMap[day] = { calories: 0, protein: 0, carbohydrates: 0, fat: 0 }
+        }
+
+        entry.nutrients.forEach((nutrient) => {
+            const nutrientKey = nutrient.name.toLowerCase()
+            if (dataMap[day][nutrientKey] !== undefined) {
+                dataMap[day][nutrientKey] += nutrient.quantity
+            }
+        })
+    })
+
+    return Object.entries(dataMap).map(([day, nutrients]) => ({
+        day,
+        ...nutrients,
+    }))
+}
+
 function DashboardPage() {
     const midnight = new Date(new Date().setHours(0, 0, 0, 0))
     const nutrientTotals = getTotalNutrients(FOOD_ENTRIES.filter(entry => entry.timestamp >= midnight))
+    const chartData = aggregateByDay(FOOD_ENTRIES)
 
     return (
         <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
@@ -44,7 +69,8 @@ function DashboardPage() {
                 })}
             </div>
             <div className="px-4 lg:px-6">
-                <DashboardGraph />
+                <DashboardCaloriesGraph data={chartData} />
+                <DashboardMacrosGraph data={chartData} />
             </div>
         </div>
     )

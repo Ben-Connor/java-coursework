@@ -2,6 +2,8 @@ import { Icon, IconProps } from "@tabler/icons-react"
 import { ForwardRefExoticComponent, RefAttributes } from "react"
 import { USDANutrientSchema, USDAProductSchema, USDAFoodsSchema } from "./schemas/usda"
 import { z } from "zod"
+import { FoodEntrySchema, NutrientEntrySchema } from "./schemas/food-entry"
+import { UserSchema } from "./schemas/user"
 
 export interface SidebarGroupEntry {
     title: string
@@ -44,18 +46,25 @@ export interface NutrientTarget {
 }
 
 export interface Food {
+    id: number
     name: string
     nutrients: NutrientEntry[]
 }
 
-export interface FoodEntry extends Food {
-    timestamp: Date
-}
-
 export interface FoodUSDA extends Food {
-    fdcId: number
     brandOwner?: string
 }
+
+export interface UserRequest {
+    username: string
+    email: string
+    password_hash: string
+}
+
+export type DatabaseUser = z.infer<typeof UserSchema>
+
+export type DatabaseNutrientEntry = z.infer<typeof NutrientEntrySchema>
+export type DatabaseFoodEntry = z.infer<typeof FoodEntrySchema>
 
 export type USDANutrient = z.infer<typeof USDANutrientSchema>
 export type USDAProduct = z.infer<typeof USDAProductSchema>

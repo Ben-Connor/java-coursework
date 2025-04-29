@@ -10,5 +10,5 @@ export interface SelectedFoodsState {
 export const useSelectedFoodsStore = create<SelectedFoodsState>()((set) => ({
     foods: [],
     select: food => set((state) => ({ foods: [...state.foods, food] })),
-    deselect: food => set((state) => ({ foods: state.foods.filter(selectedFood => selectedFood.name !== food.name) })),
+    deselect: food => set((state) => ({ foods: state.foods.filter(selectedFood => selectedFood.id !== food.id) })),
 }))
