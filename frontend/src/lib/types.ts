@@ -1,5 +1,7 @@
 import { Icon, IconProps } from "@tabler/icons-react"
 import { ForwardRefExoticComponent, RefAttributes } from "react"
+import { USDANutrientSchema, USDAProductSchema, USDAFoodsSchema } from "./schemas/usda"
+import { z } from "zod"
 
 export interface SidebarGroupEntry {
     title: string
@@ -47,8 +49,20 @@ export interface NutrientTarget {
     unit: NutrientUnit
 }
 
-export interface FoodEntry {
+export interface Food {
     name: string
-    timestamp: Date
     nutrients: NutrientEntry[]
 }
+
+export interface FoodEntry extends Food {
+    timestamp: Date
+}
+
+export interface FoodUSDA extends Food {
+    fdcId: number
+    brandOwner?: string
+}
+
+export type USDANutrient = z.infer<typeof USDANutrientSchema>
+export type USDAProduct = z.infer<typeof USDAProductSchema>
+export type USDAFoods = z.infer<typeof USDAFoodsSchema>

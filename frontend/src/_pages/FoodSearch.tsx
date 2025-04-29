@@ -123,5 +123,3 @@ const _FoodSearch = () => {
     </div>
   )
 }
-
-export default FoodSearch;

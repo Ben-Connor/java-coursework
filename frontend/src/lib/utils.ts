@@ -16,4 +16,33 @@ export const repeat = <T>(n: number, list: T[]) => {
         result.push(...list)
     }
     return result
-  }
+}
+
+export const title = (input: string): string => {
+    const minorWords = new Set([
+        "and",
+        "or",
+        "the",
+        "a",
+        "an",
+        "in",
+        "on",
+        "at",
+        "to",
+        "for",
+        "by",
+        "with",
+        "of",
+    ])
+  
+    return input
+        .split(/[_\-\s]+/)
+        .map((word, index) => {
+            const lowerWord = word.toLowerCase()
+            if (index === 0 || !minorWords.has(lowerWord)) {
+                return word.charAt(0).toUpperCase() + lowerWord.slice(1)
+            }
+            return lowerWord
+        })
+        .join(" ")
+}
