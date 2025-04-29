@@ -18,6 +18,7 @@ interface DashboardCardProps {
 
 export const DashboardCard = ({ nutrient, quantity, targetQuantity, unit, success }: DashboardCardProps) => {
     return (
+        
         <Card className={`@container/card ${success ? "border-green-500" : "border-red-500"}`}>
             <CardHeader>
                 <CardDescription className="capitalize">{nutrient}</CardDescription>
