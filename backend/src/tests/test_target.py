@@ -4,6 +4,7 @@ from sqlmodel import select
 from ..api.routers.user.subrouters.target.schemas import TargetOutputSchema
 from ..database.tables import NutrientTargetTable
 from ..database import BegunSession
+from .lib import dump_database_model
 from .lib.consts import USER_001, BULKING_NUTRIENT_TARGETS, BULKING_NUTRIENT_TARGET_001
 from .lib.queries import insert_user, insert_nutrient_target, count_records
 
@@ -17,7 +18,7 @@ def test_create_targets(client: TestClient, session: BegunSession) -> None:
         assert response.status_code == 200
 
         target = TargetOutputSchema.model_validate(response.json()["target"])
-        assert session.scalar(select(NutrientTargetTable).where(NutrientTargetTable.id == BULKING_NUTRIENT_TARGETS[idx].id)).model_dump() == target.model_dump()
+        assert dump_database_model(session.scalar(select(NutrientTargetTable).where(NutrientTargetTable.id == BULKING_NUTRIENT_TARGETS[idx].id))) == target.model_dump()
 
 
 def test_create_target_for_nonexistent_user(client: TestClient, session: BegunSession) -> None:
@@ -37,7 +38,7 @@ def test_get_target_by_id(client: TestClient, session: BegunSession) -> None:
     assert response.status_code == 200
 
     target = TargetOutputSchema.model_validate(response.json()["target"])
-    assert session.scalar(select(NutrientTargetTable).where(NutrientTargetTable.id == BULKING_NUTRIENT_TARGET_001.id)).model_dump() == target.model_dump()
+    assert dump_database_model(session.scalar(select(NutrientTargetTable).where(NutrientTargetTable.id == BULKING_NUTRIENT_TARGET_001.id))) == target.model_dump()
 
 
 def test_get_nonexistent_target_by_id(client: TestClient, session: BegunSession) -> None:
