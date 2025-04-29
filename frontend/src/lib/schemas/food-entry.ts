@@ -25,6 +25,10 @@ export const FoodEntryResponseSchema = z.object({
     foodEntry: FoodEntrySchema,
 })
 
+export const FoodEntriesResponseSchema = z.object({
+    foodEntries: z.array(FoodEntrySchema),
+})
+
 export const NutrientEntryRequestSchema = z.object({
     name: z.string(),
     quantity: z.number(),

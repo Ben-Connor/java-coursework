@@ -28,6 +28,7 @@ export const SIDEBAR = {
 } satisfies Sidebar
 
 export const USER_ID = 1
+export const DATE_FORMAT = "dd/MM/yyyy"
 
 export const FOOD_ENTRIES: BackendFoodEntry[] = [
     {

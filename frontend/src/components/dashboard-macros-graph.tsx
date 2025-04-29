@@ -2,14 +2,10 @@ import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { ChartLegend, ChartLegendContent } from "@/components/ui/chart"
-import { FOOD_ENTRIES } from "@/lib/consts"
-
-interface Day {
-    day: string
-}
+import { AggregateFoodEntryWithDay } from "@/lib/types"
 
 interface DashboardMacrosGraphProps {
-    data: Day[]
+    data: AggregateFoodEntryWithDay[]
 }
 
 const chartConfig = {
@@ -37,7 +33,6 @@ export const DashboardMacrosGraph = ({ data }: DashboardMacrosGraphProps) => {
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
-                tickFormatter={(value) => value.slice(5)}
             />
             <YAxis />
             <ChartTooltip content={<ChartTooltipContent />} />

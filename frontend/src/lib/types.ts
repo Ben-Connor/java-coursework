@@ -2,7 +2,7 @@ import { Icon, IconProps } from "@tabler/icons-react"
 import { ForwardRefExoticComponent, RefAttributes } from "react"
 import { USDANutrientSchema, USDAProductSchema, USDAFoodsSchema } from "./schemas/usda"
 import { z } from "zod"
-import { FoodEntrySchema, NutrientEntrySchema, FoodEntryRequestSchema, NutrientEntryRequestSchema, FoodEntryResponseSchema } from "./schemas/food-entry"
+import { FoodEntrySchema, NutrientEntrySchema, FoodEntryRequestSchema, NutrientEntryRequestSchema, FoodEntryResponseSchema, FoodEntriesResponseSchema } from "./schemas/food-entry"
 import { UserSchema, UserResponseSchema, UserRequestSchema } from "./schemas/user"
 import { NutrientTargetRequestSchema, NutrientTargetResponseSchema, NutrientTargetSchema } from "./schemas/nutrient-target"
 
@@ -56,6 +56,21 @@ export interface FoodUSDA extends Food {
     brandOwner?: string
 }
 
+export type NutrientQuantity = {
+    [key in Nutrient]?: number
+}
+
+export interface AggregateFoodEntry {
+    calories: number
+    protein: number
+    carbohydrates: number
+    fat: number
+}
+
+export interface AggregateFoodEntryWithDay extends AggregateFoodEntry {
+    day: string
+}
+
 export type BackendUser = z.infer<typeof UserSchema>
 export type BackendUserResponse = z.output<typeof UserResponseSchema>
 export type BackendUserRequest = z.input<typeof UserRequestSchema>
@@ -63,6 +78,7 @@ export type BackendUserRequest = z.input<typeof UserRequestSchema>
 export type BackendNutrientEntry = z.infer<typeof NutrientEntrySchema>
 export type BackendFoodEntry = z.infer<typeof FoodEntrySchema>
 export type BackendFoodEntryResponse = z.output<typeof FoodEntryResponseSchema>
+export type BackendFoodEntriesResponse = z.output<typeof FoodEntriesResponseSchema>
 export type BackendNutrientEntryRequest = z.input<typeof NutrientEntryRequestSchema>
 export type BackendFoodEntryRequest = z.input<typeof FoodEntryRequestSchema>
 

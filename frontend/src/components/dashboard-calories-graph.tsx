@@ -2,14 +2,10 @@ import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { ChartLegend, ChartLegendContent } from "@/components/ui/chart"
-import { BackendFoodEntry } from "@/lib/types"
-
-interface Day {
-    day: string
-}
+import { AggregateFoodEntryWithDay, BackendFoodEntry } from "@/lib/types"
 
 interface DashboardCaloriesGraphProps {
-    data: Day[]
+    data: AggregateFoodEntryWithDay[]
 }
 
 const chartConfig = {
@@ -29,12 +25,11 @@ export const DashboardCaloriesGraph = ({ data }: DashboardCaloriesGraphProps) =>
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
-                tickFormatter={(value) => value.slice(5)}
             />
             <YAxis />
             <ChartTooltip content={<ChartTooltipContent />} />
             <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="calories" fill="var(--color-calories)" radius={4} />
+            <Bar dataKey="calories" fill="var(--color-calories)" radius={0} />
             </BarChart>
         </ChartContainer>
     )

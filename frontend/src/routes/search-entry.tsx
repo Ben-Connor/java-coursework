@@ -1,10 +1,11 @@
 import { USDAFoodCard } from "@/components/usda-food-card"
 import { FoodSearch } from "@/components/food-search"
 import { RouteUrl } from "@/lib/consts"
-import { FoodUSDA, USDAFoods } from "@/lib/types"
+import { FoodUSDA } from "@/lib/types"
 import { createFileRoute } from "@tanstack/react-router"
 import { useState } from "react"
 import { useSelectedFoodsStore } from "@/lib/stores/selected-foods"
+import { useFoodSelectionToggle } from "@/lib/hooks/use-food-selection-toggle"
 
 export const Route = createFileRoute(RouteUrl.SEARCH_ENTRY)({
     component: SearchEntryPage,
@@ -12,17 +13,7 @@ export const Route = createFileRoute(RouteUrl.SEARCH_ENTRY)({
 
 function SearchEntryPage() {
     const [foods, setFoods] = useState<FoodUSDA[] | null>(null)
-    const selectedFoods = useSelectedFoodsStore((state) => state.foods)
-    const selectFood = useSelectedFoodsStore((state) => state.select)
-    const deselectFood = useSelectedFoodsStore((state) => state.deselect)
-
-    const toggleFood = (food: FoodUSDA) => {
-        if (selectedFoods.some(selectedFood => selectedFood.id === food.id)) {
-            deselectFood(food)
-        } else {
-            selectFood(food)
-        }
-    }
+    const { toggleFood } = useFoodSelectionToggle()
 
     return (
         <div className="flex flex-col items-center gap-4 py-4 md:gap-6 md:py-6">
