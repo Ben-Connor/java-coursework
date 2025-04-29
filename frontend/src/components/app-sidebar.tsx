@@ -1,4 +1,4 @@
-import { IconInnerShadowTop, IconMacro } from "@tabler/icons-react"
+import { IconHome, IconInnerShadowTop, IconMacro } from "@tabler/icons-react"
 import { NavGroup } from "@/components/nav-group"
 import { NavUser } from "@/components/nav-user"
 import {
@@ -13,6 +13,7 @@ import {
 import { ComponentProps } from "react"
 import { RouteUrl, SIDEBAR } from "@/lib/consts"
 import { Link } from "@tanstack/react-router"
+import { Separator } from "./ui/separator"
 
 export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
     return (
@@ -22,13 +23,14 @@ export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
                             <Link to={RouteUrl.DASHBOARD.toString()}>
-                                <IconMacro className="!size-5" />
+                                <IconHome className="!size-5" />
                                 <span className="text-base font-semibold">Macromotions</span>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
+            <Separator className="my-2" />
             <SidebarContent>
                 <NavGroup items={SIDEBAR.main} />
             </SidebarContent>

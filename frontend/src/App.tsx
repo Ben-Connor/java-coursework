@@ -22,7 +22,7 @@ const App = ({ children } : AppProps ) => {
                         <SidebarInset>
                             <SidebarTrigger className="ml-1 mt-1" />
                             <div className="flex flex-1 flex-col">
-                                <div className="@container/main flex flex-1 flex-col gap-2">
+                                <div className="@container/main flex flex-1 flex-col gap-4 px-12">
                                     {children}
                                 </div>
                             </div>

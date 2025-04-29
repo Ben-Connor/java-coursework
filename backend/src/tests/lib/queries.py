@@ -3,7 +3,7 @@ from sqlmodel import select, func, col, insert
 from ...database.tables import UserTable, FoodEntryTable, NutrientEntryTable, NutrientTargetTable
 from ...database import BegunSession
 from ...lib.models import UserModel, FoodEntryModel, NutrientEntryModel, NutrientTargetModel
-from ...database.tables.lib import DatabaseTable
+from ...database.tables.lib import DatabaseModel
 
 
 def insert_user(user: UserModel, session: BegunSession) -> UserTable | None:
@@ -57,5 +57,5 @@ def insert_nutrient_target(nutrient_target: NutrientTargetModel, session: BegunS
     )
 
 
-def count_records(table: type[DatabaseTable], session: BegunSession) -> int | None:
+def count_records(table: type[DatabaseModel], session: BegunSession) -> int | None:
     return session.scalar(select(func.count(col(table.id))))

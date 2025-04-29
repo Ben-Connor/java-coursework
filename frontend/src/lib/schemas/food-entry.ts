@@ -3,12 +3,12 @@ import { Nutrient, NutrientUnit } from "../types"
 
 export const NutrientEntrySchema = z.object({
     id: z.number(),
-    created_at: z.coerce.date(),
-    updated_at: z.coerce.date(),
+    createdAt: z.coerce.date(),
+    updatedAt: z.coerce.date(),
     name: z.nativeEnum(Nutrient),
     quantity: z.number(),
     unit: z.nativeEnum(NutrientUnit),
-    food_entry_id: z.number(),
+    foodEntryId: z.number(),
 })
 
 export const FoodEntrySchema = z.object({
@@ -23,4 +23,16 @@ export const FoodEntrySchema = z.object({
 
 export const FoodEntryResponseSchema = z.object({
     foodEntry: FoodEntrySchema,
+})
+
+export const NutrientEntryRequestSchema = z.object({
+    name: z.string(),
+    quantity: z.number(),
+    unit: z.string(),
+})
+  
+export const FoodEntryRequestSchema = z.object({
+    name: z.string(),
+    timestamp: z.coerce.date().default(new Date),
+    nutrients: z.array(NutrientEntryRequestSchema),
 })

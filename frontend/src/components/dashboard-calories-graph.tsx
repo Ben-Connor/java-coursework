@@ -2,7 +2,7 @@ import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { ChartLegend, ChartLegendContent } from "@/components/ui/chart"
-import { DatabaseFoodEntry } from "@/lib/types"
+import { BackendFoodEntry } from "@/lib/types"
 
 interface Day {
     day: string

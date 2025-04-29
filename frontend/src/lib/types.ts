@@ -2,8 +2,9 @@ import { Icon, IconProps } from "@tabler/icons-react"
 import { ForwardRefExoticComponent, RefAttributes } from "react"
 import { USDANutrientSchema, USDAProductSchema, USDAFoodsSchema } from "./schemas/usda"
 import { z } from "zod"
-import { FoodEntrySchema, NutrientEntrySchema } from "./schemas/food-entry"
-import { UserSchema } from "./schemas/user"
+import { FoodEntrySchema, NutrientEntrySchema, FoodEntryRequestSchema, NutrientEntryRequestSchema, FoodEntryResponseSchema } from "./schemas/food-entry"
+import { UserSchema, UserResponseSchema, UserRequestSchema } from "./schemas/user"
+import { NutrientTargetRequestSchema, NutrientTargetResponseSchema, NutrientTargetSchema } from "./schemas/nutrient-target"
 
 export interface SidebarGroupEntry {
     title: string
@@ -55,16 +56,19 @@ export interface FoodUSDA extends Food {
     brandOwner?: string
 }
 
-export interface UserRequest {
-    username: string
-    email: string
-    password_hash: string
-}
+export type BackendUser = z.infer<typeof UserSchema>
+export type BackendUserResponse = z.output<typeof UserResponseSchema>
+export type BackendUserRequest = z.input<typeof UserRequestSchema>
 
-export type DatabaseUser = z.infer<typeof UserSchema>
+export type BackendNutrientEntry = z.infer<typeof NutrientEntrySchema>
+export type BackendFoodEntry = z.infer<typeof FoodEntrySchema>
+export type BackendFoodEntryResponse = z.output<typeof FoodEntryResponseSchema>
+export type BackendNutrientEntryRequest = z.input<typeof NutrientEntryRequestSchema>
+export type BackendFoodEntryRequest = z.input<typeof FoodEntryRequestSchema>
 
-export type DatabaseNutrientEntry = z.infer<typeof NutrientEntrySchema>
-export type DatabaseFoodEntry = z.infer<typeof FoodEntrySchema>
+export type BackendNutrientTarget = z.infer<typeof NutrientTargetSchema>
+export type BackendNutrientTargetResponse = z.output<typeof NutrientTargetResponseSchema>
+export type BackendNutrientTargetRequest = z.input<typeof NutrientTargetRequestSchema>
 
 export type USDANutrient = z.infer<typeof USDANutrientSchema>
 export type USDAProduct = z.infer<typeof USDAProductSchema>

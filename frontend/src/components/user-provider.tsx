@@ -1,17 +1,17 @@
 import { QueryKey } from "@/lib/consts"
-import { UserResponseSchema } from "@/lib/schemas/user"
+import { UserRequestSchema, UserResponseSchema } from "@/lib/schemas/user"
 import { useUserStore } from "@/lib/stores/user"
-import { DatabaseUser, UserRequest } from "@/lib/types"
+import { BackendUser, BackendUserRequest } from "@/lib/types"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { ReactNode, useCallback, useEffect } from "react"
 
-const postUser = async (user: UserRequest): Promise<DatabaseUser> => {
+const postUser = async (user: BackendUserRequest): Promise<BackendUser> => {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify(UserRequestSchema.parse(user)),
     })
 
     if (!response.ok) {

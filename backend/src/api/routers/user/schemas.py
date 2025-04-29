@@ -1,20 +1,25 @@
 from ...lib.schemas import APISchema
-from ....database.tables import UserTable
+from ....lib.models.lib import DatabaseModel
+from ....lib.models import UserModel
 
 
-class PostUserRequest(APISchema):
+class UserOutputSchema(UserModel, DatabaseModel, APISchema):
+    pass
+
+
+class PostUserRequestSchema(APISchema):
     username: str
     email: str
     password_hash: str
 
 
-class PostUserResponse(APISchema):
-    user: UserTable
+class PostUserResponseSchema(APISchema):
+    user: UserOutputSchema
 
 
-class GetUserResponse(APISchema):
-    user: UserTable
+class GetUserResponseSchema(APISchema):
+    user: UserOutputSchema
 
 
-class GetUsersResponse(APISchema):
-    users: list[UserTable]
+class GetUsersResponseSchema(APISchema):
+    users: list[UserOutputSchema]

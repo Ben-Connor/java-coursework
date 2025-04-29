@@ -2,13 +2,19 @@ import { z } from "zod"
 
 export const UserSchema = z.object({
     id: z.number(),
-    created_at: z.coerce.date(),
-    updated_at: z.coerce.date(),
+    createdAt: z.coerce.date(),
+    updatedAt: z.coerce.date(),
     username: z.string(),
     email: z.string(),
-    password_hash: z.string(),
+    passwordHash: z.string(),
 })
 
 export const UserResponseSchema = z.object({
     user: UserSchema,
+})
+
+export const UserRequestSchema = z.object({
+    username: z.string(),
+    email: z.string(),
+    passwordHash: z.string(),
 })

@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status
 from sqlmodel import insert, select
 from sqlalchemy.exc import IntegrityError
 
-from .schemas import PostUserResponse, PostUserRequest, GetUserResponse, GetUsersResponse
+from .schemas import PostUserResponseSchema, PostUserRequestSchema, GetUserResponseSchema, GetUsersResponseSchema
 from ...lib.dependencies import SessionDep
 from ....database.tables import UserTable
 from .subrouters import food_entry_router, target_router
@@ -13,8 +13,8 @@ router = APIRouter(prefix="/user")
 _router = APIRouter()
 
 
-@_router.post("/", response_model=PostUserResponse)
-def post_user(user_data: PostUserRequest, session: SessionDep) -> PostUserResponse:
+@_router.post("/", response_model=PostUserResponseSchema)
+def post_user(user_data: PostUserRequestSchema, session: SessionDep) -> PostUserResponseSchema:
     stmt = (
         insert(UserTable)
         .values(
@@ -36,11 +36,11 @@ def post_user(user_data: PostUserRequest, session: SessionDep) -> PostUserRespon
             status.HTTP_400_BAD_REQUEST,
             detail="Failed to create user."
         )
-    return PostUserResponse(user=user)
+    return PostUserResponseSchema(user=user)
 
 
-@_router.get("/", response_model=GetUserResponse)
-def get_user_by_email(email: str, session: SessionDep) -> GetUserResponse:
+@_router.get("/", response_model=GetUserResponseSchema)
+def get_user_by_email(email: str, session: SessionDep) -> GetUserResponseSchema:
     user = session.scalar(
         select(UserTable)
         .where(UserTable.email == email)
@@ -50,19 +50,19 @@ def get_user_by_email(email: str, session: SessionDep) -> GetUserResponse:
             status.HTTP_404_NOT_FOUND,
             detail="No such user found."
         )
-    return GetUserResponse(user=user)
+    return GetUserResponseSchema(user=user)
 
 
-@_router.get("/all", response_model=GetUsersResponse)
-def get_all_users(session: SessionDep) -> GetUsersResponse:
+@_router.get("/all", response_model=GetUsersResponseSchema)
+def get_all_users(session: SessionDep) -> GetUsersResponseSchema:
     users = session.scalars(
         select(UserTable)
     )
-    return GetUsersResponse(users=list(users))
+    return GetUsersResponseSchema(users=list(users))
 
 
-@_router.get("/{user_id}", response_model=GetUserResponse)
-def get_user(user_id: int, session: SessionDep) -> GetUserResponse:
+@_router.get("/{user_id}", response_model=GetUserResponseSchema)
+def get_user(user_id: int, session: SessionDep) -> GetUserResponseSchema:
     user = session.scalar(
         select(UserTable)
         .where(UserTable.id == user_id)
@@ -72,7 +72,7 @@ def get_user(user_id: int, session: SessionDep) -> GetUserResponse:
             status.HTTP_404_NOT_FOUND,
             detail="No such user found."
         )
-    return GetUserResponse(user=user)
+    return GetUserResponseSchema(user=user)
 
 
 router.include_router(_router, tags=[RouterTag.USER])

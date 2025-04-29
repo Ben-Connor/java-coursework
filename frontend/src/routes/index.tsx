@@ -1,7 +1,7 @@
 import { DashboardCard } from "@/components/dashboard-card"
 import { DashboardCaloriesGraph } from "@/components/dashboard-calories-graph"
 import { TARGET_COMPARATORS_LOOKUP, TARGETS, FOOD_ENTRIES, RouteUrl } from "@/lib/consts"
-import { DatabaseFoodEntry, Nutrient, NutrientTarget, NutrientUnit } from "@/lib/types"
+import { BackendFoodEntry, Nutrient, NutrientTarget, NutrientUnit } from "@/lib/types"
 import { sum } from "@/lib/utils"
 import { createFileRoute } from "@tanstack/react-router"
 import { DashboardMacrosGraph } from "@/components/dashboard-macros-graph"
@@ -14,7 +14,7 @@ type NutrientQuantity = {
     [key in Nutrient]?: number
 }
 
-const getTotalNutrients = (entries: DatabaseFoodEntry[]) => {
+const getTotalNutrients = (entries: BackendFoodEntry[]) => {
     const nutrientMap: { [key in Nutrient]?: number[] } = {}
   
     for (const entry of entries) {
@@ -32,7 +32,7 @@ const getTotalNutrients = (entries: DatabaseFoodEntry[]) => {
     return totals
 }
 
-const aggregateByDay = (foodEntries: DatabaseFoodEntry[]) => {
+const aggregateByDay = (foodEntries: BackendFoodEntry[]) => {
     const dataMap: Record<string, Record<string, number>> = {}
 
     FOOD_ENTRIES.forEach((entry) => {

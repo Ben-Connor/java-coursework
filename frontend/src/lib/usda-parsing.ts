@@ -1,5 +1,5 @@
 import { USDAProduct, USDANutrient, FoodUSDA, NutrientEntry } from "@/lib/types"
-import { Nutrient, DatabaseNutrientEntry, NutrientUnit } from "@/lib/types"
+import { Nutrient, BackendNutrientEntry, NutrientUnit } from "@/lib/types"
 
 const mapNutrientName = (name: string): Nutrient | null => {
     switch (name.toLowerCase()) {

@@ -1,22 +1,27 @@
 from .....lib.schemas import APISchema
-from ......database.tables import NutrientTargetTable
+from ......lib.models import NutrientTargetModel
+from ......lib.models.lib import DatabaseModel
 from ......lib.models.lib.consts import NutrientUnit, Nutrient
 
 
-class PostTargetRequest(APISchema):
+class UserOutputSchema(NutrientTargetModel, DatabaseModel, APISchema):
+    pass
+
+
+class PostTargetRequestSchema(APISchema):
     name: Nutrient
     quantity: float
     unit: NutrientUnit
     is_lower_bound: bool
 
 
-class PostTargetResponse(APISchema):
-    target: NutrientTargetTable
+class PostTargetResponseSchema(APISchema):
+    target: UserOutputSchema
 
 
-class GetTargetResponse(APISchema):
-    target: NutrientTargetTable
+class GetTargetResponseSchema(APISchema):
+    target: UserOutputSchema
 
 
-class GetTargetsResponse(APISchema):
-    targets: list[NutrientTargetTable]
+class GetTargetsResponseSchema(APISchema):
+    targets: list[UserOutputSchema]

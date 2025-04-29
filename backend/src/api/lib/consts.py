@@ -1,5 +1,7 @@
 from enum import StrEnum
 
+from ...configuration import CONFIGURATION
+
 
 class RouterTag(StrEnum):
     META = "meta"
@@ -14,8 +16,5 @@ API_PORT = 8_000
 API_PREFIX = "/api/v1"
 ALL = "*"
 API_ORIGINS = [
-    "http://localhost:3000",
-    "localhost:3000",
+    CONFIGURATION.FRONTEND_BASE_URL
 ]
-
-SESSION_MIDDLEWARE_SAME_SITE_STRICT = "strict"
