@@ -1,4 +1,4 @@
-import { USDAFoodsSchema } from "../schemas/usda"
+import { USDAFoodsSchema } from "../schemas/api/usda"
 import { USDAFoods } from "../types"
 
 const BASE_URL = "https://api.nal.usda.gov/fdc/v1"

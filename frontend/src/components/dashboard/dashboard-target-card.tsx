@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Nutrient, NutrientUnit } from "@/lib/types"
+import { roundTo } from "@/lib/utils/utils"
 
 interface DashboardCardProps {
     nutrient: Nutrient
@@ -21,7 +22,7 @@ export const DashboardCard = ({ nutrient, quantity, targetQuantity, unit, succes
         <Card className={`@container/card ${success ? "border-green-500" : "border-red-500"}`}>
             <CardHeader>
                 <CardDescription className="capitalize">{nutrient}</CardDescription>
-                <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">{quantity} / {targetQuantity} <span className="text-sm font-medium">{unit}</span></CardTitle>
+                <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">{roundTo(quantity, 1)} / {roundTo(targetQuantity, 1)} <span className="text-sm font-medium">{unit}</span></CardTitle>
             </CardHeader>
             <CardFooter className="flex-col items-start gap-1.5 text-sm">
                 <div className="text-muted-foreground">

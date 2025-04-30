@@ -1,30 +1,27 @@
 import { USDAFoodCard } from "@/components/search-entry/usda-food-card"
 import { FoodSearch } from "@/components/search-entry/food-search"
 import { RouteUrl } from "@/lib/consts"
-import { FoodUSDA } from "@/lib/types"
+import { FoodEntryUSDA, FoodEntryUSDACount } from "@/lib/types"
 import { createFileRoute } from "@tanstack/react-router"
-import { useState } from "react"
-import { useSelectedFoodsStore } from "@/lib/stores/selected-foods"
-import { useFoodSelectionToggle } from "@/lib/hooks/use-food-selection-toggle"
+import { useMemo, useState } from "react"
+import { useFoodEntriesStore } from "@/lib/stores/food-entries"
+import { useShallow } from "zustand/react/shallow"
+import { deduplicate } from "@/lib/utils/utils"
+import { SearchEntriesTable } from "@/components/search-entry/search-entries-table"
 
 export const Route = createFileRoute(RouteUrl.SEARCH_ENTRY)({
     component: SearchEntryPage,
 })
 
 function SearchEntryPage() {
-    const [foods, setFoods] = useState<FoodUSDA[] | null>(null)
-    const { toggleFood } = useFoodSelectionToggle()
+    const [foods, setFoods] = useState<FoodEntryUSDA[]>([])
+    const counts = useFoodEntriesStore(useShallow(state => state.counts))
+    const data: FoodEntryUSDACount[] = useMemo(() => foods.map(food => ({ foodEntry: food, n: counts.find(count => count.foodEntry.id === food.id)?.n ?? 0 })), [foods, counts])
 
     return (
         <div className="flex flex-col items-center gap-4 py-4 md:gap-6 md:py-6">
-            <FoodSearch onResults={setFoods} />
-            <div className="w-full *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
-                {
-                    foods?.slice(0, 8).map(food => (
-                        <USDAFoodCard key={food.id} food={food} onClick={toggleFood} />
-                    ))
-                }
-            </div>
+            <FoodSearch onResults={(foods: FoodEntryUSDA[]) => setFoods(deduplicate(foods, (a, b) => a.name.toLowerCase() + (a.brandOwner ?? "").toLowerCase() === b.name.toLowerCase() + (b.brandOwner ?? "").toLowerCase()))} />
+            <SearchEntriesTable data={data} />
         </div>
     )
 }

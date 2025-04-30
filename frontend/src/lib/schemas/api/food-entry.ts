@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { Nutrient, NutrientUnit } from "../types"
+import { Nutrient, NutrientUnit } from "../../types"
 
 export const NutrientEntrySchema = z.object({
     id: z.number(),

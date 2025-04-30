@@ -1,10 +1,10 @@
-import { FoodUSDA } from "@/lib/types"
+import { FoodEntryUSDA } from "@/lib/types"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
 import { title } from "@/lib/utils/utils"
 
 interface FoodCardProps {
-    food: FoodUSDA
-    onClick?: (food: FoodUSDA) => void
+    food: FoodEntryUSDA
+    onClick?: (food: FoodEntryUSDA) => void
 }
 
 export const USDAFoodCard = ({ food, onClick }: FoodCardProps) => {

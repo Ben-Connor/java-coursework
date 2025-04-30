@@ -1,5 +1,5 @@
 import { DashboardCaloriesGraph } from "@/components/dashboard/dashboard-calories-graph"
-import { TARGETS, FOOD_ENTRIES, RouteUrl, QueryKey } from "@/lib/consts"
+import { RouteUrl, QueryKey } from "@/lib/consts"
 import { DashboardMacrosGraph } from "@/components/dashboard/dashboard-macros-graph"
 import { getTotalNutrients, aggregateByDay } from "@/lib/utils/dashboard"
 import { useUserStore } from "@/lib/stores/user"

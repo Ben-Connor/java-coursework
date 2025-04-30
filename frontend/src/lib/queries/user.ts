@@ -1,4 +1,4 @@
-import { UserRequestSchema, UserResponseSchema } from "../schemas/user"
+import { UserRequestSchema, UserResponseSchema } from "../schemas/api/user"
 import { BackendUser, BackendUserRequest } from "../types"
 
 export const postUser = async (user: BackendUserRequest): Promise<BackendUser> => {

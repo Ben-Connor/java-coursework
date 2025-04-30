@@ -55,3 +55,18 @@ export const initials = (name: string): string => {
         .join("")
         .toUpperCase()
 }
+
+export const roundTo = (n: number, decimalPlaces: number) => {
+    const factor = Math.pow(10, decimalPlaces)
+    return Math.round(n * factor) / factor
+}
+
+export const deduplicate = <T>(items: T[], predicate: (a: T, b: T) => boolean) => (
+    items.reduce<T[]>((acc, current) => {
+        const exists = acc.some((item) => predicate(item, current))
+        if (!exists) {
+            acc.push(current)
+        }
+        return acc
+    }, [])
+)

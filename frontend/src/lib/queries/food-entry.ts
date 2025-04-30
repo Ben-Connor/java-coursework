@@ -1,10 +1,8 @@
-import { FoodEntriesResponseSchema, FoodEntryRequestSchema, FoodEntryResponseSchema } from "../schemas/food-entry"
+import { FoodEntriesResponseSchema, FoodEntryRequestSchema, FoodEntryResponseSchema } from "../schemas/api/food-entry"
 import { BackendFoodEntry, BackendFoodEntryRequest, BackendUser } from "../types"
 
 export const getFoodEntries = async (user: BackendUser): Promise<BackendFoodEntry[]> => {
-    console.log(`${import.meta.env.VITE_API_URL}/user/${user.id}/entry/all`)
     const response = await fetch(`${import.meta.env.VITE_API_URL}/user/${user.id}/entry/all`)
-    console.log(response)
 
     if (!response.ok) {
         throw new Error(`Macromotions API error: ${response.statusText}`)

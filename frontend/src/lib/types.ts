@@ -1,10 +1,10 @@
 import { Icon, IconProps } from "@tabler/icons-react"
 import { ForwardRefExoticComponent, RefAttributes } from "react"
-import { USDANutrientSchema, USDAProductSchema, USDAFoodsSchema } from "./schemas/usda"
+import { USDANutrientSchema, USDAProductSchema, USDAFoodsSchema } from "./schemas/api/usda"
 import { z } from "zod"
-import { FoodEntrySchema, NutrientEntrySchema, FoodEntryRequestSchema, NutrientEntryRequestSchema, FoodEntryResponseSchema, FoodEntriesResponseSchema } from "./schemas/food-entry"
-import { UserSchema, UserResponseSchema, UserRequestSchema } from "./schemas/user"
-import { NutrientTargetRequestSchema, NutrientTargetResponseSchema, NutrientTargetSchema } from "./schemas/nutrient-target"
+import { FoodEntrySchema, NutrientEntrySchema, FoodEntryRequestSchema, NutrientEntryRequestSchema, FoodEntryResponseSchema, FoodEntriesResponseSchema } from "./schemas/api/food-entry"
+import { UserSchema, UserResponseSchema, UserRequestSchema } from "./schemas/api/user"
+import { NutrientTargetRequestSchema, NutrientTargetResponseSchema, NutrientTargetSchema } from "./schemas/api/nutrient-target"
 
 export interface SidebarGroupEntry {
     title: string
@@ -40,14 +40,24 @@ export interface NutrientEntry {
     unit: NutrientUnit
 }
 
-export interface Food {
+export interface FoodEntry {
     id: number
     name: string
     nutrients: NutrientEntry[]
 }
 
-export interface FoodUSDA extends Food {
+export interface FoodEntryCount {
+    foodEntry: FoodEntry
+    n: number
+}
+
+export interface FoodEntryUSDA extends FoodEntry {
     brandOwner?: string
+}
+
+export interface FoodEntryUSDACount {
+    foodEntry: FoodEntryUSDA
+    n: number
 }
 
 export type NutrientQuantity = {
