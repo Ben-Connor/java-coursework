@@ -1,6 +1,6 @@
 {
     "loggers": {
-        "coursework-name": {
+        "macromotions": {
             "handlers": ["queue"],
             "level": "DEBUG",
             "propagate": false

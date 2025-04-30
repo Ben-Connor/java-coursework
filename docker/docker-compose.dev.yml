@@ -1,11 +1,9 @@
 services:
   fastapi-backend:
-    container_name: coursework-backend-dev
+    container_name: macromotions-backend-dev
     build:
       context: ../backend
       dockerfile: ./docker/dev.Dockerfile
-    env_file:
-      - ../backend/env/.env.dev
     volumes:
       - ../backend/logging/logs:/app/logging/logs
       - ../backend/src:/app/src
@@ -14,14 +12,18 @@ services:
       - 8000:8000
     networks:
       - app-network
+    healthcheck:
+      test: curl --fail http://localhost:8000/api/v1/health || exit 1
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
 
   react-frontend:
-    container_name: coursework-frontend-dev
+    container_name: macromotions-frontend-dev
     build:
       context: ../frontend
       dockerfile: ./docker/dev.Dockerfile
-    env_file:
-      - ../frontend/env/.env.dev
     volumes:
       - ../frontend/src:/app/src
       - /app/node_modules
@@ -30,6 +32,9 @@ services:
       - 3000:3000
     networks:
       - app-network
+    depends_on:
+      fastapi-backend:
+        condition: service_healthy
 
 networks:
   app-network:
