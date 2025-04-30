@@ -9,6 +9,8 @@ RUN bun install --frozen-lockfile
 
 COPY . .
 
+COPY ./env/.env.dev ./.env
+
 EXPOSE 3000
 
 CMD ["bun", "run", "dev"]

@@ -4,8 +4,6 @@ services:
     build:
       context: ../backend
       dockerfile: ./docker/dev.Dockerfile
-    env_file:
-      - ../backend/env/.env.dev
     volumes:
       - ../backend/logging/logs:/app/logging/logs
       - ../backend/src:/app/src
@@ -15,18 +13,17 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      test: curl --fail http://localhost:8000/api/v1/health || exit 1
       interval: 5s
       timeout: 3s
       retries: 5
+      start_period: 5s
 
   react-frontend:
     container_name: macromotions-frontend-dev
     build:
       context: ../frontend
       dockerfile: ./docker/dev.Dockerfile
-    env_file:
-      - ../frontend/env/.env.dev
     volumes:
       - ../frontend/src:/app/src
       - /app/node_modules

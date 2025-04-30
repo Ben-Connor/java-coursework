@@ -40,12 +40,6 @@ export interface NutrientEntry {
     unit: NutrientUnit
 }
 
-export interface NutrientTarget {
-    name: Nutrient
-    quantity: number
-    unit: NutrientUnit
-}
-
 export interface Food {
     id: number
     name: string

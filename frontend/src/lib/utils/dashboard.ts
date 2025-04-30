@@ -38,8 +38,6 @@ export const aggregateByDay = (foodEntries: BackendFoodEntry[]): AggregateFoodEn
             }
         })
     })
-
-    console.log(dataMap)
   
     return Object.entries(dataMap).map(([day, nutrients]) => ({
         day,

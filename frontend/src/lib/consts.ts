@@ -1,5 +1,6 @@
 import { IconChartBar, IconListDetails, IconSearch } from "@tabler/icons-react"
-import { Nutrient, NutrientUnit, Sidebar, NutrientTarget, BackendFoodEntry } from "./types"
+import { Nutrient, NutrientUnit, Sidebar, BackendNutrientTarget, BackendFoodEntry } from "./types"
+import { subDays } from "date-fns"
 
 export enum RouteUrl {
     DASHBOARD = "/",
@@ -607,39 +608,48 @@ export const FOOD_ENTRIES: BackendFoodEntry[] = [
     },
 ]
 
-export const TARGETS: NutrientTarget[] = [
+export const TARGETS: BackendNutrientTarget[] = [
     {
+        id: 1,
+        createdAt: subDays(new Date(), 2),
+        updatedAt: subDays(new Date(), 2),
+        userId: USER_ID,
         name: Nutrient.CALORIES,
-        quantity: 3000,
+        quantity: 2500,
         unit: NutrientUnit.CALORIES,
+        isLowerBound: false,
     },
     {
+        id: 2,
+        createdAt: subDays(new Date(), 2),
+        updatedAt: subDays(new Date(), 2),
+        userId: USER_ID,
         name: Nutrient.PROTEIN,
         quantity: 200,
         unit: NutrientUnit.GRAMS,
+        isLowerBound: true,
     },
     {
+        id: 3,
+        createdAt: subDays(new Date(), 2),
+        updatedAt: subDays(new Date(), 2),
+        userId: USER_ID,
         name: Nutrient.FAT,
         quantity: 25,
         unit: NutrientUnit.GRAMS,
+        isLowerBound: false,
     },
     {
+        id: 4,
+        createdAt: subDays(new Date(), 2),
+        updatedAt: subDays(new Date(), 2),
+        userId: USER_ID,
         name: Nutrient.SUGAR,
         quantity: 25,
         unit: NutrientUnit.GRAMS,
+        isLowerBound: false,
     },
 ]
-
-export const TARGET_COMPARATORS_LOOKUP: Record<Nutrient, (quantity: number, target: number) => boolean> = {
-    "calories": (quantity: number, target: number) => quantity >= target,
-    "protein": (quantity: number, target: number) => quantity >= target,
-    "carbohydrates": (quantity: number, target: number) => quantity <= target,
-    "fat": (quantity: number, target: number) => quantity <= target,
-    "sugar": (quantity: number, target: number) => quantity <= target,
-    "vitamin_c": (quantity: number, target: number) => quantity >= target,
-    "vitamin_d": (quantity: number, target: number) => quantity >= target,
-    "fibre": (quantity: number, target: number) => quantity > target,
-}
 
 export enum QueryKey {
     USDA_FOOD = "usda/food",
