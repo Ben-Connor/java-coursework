@@ -7,7 +7,7 @@ import { IncrementFoodEntryButton } from "@/components/food-entries/increment-fo
 import { DecrementFoodEntryButton } from "@/components/food-entries/decrement-food-entry-button"
 
 const getNutrientEntryFromFoodEntryCount = (count: FoodEntryUSDACount, nutrient: Nutrient): NutrientEntry | null => (
-    count.foodEntry.nutrients.find(nutrientEntry => nutrientEntry.name = nutrient) ?? null
+    count.foodEntry.nutrients.find(nutrientEntry => nutrientEntry.name === nutrient) ?? null
 )
 
 export const searchEntriesColumns: ColumnDef<FoodEntryUSDACount>[] = [
@@ -49,7 +49,7 @@ export const searchEntriesColumns: ColumnDef<FoodEntryUSDACount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.CALORIES)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         },
         enableGlobalFilter: false,
     },
@@ -66,7 +66,7 @@ export const searchEntriesColumns: ColumnDef<FoodEntryUSDACount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.PROTEIN)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         },
         enableGlobalFilter: false,
     },
@@ -83,7 +83,7 @@ export const searchEntriesColumns: ColumnDef<FoodEntryUSDACount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.CARBOHYDRATES)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         },
         enableGlobalFilter: false,
     },
@@ -100,7 +100,7 @@ export const searchEntriesColumns: ColumnDef<FoodEntryUSDACount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.FAT)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         },
         enableGlobalFilter: false,
     },
@@ -117,7 +117,7 @@ export const searchEntriesColumns: ColumnDef<FoodEntryUSDACount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.SUGAR)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         },
         enableGlobalFilter: false,
     },
@@ -134,7 +134,7 @@ export const searchEntriesColumns: ColumnDef<FoodEntryUSDACount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.VITAMIN_C)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         },
         enableGlobalFilter: false,
     },
@@ -151,7 +151,7 @@ export const searchEntriesColumns: ColumnDef<FoodEntryUSDACount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.VITAMIN_D)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         },
         enableGlobalFilter: false,
     },
@@ -168,7 +168,7 @@ export const searchEntriesColumns: ColumnDef<FoodEntryUSDACount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.FIBRE)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         },
         enableGlobalFilter: false,
     },

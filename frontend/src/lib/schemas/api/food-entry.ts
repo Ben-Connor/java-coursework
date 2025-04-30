@@ -30,11 +30,11 @@ export const FoodEntriesResponseSchema = z.object({
 })
 
 export const NutrientEntryRequestSchema = z.object({
-    name: z.string(),
+    name: z.nativeEnum(Nutrient),
     quantity: z.number(),
-    unit: z.string(),
+    unit: z.nativeEnum(NutrientUnit),
 })
-  
+
 export const FoodEntryRequestSchema = z.object({
     name: z.string(),
     timestamp: z.coerce.date().default(new Date),

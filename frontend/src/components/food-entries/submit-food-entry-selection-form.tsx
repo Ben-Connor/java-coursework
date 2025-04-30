@@ -12,12 +12,14 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form"
 import { DialogFormDatetimePicker } from "../custom-ui/datetime-picker"
-import { submitFoodEntrySelectionFormSchema } from "@/lib/schemas/forms/submit-food-entry-selection-form"
+import { submitFoodEntrySelectionFormSchema } from "@/lib/schemas/forms/food-entries"
 import { WorkerButton } from "../custom-ui/worker-button"
 import { IconPlus } from "@tabler/icons-react"
 
+type FormData = z.infer<typeof submitFoodEntrySelectionFormSchema>
+
 export const SubmitFoodEntrySelectionForm = () => {
-    const form = useForm<z.infer<typeof submitFoodEntrySelectionFormSchema>>({
+    const form = useForm<FormData>({
         resolver: zodResolver(submitFoodEntrySelectionFormSchema),
     })
     const queryClient = useQueryClient()
@@ -32,7 +34,7 @@ export const SubmitFoodEntrySelectionForm = () => {
         },
     })
 
-    const onSubmit = (values: z.infer<typeof submitFoodEntrySelectionFormSchema>) => {
+    const onSubmit = (values: FormData) => {
         setIsLoading(true)
         let nSubmitted = 0
         for (const [index, count] of counts.entries()) {
@@ -56,7 +58,10 @@ export const SubmitFoodEntrySelectionForm = () => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-row gap-8 items-center">
+            <form onSubmit={event => {
+                event.preventDefault()
+                void form.handleSubmit(onSubmit)(event)
+            }} className="flex flex-row gap-8 items-center">
                 <FormField
                     control={form.control}
                     name="timestamp"
@@ -67,7 +72,7 @@ export const SubmitFoodEntrySelectionForm = () => {
                         </FormItem>
                     )}
                 />
-                <WorkerButton className="h-full" icon={IconPlus} isLoading={isLoading}>Submit Food Entries</WorkerButton>
+                <WorkerButton className="h-full" type="submit" icon={IconPlus} isLoading={isLoading}>Submit Food Entries</WorkerButton>
             </form>
         </Form>
     )

@@ -79,3 +79,14 @@ export enum QueryKey {
     USER = "macromotions/user",
     FOOD_ENTRY = "macromotions/food-entry",
 }
+
+export const DEFAULT_NUTRIENT_UNITS: Record<Nutrient, NutrientUnit> = {
+    [Nutrient.CALORIES]: NutrientUnit.CALORIES,
+    [Nutrient.PROTEIN]: NutrientUnit.GRAMS,
+    [Nutrient.CARBOHYDRATES]: NutrientUnit.GRAMS,
+    [Nutrient.FAT]: NutrientUnit.GRAMS,
+    [Nutrient.SUGAR]: NutrientUnit.GRAMS,
+    [Nutrient.VITAMIN_C]: NutrientUnit.MILLI_GRAMS,
+    [Nutrient.VITAMIN_D]: NutrientUnit.MICRO_GRAMS,
+    [Nutrient.FIBRE]: NutrientUnit.GRAMS,
+}

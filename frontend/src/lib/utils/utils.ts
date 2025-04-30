@@ -70,3 +70,23 @@ export const deduplicate = <T>(items: T[], predicate: (a: T, b: T) => boolean) =
         return acc
     }, [])
 )
+
+export const zip = <A, B>(a: A[], b: B[]) => {
+    console.log("In zip", a, b)
+    const length = Math.min(a.length, b.length)
+    const result: [A, B][] = []
+    for (let i = 0; i < length; i++) {
+        result.push([a[i], b[i]])
+    }
+    return result
+}
+
+export const stringToIntHash = (str: string) => {
+    let hash = 0
+    for (let i = 0; i < str.length; i++) {
+        const chr = str.charCodeAt(i)
+        hash = (hash << 5) - hash + chr
+        hash |= 0
+    }
+    return Math.abs(hash);
+}

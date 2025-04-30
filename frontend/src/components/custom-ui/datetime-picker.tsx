@@ -1,5 +1,3 @@
-"use client"
-
 import { CalendarDateTime } from "@internationalized/date"
 import { format } from "date-fns"
 import { Calendar as CalendarIcon, Clock } from "lucide-react"
@@ -55,7 +53,7 @@ const TimeField = ({hasTime, onHasTimeChange, disabled, ...props}: {
     useTimeField(props, state, ref)
 
     return (
-        <div className={cn("mt-1 flex items-center space-x-2", disabled ? "cursor-not-allowed opacity-70" : "")}>
+        <div className={cn("mt-1 flex items-center space-x-2 pt-4", disabled ? "cursor-not-allowed opacity-70" : "")}>
             <Toggle
                 disabled={disabled}
                 pressed={hasTime}

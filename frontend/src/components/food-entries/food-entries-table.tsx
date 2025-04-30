@@ -32,11 +32,12 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { foodEntriesColumns } from "@/lib/tables/food-entries"
 import { useFoodEntriesStore } from "@/lib/stores/food-entries"
 import { useShallow } from "zustand/react/shallow"
 import { FoodEntryCount, FoodEntry } from "@/lib/types"
+import { completeNutrientsList } from "@/lib/utils/food-entries"
 
 interface FoodEntriesTableProps {
     data: FoodEntryCount[]
@@ -49,12 +50,22 @@ export const FoodEntriesTable = ({ data }: FoodEntriesTableProps) => {
     const [selection, setSelection] = useState<Record<number, boolean>>({})
     const { storeSelection, setStoreSelection } = useFoodEntriesStore(useShallow(state => ({ storeSelection: state.selection, setStoreSelection: state.setSelection })))
 
+    const completedData = useMemo(() => (
+        data.map(count => ({
+            n: count.n,
+            foodEntry: {
+                id: count.foodEntry.id,
+                name: count.foodEntry.name,
+                nutrients: completeNutrientsList(count.foodEntry.nutrients),
+        }}))
+    ), [data, completeNutrientsList])
+
     useEffect(() => {
         setSelection(storeSelection)
     }, [setSelection, storeSelection])
 
     const table = useReactTable({
-        data,
+        data: completedData,
         columns: foodEntriesColumns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,

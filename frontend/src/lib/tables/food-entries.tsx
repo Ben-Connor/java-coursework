@@ -8,7 +8,7 @@ import { DecrementFoodEntryButton } from "@/components/food-entries/decrement-fo
 import { Checkbox } from "@/components/ui/checkbox"
 
 const getNutrientEntryFromFoodEntryCount = (count: FoodEntryCount, nutrient: Nutrient): NutrientEntry | null => (
-    count.foodEntry.nutrients.find(nutrientEntry => nutrientEntry.name = nutrient) ?? null
+    count.foodEntry.nutrients.find(nutrientEntry => nutrientEntry.name === nutrient) ?? null
 )
 
 export const foodEntriesColumns: ColumnDef<FoodEntryCount>[] = [
@@ -79,7 +79,7 @@ export const foodEntriesColumns: ColumnDef<FoodEntryCount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.CALORIES)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         }
     },
     {
@@ -95,7 +95,7 @@ export const foodEntriesColumns: ColumnDef<FoodEntryCount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.PROTEIN)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         }
     },
     {
@@ -111,7 +111,7 @@ export const foodEntriesColumns: ColumnDef<FoodEntryCount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.CARBOHYDRATES)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         }
     },
     {
@@ -127,7 +127,7 @@ export const foodEntriesColumns: ColumnDef<FoodEntryCount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.FAT)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         }
     },
     {
@@ -143,7 +143,7 @@ export const foodEntriesColumns: ColumnDef<FoodEntryCount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.SUGAR)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         }
     },
     {
@@ -159,7 +159,7 @@ export const foodEntriesColumns: ColumnDef<FoodEntryCount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.VITAMIN_C)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         }
     },
     {
@@ -175,7 +175,7 @@ export const foodEntriesColumns: ColumnDef<FoodEntryCount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.VITAMIN_D)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         }
     },
     {
@@ -191,7 +191,7 @@ export const foodEntriesColumns: ColumnDef<FoodEntryCount>[] = [
         },
         cell: ({ row }) => {
             const nutrient = getNutrientEntryFromFoodEntryCount(row.original, Nutrient.FIBRE)
-                return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
+            return <div className="pl-3">{!!nutrient ? roundTo(nutrient.quantity, 1) : ""}{nutrient?.unit ?? ""}</div>
         }
     },
     {
